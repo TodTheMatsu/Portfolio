@@ -36,7 +36,7 @@ function App() {
           </motion.h1>
         </div>
         <div className="w-full flex flex-wrap items-center justify-center gap-2">
-          <div  className="w-[600px] h-[400px] bg-white rounded-md backdrop-blur-md bg-opacity-20">
+          <div  className="w-[600px] h-[400px] bg-white shadow-[inset_0_0_20px_rgba(0,0,0,0.6)] shadow-white rounded-md backdrop-blur-md bg-opacity-20">
             <h1 className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>About me</h1>
             <h1 className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>About me</h1>
             <p className='text-white font-sans px-5 font-thin mx-auto text-center w-full text-2xl mt-5'>I am an aspiring web developer with a strong passion for learning and growth.<br/>
@@ -44,16 +44,16 @@ function App() {
              Recently, I transitioned into web development, bringing with me a solid foundation in programming and a commitment to mastering this exciting field.
              </p>
           </div>
-          <div  className="w-[1250px] h-[400px] bg-white rounded-md backdrop-blur-md bg-opacity-20">
-            <h1 className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My techstack</h1>
-            <h1 className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My techstack</h1>
+          <div  className="w-[1250px] h-[400px] bg-white rounded-md backdrop-blur-md shadow-white shadow-[inset_0_0px_20px_rgba(0,0,0,0.6)] bg-opacity-20">
+            <h1 className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My tech stack</h1>
+            <h1 className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My tech stack</h1>
             <reactsvg />
           </div>
-          <div  className="w-1/2 h-[500px] bg-white rounded-md backdrop-blur-md bg-opacity-20">
+          <div  className="w-1/2 h-[500px] bg-white rounded-md backdrop-blur-md shadow-white shadow-[inset_0_0px_20px_rgba(0,0,0,0.6)] bg-opacity-20">
             <h1 className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>Task managing tool</h1>
             <h1 className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>Task managing tool</h1>
           </div>
-          <div  className="w-[900px] h-[500px] bg-white rounded-md backdrop-blur-md bg-opacity-20">
+          <div  className="w-[900px] h-[500px] bg-white rounded-md backdrop-blur-md shadow-white shadow-[inset_0_0px_20px_rgba(0,0,0,0.6)] bg-opacity-20">
             <h1 className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>Weather app</h1>
             <h1 className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>Weather app</h1>
           </div>
