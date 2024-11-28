@@ -21,6 +21,7 @@ function App() {
       opacity: 1,
       transition: {
         duration: 1,
+        ease: "easeOut",
       },
     },
   };
@@ -31,6 +32,7 @@ function App() {
       x:0,
       transition: {
         duration: .5,
+        ease: "easeOut",
       },
     },
   }
@@ -42,6 +44,7 @@ function App() {
       transition: {
         delay: .5,
         duration: 1,
+        ease: "easeOut",
       },
     },
   };
@@ -74,7 +77,7 @@ function App() {
         <div className="w-[1000px] h-[500px] mx-auto my-56 flex flex-col items-center justify-center">
           <motion.h1
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { delay: 1.2 } }}
+            animate={{ opacity: 1, transition: { delay: 1.2,ease: "easeOut" } }}
             className="text-white font-sans font-bold mx-auto text-center w-full text-6xl blur-2xl"
           >
             Hello my name is Lee.
@@ -85,7 +88,7 @@ function App() {
               opacity: 1,
               y: 0,
               pathLength: 1,
-              transition: { delay: 1, ease: "easeInOut" },
+              transition: { delay: 1, ease: "easeOut" },
             }}
             className="text-white font-sans font-thin mx-auto text-center w-full text-6xl absolute"
           >
@@ -99,8 +102,9 @@ function App() {
             <p className='text-white font-sans px-5 font-thin mx-auto text-center w-full text-2xl mt-5'>
               {aboutMe.split("").map((word, index) => (  
                 <motion.span
+                key = {index}
                 initial={{ opacity: 0, y:200 }}
-                whileInView={{ opacity: 1, y: 0, transition: { delay: index * 0.005, ease: "easeInOut", duration: 1 } }}
+                whileInView={{ opacity: 1, y: 0, transition: { delay: index * 0.005, ease: "easeOut", duration: 1 } }}
                 viewport={{ once: true }}
                 className='text-white font-sans font-thin mx-auto text-center w-full text-2xl'>{word}</motion.span> // Wrap each word in a motion.span
               ))}
