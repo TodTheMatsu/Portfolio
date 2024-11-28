@@ -29,23 +29,13 @@ function App() {
   };
 
 
-  const bentosVar = {
-    hidden: {x:200 },
-    visible: {
-      x:0,
-      transition: {
-        duration: .5,
-        ease: "easeOut",
-      },
-    },
-  }
   
   const smallGlowingLabels = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        delay: .5,
+        delay: 1,
         duration: 1,
         ease: "easeOut",
       },
@@ -57,12 +47,22 @@ function App() {
     visible: { transition: {
       when: "beforeChildren",
       delayChildren: .1,
-      staggerChildren: .1,
+      staggerChildren: .3,
     }
       
     }
   }
 
+  const bentosVar = {
+    hidden: {x:1500 },
+    visible: {
+      x:0,
+      transition: {
+        duration: 1,
+        ease: "easeOut",
+      },
+    },
+  }
   
   const imgParentVariants = {
     hidden: {
@@ -70,14 +70,14 @@ function App() {
     visible: {
       transition: {
         when: "beforeChildren",
-        delayChildren: .5,
+        delayChildren: 1.5,
         staggerChildren: .2,
       },
     }
   }
   return (
     <>
-      <div className="bg-black h-[400vh] w-full absolute flex flex-col items-center">
+      <div className="bg-black h-[400vh] w-full absolute flex flex-col items-center overflow-x-hidden">
         <div className="w-[1000px] h-[500px] mx-auto my-56 flex flex-col items-center justify-center">
           <motion.h1>
             {greetText.split("").map((char, index) => (
@@ -101,7 +101,7 @@ function App() {
                 <motion.span
                 key = {index}
                 initial={{ opacity: 0, y:200 }}
-                whileInView={{ opacity: 1, y: 0, transition: { delay: index * 0.005, ease: "easeOut", duration: 1 } }}
+                whileInView={{ opacity: 1, y: 0, transition: { delay: index * 0.005+1.5, ease: "easeOut", duration: 1 } }}
                 viewport={{ once: true }}
                 className='text-white font-sans font-thin mx-auto text-center w-full text-2xl'>{word}</motion.span> // Wrap each word in a motion.span
               ))}
