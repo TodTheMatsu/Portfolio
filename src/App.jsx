@@ -14,6 +14,8 @@ function App() {
   ];
 
   const aboutMe = "I am an aspiring web developer with a strong passion for learning and growth. My journey began with over four years of experience in game development, where I honed my programming skills and creative problem-solving abilities. Recently, I transitioned into web development, bringing with me a solid foundation in programming and a commitment to mastering this exciting field."
+  
+  const greetText = "Hello my name is Lee."
 
   const ImgVariants = {
     hidden: { opacity: 0 },
@@ -25,6 +27,7 @@ function App() {
       },
     },
   };
+
 
   const bentosVar = {
     hidden: {x:200 },
@@ -60,6 +63,7 @@ function App() {
     }
   }
 
+  
   const imgParentVariants = {
     hidden: {
      },
@@ -75,24 +79,17 @@ function App() {
     <>
       <div className="bg-black h-[400vh] w-full absolute flex flex-col items-center">
         <div className="w-[1000px] h-[500px] mx-auto my-56 flex flex-col items-center justify-center">
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { delay: 1.2,ease: "easeOut" } }}
-            className="text-white font-sans font-bold mx-auto text-center w-full text-6xl blur-2xl"
-          >
-            Hello my name is Lee.
+          <motion.h1>
+            {greetText.split("").map((char, index) => (
+              <motion.span className="text-white font-sans font-bold mx-auto text-center w-full text-6xl blur-2xl" 
+              initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: index * 0.05 + 1.5, duration: 1 } }} key={index}>{char}</motion.span>
+            ))}
           </motion.h1>
-          <motion.h1
-            initial={{ opacity: 0, y: 200, pathLength: 0 }}
-            animate={{
-              opacity: 1,
-              y: 0,
-              pathLength: 1,
-              transition: { delay: 1, ease: "easeOut" },
-            }}
-            className="text-white font-sans font-thin mx-auto text-center w-full text-6xl absolute"
-          >
-            Hello my name is Lee.
+          <motion.h1 className='absolute'>
+            {greetText.split("").map((char, index) => (
+              <motion.span  className="text-white font-sans font-thin mx-auto text-center w-full text-6xl"
+              initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: index * 0.05 + 1.5, duration: 1 } }} key={index}>{char}</motion.span>
+            ))}
           </motion.h1>
         </div>
         <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="w-full flex flex-wrap items-center justify-center gap-2">
