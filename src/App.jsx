@@ -78,6 +78,7 @@ function App() {
   return (
     <>
       <div className="bg-black h-[400vh] w-full absolute flex flex-col items-center overflow-x-hidden">
+      <motion.iframe initial={{ opacity: 0 }} whileInView={{ opacity: 1, transition: { duration: 1, delay:3.5 } }} viewport={{ once: true }} className='absolute' src='https://my.spline.design/untitled-6cc2c57f8acbfdc379efb69648446138/' frameborder='0' width='100%' height='100%'></motion.iframe>
         <div className="w-[1000px] h-[500px] mx-auto my-56 flex flex-col items-center justify-center">
           <motion.h1>
             {greetText.split("").map((char, index) => (
@@ -92,8 +93,8 @@ function App() {
             ))}
           </motion.h1>
         </div>
-        <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="w-full flex flex-wrap items-center justify-center gap-2">
-          <motion.div variants={bentosVar}  className="w-[600px] h-[400px] bg-white shadow-[inset_0_0_20px_rgba(0,0,0,0.6)] shadow-white rounded-md backdrop-blur-md bg-opacity-20">
+        <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className=" pointer-events-none w-full flex flex-wrap items-center justify-center gap-2">
+          <motion.div variants={bentosVar}  className="w-[600px] h-[400px] bg-white  rounded-md backdrop-blur-md bg-opacity-20">
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>About me</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>About me</motion.h1>
             <p className='text-white font-sans px-5 font-thin mx-auto text-center w-full text-2xl mt-5'>
@@ -107,7 +108,7 @@ function App() {
               ))}
              </p>
           </motion.div>
-          <motion.div variants={bentosVar}  className="w-[1250px] h-[400px] bg-white rounded-md backdrop-blur-md shadow-white shadow-[inset_0_0px_20px_rgba(0,0,0,0.6)] bg-opacity-20 ">
+          <motion.div variants={bentosVar}  className="w-[1250px] h-[400px] bg-white rounded-md backdrop-blur-md bg-opacity-20">
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My tech stack</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My tech stack</motion.h1>
             <motion.div variants={imgParentVariants} viewport={{ once: true }} initial="hidden" whileInView="visible" className='w-full flex-row justify-center items-center flex h-[300px]'>
@@ -129,11 +130,11 @@ function App() {
               </motion.svg>
             </motion.div>
           </motion.div>
-          <motion.div variants={bentosVar}    className="w-1/2 h-[500px] bg-white rounded-md backdrop-blur-md shadow-white shadow-[inset_0_0px_20px_rgba(0,0,0,0.6)] bg-opacity-20">
+          <motion.div variants={bentosVar}    className="w-1/2 h-[500px] bg-white rounded-md backdrop-blur-md bg-opacity-20">
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>Task managing tool</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>Task managing tool</motion.h1>
           </motion.div>
-          <motion.div variants={bentosVar}  className="w-[900px] h-[500px] bg-white rounded-md backdrop-blur-md shadow-white shadow-[inset_0_0px_20px_rgba(0,0,0,0.6)] bg-opacity-20">
+          <motion.div variants={bentosVar}  className="w-[900px] h-[500px] bg-white rounded-md backdrop-blur-md bg-opacity-20">
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>Weather app</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>Weather app</motion.h1>
           </motion.div>
