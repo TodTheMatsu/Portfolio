@@ -1,7 +1,6 @@
 import { delay, motion, useScroll} from 'framer-motion';
-import Reactsvg from "./assets/react.svg"
-import vitesvg  from "./assets/vite.svg"
 import { useEffect, useRef } from 'react';
+import Card from './Card';
 function App() {
   const links = [
     {
@@ -136,7 +135,9 @@ function App() {
           <motion.div variants={bentosVar} className="flex-grow h-full bg-white rounded-md backdrop-blur-md bg-opacity-20">
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My projects</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My projects</motion.h1>
-            
+            <motion.div className='w-full justify-center items-center  flex flex-grow h-full'>
+              <Card/>
+            </motion.div>
           </motion.div>
         </motion.div>
         <motion.div // The div that holds the links
