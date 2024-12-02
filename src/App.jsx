@@ -2,6 +2,9 @@ import { delay, motion, useScroll} from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import whattodo from './assets/whattodo.png';
 import Card from './Card';
+import WhattodoInfo from './WhattodoInfo';
+import { useState } from 'react';
+
 function App() {
   const links = [
     {
@@ -13,6 +16,14 @@ function App() {
       label: "Instagram",
     },
   ];
+  const [activeCardId, setActiveCardId] = useState(null);
+
+  const handleCardClick = (id) => {
+    setActiveCardId((prev) => (prev === id ? null : id));
+  };
+  const projects = [
+    {id:1, image: whattodo, info: <WhattodoInfo />}
+  ]
 
   const aboutMe = "I am an aspiring web developer with a strong passion for learning and growth. My journey began with over four years of experience in game development, where I honed my programming skills and creative problem-solving abilities. Recently, I transitioned into web development, bringing with me a solid foundation in programming and a commitment to mastering this exciting field."
   
@@ -137,7 +148,15 @@ function App() {
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My projects</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My projects</motion.h1>
             <motion.div className='w-full justify-center items-center  flex flex-grow h-full'>
-              <Card image={whattodo}/>
+            {projects.map(({ id, image, info }) => (
+          <Card
+            key={id}
+            image={image}
+            info={info}
+            isCardClicked={activeCardId === id}
+            onClick={() => handleCardClick(id)}
+          />
+        ))}
             </motion.div>
           </motion.div>
         </motion.div>
