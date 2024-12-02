@@ -1,5 +1,6 @@
 import { delay, motion, useScroll} from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import whattodo from './assets/whattodo.png';
 import Card from './Card';
 function App() {
   const links = [
@@ -136,7 +137,7 @@ function App() {
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My projects</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My projects</motion.h1>
             <motion.div className='w-full justify-center items-center  flex flex-grow h-full'>
-              <Card/>
+              <Card image={whattodo}/>
             </motion.div>
           </motion.div>
         </motion.div>
