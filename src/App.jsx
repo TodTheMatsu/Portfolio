@@ -160,6 +160,7 @@ function App() {
             </motion.div>
           </motion.div>
         </motion.div>
+        {activeCardId && projects.find((project) => project.id === activeCardId).info}
         <motion.div // The div that holds the links
           initial={{ opacity: 0, width: "60px", y: 100 }}
           animate={{
@@ -192,7 +193,7 @@ function App() {
             </motion.a>
           ))}
         </motion.div>
-        {activeCardId && projects.find((project) => project.id === activeCardId).info}
+
       </div>
     </>
   );
