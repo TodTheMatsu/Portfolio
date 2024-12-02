@@ -1,8 +1,7 @@
 import {motion} from 'framer-motion'
-function WhattodoInfo() {
+function WhattodoInfo({onClick}) {
     return (
-        <motion.div className='w-[1000px] h-[600px] bg-white absolute'>
-            
+        <motion.div onClick={onClick} className='w-full h-full bg-black bg-opacity-50 backdrop-blur-md absolute'>
         </motion.div>
     )
 }

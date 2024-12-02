@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-function Card({ image, info, isCardClicked, onClick }) {
+function Card({ image, info, onClick }) {
     const randomRotation = Math.random() * 20 - 10
     return (
         <>
@@ -7,7 +7,7 @@ function Card({ image, info, isCardClicked, onClick }) {
             <motion.img src={image} className=' object-cover w-full h-full object-center rounded-2xl'>
             </motion.img>
         </motion.div>
-        {isCardClicked && (<>{info}</>)}
+
         </>
     )
 }   

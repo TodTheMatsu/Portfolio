@@ -21,9 +21,7 @@ function App() {
   const handleCardClick = (id) => {
     setActiveCardId((prev) => (prev === id ? null : id));
   };
-  const projects = [
-    {id:1, image: whattodo, info: <WhattodoInfo />}
-  ]
+
 
   const aboutMe = "I am an aspiring web developer with a strong passion for learning and growth. My journey began with over four years of experience in game development, where I honed my programming skills and creative problem-solving abilities. Recently, I transitioned into web development, bringing with me a solid foundation in programming and a commitment to mastering this exciting field."
   
@@ -85,10 +83,13 @@ function App() {
       },
     }
   }
-
+  const projects = [
+    {id:1, image: whattodo, info: <WhattodoInfo onClick={() => handleCardClick(1)} />}
+  ]
   return (
     <>
       <div className="bg-black h-[400vh] w-full absolute flex flex-col items-center overflow-x-hidden">
+
       <motion.iframe initial={{ opacity: 0 }} whileInView={{ opacity: 1, transition: { duration: 1, delay:3.5 } }} viewport={{ once: true }} className='absolute' src='https://my.spline.design/untitled-6cc2c57f8acbfdc379efb69648446138/' frameBorder='0' width='100%' height='100%'></motion.iframe>
         <div className="w-[1000px] h-[500px] mx-auto my-56 flex flex-col items-center justify-center">
           <motion.h1>
@@ -148,14 +149,13 @@ function App() {
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My projects</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My projects</motion.h1>
             <motion.div className='w-full justify-center items-center  flex flex-grow h-full'>
-            {projects.map(({ id, image, info }) => (
+            {projects.map(({ id, image, info }) => (<>
           <Card
             key={id}
             image={image}
             info={info}
-            isCardClicked={activeCardId === id}
             onClick={() => handleCardClick(id)}
-          />
+          /></>
         ))}
             </motion.div>
           </motion.div>
@@ -192,6 +192,7 @@ function App() {
             </motion.a>
           ))}
         </motion.div>
+        {activeCardId && projects.find((project) => project.id === activeCardId).info}
       </div>
     </>
   );
