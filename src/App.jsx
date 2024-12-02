@@ -4,7 +4,7 @@ import whattodo from './assets/whattodo.png';
 import Card from './Card';
 import WhattodoInfo from './WhattodoInfo';
 import { useState } from 'react';
-
+import { AnimatePresence } from 'framer-motion';
 function App() {
   const links = [
     {
@@ -160,7 +160,10 @@ function App() {
             </motion.div>
           </motion.div>
         </motion.div>
+        <AnimatePresence>
         {activeCardId && projects.find((project) => project.id === activeCardId).info}
+        </AnimatePresence>
+
         <motion.div // The div that holds the links
           initial={{ opacity: 0, width: "60px", y: 100 }}
           animate={{
