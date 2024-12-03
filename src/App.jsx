@@ -88,8 +88,8 @@ function App() {
   ]
   return (
     <>
-      <div className="bg-black h-[400vh] w-full absolute flex flex-col items-center overflow-x-hidden">
-
+      <div className={`bg-black h-[100vh] w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
+      <div className={`h-[400vh] w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
       <motion.iframe initial={{ opacity: 0 }} whileInView={{ opacity: 1, transition: { duration: 1, delay:3.5 } }} viewport={{ once: true }} className='absolute' src='https://my.spline.design/untitled-6cc2c57f8acbfdc379efb69648446138/' frameBorder='0' width='100%' height='100%'></motion.iframe>
         <div className="w-[1000px] h-[500px] mx-auto my-56 flex flex-col items-center justify-center">
           <motion.h1>
@@ -197,6 +197,7 @@ function App() {
           ))}
         </motion.div>
 
+      </div>
       </div>
     </>
   );
