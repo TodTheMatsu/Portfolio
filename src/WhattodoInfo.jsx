@@ -13,7 +13,23 @@ function WhattodoInfo({ onClick }) {
   };
 
   const description = 'A dynamic and interactive task management system that allows users to manage tasks through boards. The app features drag-and-drop functionality to reorder boards and tasks, supports dark mode, and integrates with a backend for storing board data.';
-
+  const tech = {
+    Frontend: [
+      "React + Vite",
+      "Tailwind CSS"
+    ],
+    Backend: [
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Mongoose",
+      "JWT (JSON Web Tokens)",
+      "Crypto",
+      "CORS (Cross-Origin Resource Sharing)",
+      "dotenv"
+    ]
+  };
+  
   const features = [
     {
       name: 'Tasks creation',
@@ -84,7 +100,7 @@ function WhattodoInfo({ onClick }) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="w-1/2 max-w-[50%] h-max py-5 flex-grow bg-white bg-opacity-20 rounded-2xl flex flex-col justify-start items-start backdrop-blur-md px-10 space-y-5"
+          className="w-1/2 max-w-[50%] h-max py-5 flex-grow bg-white bg-opacity-20 rounded-2xl flex flex-col justify-start items-center backdrop-blur-md px-10 space-y-5"
         >
           <motion.h1 variants={textVariants} className="text-white font-sans font-thin mx-auto text-center w-full text-9xl outline-dashed rounded-3xl mb-10 pb-5">
             What to do?
@@ -120,6 +136,28 @@ function WhattodoInfo({ onClick }) {
           <motion.h1 variants={textVariants} className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-4 outline-dashed pb-2 text-4xl">
             Technology Stack
           </motion.h1>
+          <motion.div className='flex flex-row gap-5'>
+            <motion.div className='flex max-h-[150px] flex-col gap-2 outline-dashed outline-2 rounded-3xl outline-white px-2 py-2'>
+              <motion.h2 variants={textVariants} className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 pb-2 text-3xl">
+                Frontend
+              </motion.h2>
+              {tech.Frontend.map((tech, index) => (
+                <motion.p key={index} variants={textVariants} className={`text-white font-sans font-thin mx-auto text-center w-full text-xl`}>
+                  {renderText(tech)}
+                </motion.p>
+              ))}
+            </motion.div>
+            <motion.div className='flex flex-col gap-2 outline-dashed outline-2 rounded-3xl outline-white px-2 py-2'>
+              <motion.h2 variants={textVariants} className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 pb-2 text-3xl">
+                Backend
+              </motion.h2>
+              {tech.Backend.map((tech, index) => (
+                <motion.p key={index} variants={textVariants} className={`text-white font-sans font-thin mx-auto text-center w-full text-xl`}>
+                  {renderText(tech)}
+                </motion.p>
+              ))}
+            </motion.div>
+          </motion.div>
         </motion.div>
         <motion.div className="w-[200px] right-[15%] bg-white bg-opacity-20 rounded-3xl flex flex-col gap-5 py-5 justify-center items-center fixed backdrop-blur-md">
           {['Introduction', 'Features', 'Functions'].map((section) => (
