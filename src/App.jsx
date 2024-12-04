@@ -56,10 +56,9 @@ function App() {
       when: "beforeChildren",
       delayChildren: .1,
       staggerChildren: .3,
-    }
-      
-    }
-  }
+      },
+    },
+  };
 
   const bentosVar = {
     hidden: {x:1500 },
