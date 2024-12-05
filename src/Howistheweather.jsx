@@ -3,6 +3,8 @@ import { useRef } from 'react';
 import vid1 from './assets/videos/howistheweather/vid1.mp4';
 import vid2 from './assets/videos/howistheweather/vid2.mp4';
 import vid3 from './assets/videos/howistheweather/vid3.mp4';
+import vid4 from './assets/videos/howistheweather/vid4.mp4';
+import vid5 from './assets/videos/howistheweather/vid5.mp4';
 function WhattodoInfo({ onClick }) {
   const handleClick = (e) => {
     if (e.target === e.currentTarget) onClick();
@@ -30,7 +32,18 @@ function WhattodoInfo({ onClick }) {
     {
       name: 'Weather & News Data',
       description: 'Fetches detailed weather data from the Open-Meteo API and relevant news articles from the Newsdata.io API.',
-      video: vid3}
+      video: vid3
+    },
+    {
+      name: 'Dynamic Backgrounds',
+      description: 'Changes the background image based on the current time of the day.',
+      video: vid4
+    },
+    {
+      name: 'Modern Design',
+      description: "Uses Tailwind CSS and Framer Motion for a modern and responsive design.",
+      video: vid5
+    }
   ];
   
   const sectionRefs = {
