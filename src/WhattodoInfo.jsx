@@ -7,7 +7,6 @@ import vid4 from './assets/videos/whattodo/vid4.mp4';
 import vid5 from './assets/videos/whattodo/vid5.mp4';
 import vid6 from './assets/videos/whattodo/vid6.mp4';
 import vid7 from './assets/videos/whattodo/vid7.mp4';
-import { s } from 'motion/react-client';
 
 function WhattodoInfo({ onClick }) {
   const handleClick = (e) => {

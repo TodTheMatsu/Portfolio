@@ -85,7 +85,7 @@ function App() {
   }
   const projects = [
     {id:1, image: whattodo, info: <WhattodoInfo onClick={() => handleCardClick(1)} />},
-    {id:2, image: howistheweather, info: <WhattodoInfo onClick={() => handleCardClick(1)} />}
+    {id:2, image: howistheweather, info: <Howistheweather onClick={() => handleCardClick(2)} />}
   ]
   return (
     <>
