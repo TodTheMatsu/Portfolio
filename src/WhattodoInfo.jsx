@@ -132,12 +132,12 @@ function WhattodoInfo({ onClick }) {
               </motion.p>
             </div>
           ))}
-          <motion.hr variants={textVariants} className="w-full mx-auto border-dashed" />
+          <motion.hr variants={textVariants} className="w-full mx-auto flex items-center justify-center border-dashed" />
           <motion.h1 variants={textVariants} className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-4 outline-dashed pb-2 text-4xl">
             Technology Stack
           </motion.h1>
-          <motion.div className='flex flex-row gap-5'>
-            <motion.div className='flex max-h-[150px] flex-col gap-2 outline-dashed outline-2 rounded-3xl outline-white px-2 py-2'>
+          <motion.div className='flex items-center justify-center border-dashedflex-row gap-5'>
+            <motion.div variants={textVariants} className='flex max-h-[150px] flex-col gap-2 outline-dashed outline-2 rounded-3xl outline-white px-2 py-2'>
               <motion.h2 variants={textVariants} className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 pb-2 text-3xl">
                 Frontend
               </motion.h2>
@@ -147,7 +147,7 @@ function WhattodoInfo({ onClick }) {
                 </motion.p>
               ))}
             </motion.div>
-            <motion.div className='flex flex-col gap-2 outline-dashed outline-2 rounded-3xl outline-white px-2 py-2'>
+            <motion.div variants={textVariants} className='flex flex-col gap-2 outline-dashed outline-2 rounded-3xl outline-white px-2 py-2'>
               <motion.h2 variants={textVariants} className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 pb-2 text-3xl">
                 Backend
               </motion.h2>
@@ -158,6 +158,10 @@ function WhattodoInfo({ onClick }) {
               ))}
             </motion.div>
           </motion.div>
+          <motion.hr variants={textVariants} className="w-full mx-auto border-dashed" />
+          <motion.a whileHover={{ scale: 1.1, transition: { duration: 0.2} }} href="https://github.com/TodTheMatsu/what-to-do"  variants={textVariants} target="_blank" className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 outline-dashed pb-2 text-4xl">
+            <motion.h2  className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 text-4xl">Source code</motion.h2>
+          </motion.a>
         </motion.div>
         <motion.div className="w-[200px] right-[15%] bg-white bg-opacity-20 rounded-3xl flex flex-col gap-5 py-5 justify-center items-center fixed backdrop-blur-md">
           {['Introduction', 'Features', 'Functions'].map((section) => (

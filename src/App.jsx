@@ -162,7 +162,7 @@ function App() {
         {activeCardId && projects.find((project) => project.id === activeCardId).info}
         </AnimatePresence>
 
-        <motion.div // The div that holds the links
+        <motion.div
           initial={{ opacity: 0, width: "60px", y: 100 }}
           animate={{
             opacity: 1,
