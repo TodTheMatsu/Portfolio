@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import vid1 from './assets/videos/howistheweather/vid1.mp4';
-
+import vid2 from './assets/videos/howistheweather/vid2.mp4';
+import vid3 from './assets/videos/howistheweather/vid3.mp4';
 function WhattodoInfo({ onClick }) {
   const handleClick = (e) => {
     if (e.target === e.currentTarget) onClick();
   };
+
   const introRef = useRef(null);
   const featuresRef = useRef(null);
   const techStackRef = useRef(null);
@@ -13,6 +15,24 @@ function WhattodoInfo({ onClick }) {
     console.log(ref);
     ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const features = [
+    {
+      name: 'Daily weather forecast',
+      description: 'Shows daily weather information, including temperature, precipitation, and conditions.',
+      video: vid1,
+    },
+    {
+      name: 'Hourly temperature forecast',
+      description: 'Provides hourly temperature predictions for the next 24 hours.',
+      video: vid2
+    },
+    {
+      name: 'Weather & News Data',
+      description: 'Fetches detailed weather data from the Open-Meteo API and relevant news articles from the Newsdata.io API.',
+      video: vid3}
+  ];
+  
   const sectionRefs = {
     Introduction: introRef,
     Features: featuresRef,
@@ -36,9 +56,7 @@ function WhattodoInfo({ onClick }) {
     ]
   };
   
-  const features = [
-  ];
-  
+
   const textVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 1, ease: 'easeOut' } },
@@ -85,9 +103,6 @@ function WhattodoInfo({ onClick }) {
           <motion.h1 variants={textVariants} ref={introRef} className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2  pb-2 text-4xl">
             Introduction
           </motion.h1>
-          <motion.video variants={textVariants} viewport={{ once: true }} autoPlay loop className="w-full h-auto rounded-2xl shadow-2xl">
-            <source src={vid1} type="video/mp4" />
-          </motion.video>
           <motion.p variants={textVariants} className="text-white font-sans font-thin mx-auto text-center w-full">
             {renderText(description)}
           </motion.p>
@@ -96,7 +111,7 @@ function WhattodoInfo({ onClick }) {
             Features
           </motion.h1>
           {features.map((feature, index) => (
-            <div>
+            <>
               <motion.h2 variants={textVariants} className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 pb-2 text-2xl">
                 {index + 1}. {feature.name}
               </motion.h2>
@@ -106,7 +121,7 @@ function WhattodoInfo({ onClick }) {
               <motion.p variants={textVariants} className={`text-white font-sans font-thin mx-auto text-center w-full text-xl`}>
                 {renderText(feature.description)}
               </motion.p>
-            </div>
+            </>
           ))}
           <motion.hr variants={textVariants} className="w-full mx-auto flex items-center justify-center" />
           <motion.h1 variants={textVariants} ref={techStackRef} className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-4 pb-2 text-4xl">

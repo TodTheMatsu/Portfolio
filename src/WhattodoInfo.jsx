@@ -132,7 +132,7 @@ function WhattodoInfo({ onClick }) {
             Features
           </motion.h1>
           {features.map((feature, index) => (
-            <div>
+            <>
               <motion.h2 variants={textVariants} className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 pb-2 text-2xl">
                 {index + 1}. {feature.name}
               </motion.h2>
@@ -142,7 +142,7 @@ function WhattodoInfo({ onClick }) {
               <motion.p variants={textVariants} className={`text-white font-sans font-thin mx-auto text-center w-full text-xl`}>
                 {renderText(feature.description)}
               </motion.p>
-            </div>
+            </>
           ))}
           <motion.hr variants={textVariants} className="w-full mx-auto flex items-center justify-center border-dashed" />
           <motion.h1 variants={textVariants} ref={techStackRef} className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-4 outline-dashed pb-2 text-4xl">
