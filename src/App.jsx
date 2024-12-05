@@ -21,8 +21,7 @@ function App() {
   const handleCardClick = (id) => {
     setActiveCardId((prev) => (prev === id ? null : id));
   };
-
-
+  const boxDesign = 'flex-grow bg-white bg-gradient-to-r rounded-md backdrop-blur-md bg-opacity-20'
   const aboutMe = "I am an aspiring web developer with a strong passion for learning and growth. My journey began with over four years of experience in game development, where I honed my programming skills and creative problem-solving abilities. Recently, I transitioned into web development, bringing with me a solid foundation in programming and a commitment to mastering this exciting field."
   
   const greetText = "Hello my name is Lee."
@@ -119,7 +118,7 @@ function App() {
               ))}
              </p>
           </motion.div>
-          <motion.div variants={bentosVar} className="w-[1250px] h-[400px] flex-grow bg-white bg-gradient-to-r rounded-md backdrop-blur-md bg-opacity-20">
+          <motion.div variants={bentosVar} className={`w-[1250px] h-[400px] ${boxDesign}`}>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My tech stack</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My tech stack</motion.h1>
             <motion.div variants={imgParentVariants} viewport={{ once: true }} initial="hidden" whileInView="visible" className='w-full flex-row justify-center items-center flex h-[300px]'>
@@ -144,7 +143,7 @@ function App() {
               </motion.svg>
             </motion.div>
           </motion.div>
-          <motion.div variants={bentosVar} className="flex-grow h-full bg-white rounded-md backdrop-blur-md bg-opacity-20">
+          <motion.div variants={bentosVar} className={`h-full  ${boxDesign}`}>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My projects</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My projects</motion.h1>
             <motion.div className='w-full justify-center items-center  flex flex-grow h-full'>
