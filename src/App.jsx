@@ -1,8 +1,10 @@
 import { delay, motion, useScroll} from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import whattodo from './assets/whattodo.png';
+import howistheweather from './assets/howistheweather.png';
 import Card from './Card';
 import WhattodoInfo from './WhattodoInfo';
+import Howistheweather from './Howistheweather';
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 function App() {
@@ -82,7 +84,8 @@ function App() {
     }
   }
   const projects = [
-    {id:1, image: whattodo, info: <WhattodoInfo onClick={() => handleCardClick(1)} />}
+    {id:1, image: whattodo, info: <WhattodoInfo onClick={() => handleCardClick(1)} />},
+    {id:2, image: howistheweather, info: <WhattodoInfo onClick={() => handleCardClick(1)} />}
   ]
   return (
     <>
