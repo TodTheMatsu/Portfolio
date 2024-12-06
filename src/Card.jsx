@@ -14,16 +14,15 @@ function Card({ image, info, onClick, index }) {
                 duration: 0.5,
                 type: 'spring'
             }}
-            whileHover={{ rotate: 0, scale: 1.1, transition: { duration: 0.1 } }} 
+            whileHover={{ rotate: 0, scale: 1.2, transition: { duration: 0.2 } }} 
             whileTap={{ 
                 scale: 1.3, 
                 transition: { 
                     type: 'tween', 
-                    duration: 0.2
+                    duration: 0.1
                 } 
             }} 
-            className='bg-white w-[300px] h-[400px] rounded-2xl pointer-events-auto cursor-pointer shadow-2xl'
-        >
+            className='bg-white w-[300px] h-[400px] rounded-2xl pointer-events-auto cursor-pointer shadow-2xl'>
             <motion.img src={image} className='object-cover w-full h-full object-center rounded-2xl'/>
     </motion.div>
 
