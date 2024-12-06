@@ -171,8 +171,8 @@ function WhattodoInfo({ onClick }) {
             </motion.div>
           </motion.div>
           <motion.hr variants={textVariants} className="w-full mx-auto border-dashed" />
-          <motion.a whileHover={{ scale: 1.1, transition: { duration: 0.2} }} href="https://github.com/TodTheMatsu/what-to-do"  variants={textVariants} target="_blank" className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 outline-dashed pb-2 text-4xl">
-            <motion.h2  className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 text-4xl">Source code</motion.h2>
+          <motion.a whileHover={{ scale: 1.1, transition: { duration: 0.2} }} href="https://github.com/TodTheMatsu/what-to-do"  variants={textVariants} target="_blank" className="text-white backdrop-blur-md font-sans font-thin mx-auto text-center rounded-3xl px-2 outline-dashed pb-2 text-4xl">
+            <motion.h2  className="text-white mix-blend-darken font-sans font-thin mx-auto text-center rounded-3xl px-2 text-4xl">Source code</motion.h2>
           </motion.a>
         </motion.div>
         <motion.div className="w-[200px] right-[15%] bg-white bg-opacity-20 rounded-3xl flex flex-col gap-5 py-5 justify-center items-center fixed backdrop-blur-md">
