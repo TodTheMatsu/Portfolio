@@ -104,7 +104,6 @@ function WhattodoInfo({ onClick }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="w-screen h-screen bg-black bg-opacity-50 backdrop-blur-md flex-col flex justify-center items-center fixed"
-
     >
       <motion.div onClick={handleClick} className="w-full h-full flex justify-center overflow-auto py-28 space-x-5 px-20 scroll-smooth">
         <motion.div
