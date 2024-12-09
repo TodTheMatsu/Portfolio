@@ -1,16 +1,20 @@
 {
   "name": "main-app",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://github.com/TodTheMatsu/Portfolio",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deply": "gh-pages -d dist"
   },
   "dependencies": {
     "@designbycode/tailwindcss-text-shadow": "^2.2.1",
+    "gh-pages": "^6.2.0",
     "motion": "^11.11.17",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
