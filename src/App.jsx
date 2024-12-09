@@ -25,7 +25,7 @@ function App() {
   const handleCardClick = (id) => {
     setActiveCardId((prev) => (prev === id ? null : id));
   };
-  const boxDesign = 'flex-grow bg-white bg-gradient-to-r rounded-md backdrop-blur-md bg-opacity-20'
+  const boxDesign = 'bg-white bg-gradient-to-r rounded-md backdrop-blur-md bg-opacity-20'
   const aboutMe = "I am an aspiring web developer with a strong passion for learning and growth. My journey began with over four years of experience in game development, where I honed my programming skills and creative problem-solving abilities. Recently, I transitioned into web development, bringing with me a solid foundation in programming and a commitment to mastering this exciting field."
   
   const greetText = "Hello my name is Lee."
@@ -92,7 +92,7 @@ function App() {
   return (
     <>
       <div className={`bg-black h-[100vh] w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
-      <div className={`h-[400vh] w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
+      <div className={`h-[220vh] w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
       <motion.iframe initial={{ opacity: 0 }} whileInView={{ opacity: 1, transition: { duration: 1, delay:3.5 } }} viewport={{ once: true }} className='absolute' src='https://my.spline.design/untitled-6cc2c57f8acbfdc379efb69648446138/' frameBorder='0' width='100%' height='100%'></motion.iframe>
         <div className="w-[1000px] h-[500px] mx-auto my-56 flex flex-col items-center justify-center">
           <motion.h1>
@@ -108,7 +108,7 @@ function App() {
             ))}
           </motion.h1>
         </div>
-        <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="px-2 h-screen pointer-events-none w-full flex flex-wrap items-center justify-center gap-2">
+        <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="px-4 pointer-events-none w-full flex flex-wrap items-center justify-center gap-2">
           <motion.div variants={bentosVar}  className="w-[600px] h-[400px] bg-white  rounded-md backdrop-blur-md bg-opacity-20">
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>About me</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>About me</motion.h1>
@@ -123,7 +123,7 @@ function App() {
               ))}
              </p>
           </motion.div>
-          <motion.div variants={bentosVar} className={`w-[1250px] h-[400px] ${boxDesign}`}>
+          <motion.div variants={bentosVar} className={`w-[1250px] h-[400px] flex-grow ${boxDesign}`}>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My tech stack</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My tech stack</motion.h1>
             <motion.div variants={imgParentVariants} viewport={{ once: true }} initial="hidden" whileInView="visible" className='w-full flex-row justify-center items-center flex h-[300px]'>
@@ -148,26 +148,16 @@ function App() {
               </motion.svg>
             </motion.div>
           </motion.div>
-          <motion.div variants={bentosVar} className={`h-full  ${boxDesign}`}>
+          <motion.div variants={bentosVar} className={`h-auto flex-grow w-full  ${boxDesign}`}>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My projects</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My projects</motion.h1>
-            <motion.div className='w-full justify-center items-center  flex flex-grow h-full'>
-            {projects.map(({ id, image, info }, index) => (<>
-          <Card
-            key={id}
-            image={image}
-            info={info}
-            onClick={() => handleCardClick(id)}
-            index={index}
-          /></>
-        ))}
+            <motion.div className='w-full justify-center items-center  flex flex-grow h-auto py-20'>
+            {projects.map(({ id, image, info }, index) => (
+          <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
             </motion.div>
-          </motion.div>
         </motion.div>
-        <AnimatePresence>
-        {activeCardId && projects.find((project) => project.id === activeCardId).info}
-        </AnimatePresence>
-
+        </motion.div>
+        {activeCardId && projects.find((project) => project.id === activeCardId).info} 
         <motion.div
           initial={{ opacity: 0, width: "60px", y: 100 }}
           animate={{
