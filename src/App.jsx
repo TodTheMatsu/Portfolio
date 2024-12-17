@@ -7,6 +7,8 @@ import WhattodoInfo from './WhattodoInfo';
 import Howistheweather from './Howistheweather';
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import assistant from './assets/assistant.png';
+import Assistant from './Assistant';
 function App() {
   const links = [
     {
@@ -87,7 +89,8 @@ function App() {
   }
   const projects = [
     {id:1, image: whattodo, info: <WhattodoInfo onClick={() => handleCardClick(1)} />},
-    {id:2, image: howistheweather, info: <Howistheweather onClick={() => handleCardClick(2)} />}
+    {id:2, image: howistheweather, info: <Howistheweather onClick={() => handleCardClick(2)} />},
+    {id:3, image: assistant, info: <Assistant onClick={() => handleCardClick(3)} />}
   ]
   return (
     <>

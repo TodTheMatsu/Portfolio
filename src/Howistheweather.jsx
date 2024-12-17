@@ -58,14 +58,6 @@ function WhattodoInfo({ onClick }) {
       "Tailwind CSS"
     ],
     Backend: [
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "Mongoose",
-      "JWT (JSON Web Tokens)",
-      "Crypto",
-      "CORS (Cross-Origin Resource Sharing)",
-      "dotenv"
     ]
   };
   

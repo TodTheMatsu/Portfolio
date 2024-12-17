@@ -37,8 +37,7 @@ function WhattodoInfo({ onClick }) {
       "Mongoose",
       "JWT (JSON Web Tokens)",
       "Crypto",
-      "CORS (Cross-Origin Resource Sharing)",
-      "dotenv"
+      "CORS (Cross-Origin Resource Sharing)"
     ]
   };
   
