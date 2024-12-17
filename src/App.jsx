@@ -160,7 +160,10 @@ function App() {
             </motion.div>
         </motion.div>
         </motion.div>
+        <AnimatePresence>
         {activeCardId && projects.find((project) => project.id === activeCardId).info} 
+        </AnimatePresence>
+       
         <motion.div
           initial={{ opacity: 0, width: "60px", y: 100 }}
           animate={{
