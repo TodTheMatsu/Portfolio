@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 
 function Card({ image, info, onClick, index }) {
     const randomRotation = Math.random() < 0.5 ? -10 : 10;
-    console.log(index)
     return (
         <>
             <motion.div  
