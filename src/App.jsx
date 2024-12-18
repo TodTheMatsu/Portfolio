@@ -94,10 +94,10 @@ function App() {
   ]
   return (
     <>
-      <div className={`bg-black h-[100vh] w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
+      <div className={`bg-black h-screen w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
       <div className={`pb-20 flex-grow w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
       <motion.iframe initial={{ opacity: 0 }} whileInView={{ opacity: 1, transition: { duration: 1, delay:3.5 } }} viewport={{ once: true }} className='absolute' src='https://my.spline.design/untitled-6cc2c57f8acbfdc379efb69648446138/' frameBorder='0' width='100%' height='100%'></motion.iframe>
-        <div className="w-full h-[500px] mx-auto my-56 flex flex-col items-center justify-center">
+        <div className="w-full h-screen mx-auto flex flex-col items-center justify-center">
           <motion.h1>
             {greetText.split("").map((char, index) => (
               <motion.span className="text-white font-sans font-bold mx-auto text-center w-full text-6xl blur-2xl" 
