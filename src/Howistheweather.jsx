@@ -93,15 +93,15 @@ function WhattodoInfo({ onClick }) {
       className="w-screen h-screen bg-black bg-opacity-50 backdrop-blur-md flex-col flex justify-center items-center fixed"
 
     >
-      <motion.div onClick={handleClick} className="w-full h-full flex justify-center overflow-auto py-28 space-x-5 px-20 scroll-smooth">
+      <motion.div onClick={handleClick} className="w-full h-full flex justify-center overflow-auto py-28 space-x-5 md:px-20 px-5 scroll-smooth">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="w-1/2 max-w-[50%] h-max py-5 flex-grow bg-white bg-opacity-20 rounded-2xl flex flex-col justify-start items-center backdrop-blur-md px-10 space-y-5"
+          className="xl:max-w-[50%] max-w-full h-max py-5 flex-grow bg-white bg-opacity-20 rounded-2xl flex flex-col justify-start items-center backdrop-blur-md px-10 space-y-5"
         >
-          <motion.h1 variants={textVariants} className="text-white font-sans font-thin mx-auto text-center w-full text-9xl mb-10 pb-5">
+          <motion.h1 variants={textVariants} className="text-white md:text-9xl text-7xl font-sans font-thin mx-auto text-center w-full outline-dashed rounded-3xl mb-10 pb-5">
             How is the weather?
           </motion.h1>
           <motion.hr variants={textVariants} className="w-full mx-auto" />
@@ -150,13 +150,13 @@ function WhattodoInfo({ onClick }) {
           <motion.h2  className="text-white mix-blend-darken font-sans font-thin mx-auto text-center rounded-3xl px-2 text-4xl">Source code</motion.h2>
           </motion.a>
         </motion.div>
-        <motion.div className="w-[200px] right-[15%] bg-white bg-opacity-20 rounded-3xl flex flex-col gap-5 py-5 justify-center items-center fixed backdrop-blur-md">
+        <motion.div className="xl:w-[200px] xl:right-[15%] xl:top-[20%] top-0  xl:bg-white bg-black bg-opacity-50  xl:bg-opacity-20 rounded-3xl flex xl:flex-col flex-row px-5 gap-5 py-2 justify-center items-center fixed backdrop-blur-xl">
           {Object.entries(sectionRefs).map(([section, ref]) => {
             return (
               <motion.h1
                 key={section}
                 onClick={() => scrollToSection(ref)}
-                className="text-white font-sans font-thin mx-auto text-center w-full text-2xl cursor-pointer"
+                className="text-white font-sans font-thin text-center w-full text-2xl cursor-pointer"
               >
                 {section}
               </motion.h1>
