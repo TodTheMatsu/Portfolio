@@ -101,7 +101,7 @@ function WhattodoInfo({ onClick }) {
           viewport={{ once: true }}
           className="xl:max-w-[50%] max-w-full h-max py-5 flex-grow bg-white bg-opacity-20 rounded-2xl flex flex-col justify-start items-center backdrop-blur-md px-10 space-y-5"
         >
-          <motion.h1 variants={textVariants} className="text-white md:text-9xl text-7xl font-sans font-thin mx-auto text-center w-full outline-dashed rounded-3xl mb-10 pb-5">
+          <motion.h1 variants={textVariants} className="text-white md:text-9xl text-7xl font-sans font-thin mx-auto text-center w-full outline rounded-3xl mb-10 pb-5">
             How is the weather?
           </motion.h1>
           <motion.hr variants={textVariants} className="w-full mx-auto" />
