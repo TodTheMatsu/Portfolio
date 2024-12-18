@@ -22,7 +22,7 @@ function Card({ image, info, onClick, index }) {
                     duration: 0.1
                 } 
             }} 
-            className='bg-white w-[300px] h-[400px] rounded-2xl pointer-events-auto cursor-pointer shadow-2xl'>
+            className='bg-white lg:w-[300px] lg:h-[400px] md:w-[250px] md:h-[350px] w-[200px] h-[300px] xs:w-[150px] xs:h-[200px]  rounded-2xl pointer-events-auto cursor-pointer shadow-2xl'>
             <motion.img src={image} className='object-cover w-full h-full object-center rounded-2xl'/>
     </motion.div>
 
