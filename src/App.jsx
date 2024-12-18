@@ -177,7 +177,7 @@ function App() {
             width: { delay: 3, duration: 2 },
             ease: "easeInOut",
           }}
-          className="h-[60px] fixed bg-white rounded-full backdrop-blur-md bg-opacity-20 top-[850px] flex items-center justify-center space-x-5"
+          className="h-[60px] fixed bg-white rounded-full backdrop-blur-md bg-opacity-20 top-[90%] flex items-center justify-center space-x-5"
         >
           {links.map((link, index) => (
             <motion.a
