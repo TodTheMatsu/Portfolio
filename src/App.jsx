@@ -101,7 +101,6 @@ function App() {
     <>
       <div className={`bg-black h-screen w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
       <div className={`pb-20 flex-grow w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
-      
         <div className="w-full h-screen mx-auto flex flex-col items-center justify-center">
           <motion.h1>
             {greetText.split("").map((char, index) => (
