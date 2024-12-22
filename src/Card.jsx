@@ -10,14 +10,12 @@ function Card({ image, info, onClick, index }) {
             whileInView={{ rotate: randomRotation, x: 0 }} 
             transition={{ 
                 delay: index * 0.1,
-                duration: 0.5,
-                type: 'spring'
+                duration: 0.5
             }}
             whileHover={{ rotate: 0, scale: 1.2, transition: { duration: 0.2 } }} 
             whileTap={{ 
                 scale: 1.3, 
                 transition: { 
-                    type: 'tween', 
                     duration: 0.1
                 } 
             }} 
