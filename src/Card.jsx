@@ -6,11 +6,11 @@ function Card({ image, info, onClick, index }) {
         <>
             <motion.div  
             onClick={onClick} 
-            initial={{ rotate: randomRotation, x: '100%' }} 
-            whileInView={{ rotate: randomRotation, x: 0 }} 
+            initial={{ rotate: randomRotation}} 
+            whileInView={{ rotate: randomRotation}} 
             transition={{ 
                 delay: index * 0.1,
-                duration: 0.5
+                duration: 0.2
             }}
             whileHover={{ rotate: 0, scale: 1.2, transition: { duration: 0.2 } }} 
             whileTap={{ 
