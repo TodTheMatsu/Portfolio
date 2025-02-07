@@ -32,7 +32,7 @@ function App() {
   const handleCardClick = (id) => {
     setActiveCardId((prev) => (prev === id ? null : id));
   };
-  const boxDesign = 'bg-white bg-gradient-to-r rounded-md backdrop-blur-md bg-opacity-20'
+  const boxDesign = 'bg-white shadow-lg shadow-black bg-gradient-to-r rounded-md backdrop-blur-md bg-opacity-20'
   const aboutMe = "I am an aspiring web developer with a strong passion for learning and growth. My journey began with over four years of experience in game development, where I honed my programming skills and creative problem-solving abilities. Recently, I transitioned into web development, bringing with me a solid foundation in programming and a commitment to mastering this exciting field."
   
   const greetText = "Hello my name is Lee."
@@ -99,12 +99,12 @@ function App() {
   ]
   return (
     <>
-      <div className={`bg-black h-screen w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
+      <div className={`bg-gray-950 h-screen w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
       <div className={`pb-20 flex-grow w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
         <div className="w-full h-[105vh] mx-auto flex flex-col items-center justify-center">
           <motion.h1>
             {greetText.split("").map((char, index) => (
-              <motion.span className="text-white font-sans font-bold mx-auto text-center w-full text-6xl blur-2xl" 
+              <motion.span className="text-white font-sans font-bold mx-auto text-center w-full text-6xl blur-xl" 
               initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: index * 0.05 + 1.5, duration: 1 } }} key={index}>{char}</motion.span>
             ))}
           </motion.h1>
@@ -116,7 +116,7 @@ function App() {
           </motion.h1>
         </div>
         <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="px-4 pointer-events-none w-full flex flex-wrap items-center justify-center gap-2">
-          <motion.div variants={bentosVar}  className="xl:w-[31.25%] lg:w-full h-[400px] bg-white  rounded-md backdrop-blur-md bg-opacity-20 pb-2 flex-grow">
+          <motion.div variants={bentosVar}  className="xl:w-[31.25%] lg:w-full h-[400px] bg-white rounded-md backdrop-blur-md bg-opacity-20 pb-2 flex-grow">
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>About me</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>About me</motion.h1>
             <p className='text-white font-sans px-5 font-thin mx-auto text-center w-full text-2xl mt-5 flex-grow'>
@@ -130,7 +130,7 @@ function App() {
               ))}
              </p>
           </motion.div>
-          <motion.div variants={bentosVar} className={`xl:max-w-[68%] sm:w-full lg:max-w-[100%] h-[400px] flex-grow ${boxDesign}`}>
+          <motion.div variants={bentosVar} className={`xl:max-w-[68%]  sm:w-full lg:max-w-[100%] h-[400px] flex-grow ${boxDesign}`}>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My tech stack</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My tech stack</motion.h1>
             <motion.div variants={imgParentVariants} viewport={{ once: true }} initial="hidden" whileInView="visible" className='w-full flex-row justify-center items-center flex h-[300px]'>
@@ -155,9 +155,9 @@ function App() {
               </motion.svg>
             </motion.div>
           </motion.div>
-          <motion.div variants={bentosVar} className={`h-auto flex-grow w-full  ${boxDesign}`}>
-            <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My projects</motion.h1>
-            <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My projects</motion.h1>
+          <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign}`}>
+            <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My Web Projects</motion.h1>
+            <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My Web Projects</motion.h1>
             <motion.div className='w-full justify-center items-center  flex flex-grow h-auto py-20'>
             {projects.map(({ id, image, info }, index) => (
           <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
