@@ -1,14 +1,20 @@
-import { delay, motion, useScroll} from 'framer-motion';
-import { useEffect, useRef } from 'react';
-import whattodo from './assets/whattodo.png';
-import howistheweather from './assets/howistheweather.png';
-import Card from './Card';
-import WhattodoInfo from './WhattodoInfo';
-import Howistheweather from './Howistheweather';
-import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import assistant from './assets/assistant.png';
+// External dependencies
+import { AnimatePresence, delay, motion, useScroll } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import AnimatedCursor from 'react-animated-cursor';
+
+// Local components
 import Assistant from './Assistant';
+import Card from './Card';
+import Howistheweather from './Howistheweather';
+import WhattodoInfo from './WhattodoInfo';
+
+// Assets
+import assistant from './assets/assistant.png';
+import howistheweather from './assets/howistheweather.png';
+import whattodo from './assets/whattodo.png';
+import empirehounds from './assets/empirehounds.png';
+
 function App() {
   const links = [
     {
@@ -27,14 +33,10 @@ function App() {
       svg: "M21.15979,1H2.84021C1.823853,1,1,1.823853,1,2.84021v18.31958C1,22.176147,1.823853,23,2.84021,23h18.31958   C22.176147,23,23,22.176147,23,21.15979V2.84021C23,1.823853,22.176147,1,21.15979,1z M15.235352,20l-4.362549-6.213013   L5.411438,20H4l6.246887-7.104675L4,4h4.764648l4.130127,5.881958L18.06958,4h1.411377l-5.95697,6.775635L20,20H15.235352z",
     }
   ];
-  const [activeCardId, setActiveCardId] = useState(null);
 
-  const handleCardClick = (id) => {
-    setActiveCardId((prev) => (prev === id ? null : id));
-  };
-  const boxDesign = 'bg-white shadow-lg shadow-black bg-gradient-to-r rounded-md backdrop-blur-md bg-opacity-20'
+  const boxDesign = 'bg-white bg-gradient-to-r rounded-md backdrop-blur-md bg-transparent'
   const aboutMe = "I am an aspiring web developer with a strong passion for learning and growth. My journey began with over four years of experience in game development, where I honed my programming skills and creative problem-solving abilities. Recently, I transitioned into web development, bringing with me a solid foundation in programming and a commitment to mastering this exciting field."
-  
+
   const greetText = "Hello my name is Lee."
 
   const ImgVariants = {
@@ -92,20 +94,39 @@ function App() {
       },
     }
   }
-  const projects = [
+  const webProjects = [
     {id:1, image: whattodo, info: <WhattodoInfo onClick={() => handleCardClick(1)} />},
     {id:2, image: howistheweather, info: <Howistheweather onClick={() => handleCardClick(2)} />},
     {id:3, image: assistant, info: <Assistant onClick={() => handleCardClick(3)} />}
   ]
+  const gameProjects = [
+    {id:4, image: empirehounds, info: <WhattodoInfo onClick={() => handleCardClick(4)} />},
+  ]
+  const allProjects = [...webProjects, ...gameProjects];
+  const [activeTab, setActiveTab] = useState('web');
+  const [activeCardId, setActiveCardId] = useState(null);
+
+  const handleCardClick = (id) => {
+    console.log(id);
+    setActiveCardId((prev) => (prev === id ? null : id));
+  };
+
   return (
     <>
       <div className={`bg-gray-950 h-screen w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
+      <AnimatedCursor  innerSize={15} outerAlpha={0.6} outerSize={25}
+       innerStyle={{ backgroundColor: '#fff', mixBlendMode: 'difference' }} outerScale={2} 
+       outerStyle={{ border: '1px solid #fff', mixBlendMode: 'difference', backgroundColor: 'rgba(255, 255, 255,1)' }}  />
       <div className={`pb-20 flex-grow w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
         <div className="w-full h-[105vh] mx-auto flex flex-col items-center justify-center">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 2, duration: 1 } }}
+          className='w-[50vw] h-[5vh] bg-white absolute rounded-full blur-[25vh]' />
+
           <motion.h1>
             {greetText.split("").map((char, index) => (
               <motion.span className="text-white font-sans font-bold mx-auto text-center w-full text-6xl blur-xl" 
-              initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: index * 0.05 + 1.5, duration: 1 } }} key={index}>{char}</motion.span>
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1, transition: { delay: index * 0.05 + 1.5, duration: 1 } }} key={index}>{char}</motion.span>
             ))}
           </motion.h1>
           <motion.h1 className='absolute'>
@@ -116,7 +137,7 @@ function App() {
           </motion.h1>
         </div>
         <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="px-4 pointer-events-none w-full flex flex-wrap items-center justify-center gap-2">
-          <motion.div variants={bentosVar}  className="xl:w-[31.25%] lg:w-full h-[400px] bg-white rounded-md backdrop-blur-md bg-opacity-20 pb-2 flex-grow">
+          <motion.div variants={bentosVar}  className="xl:w-[31.25%] lg:w-full h-[400px] bg-white rounded-md backdrop-blur-md bg-transparent pb-2 flex-grow">
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>About me</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>About me</motion.h1>
             <p className='text-white font-sans px-5 font-thin mx-auto text-center w-full text-2xl mt-5 flex-grow'>
@@ -156,16 +177,43 @@ function App() {
             </motion.div>
           </motion.div>
           <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign}`}>
-            <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My Web Projects</motion.h1>
-            <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>My Web Projects</motion.h1>
+          <div className="flex justify-center space-x-4 py-4">
+        <motion.button
+        variants={smallGlowingLabels}
+          onClick={() => setActiveTab('web')}
+          whileHover={{ scale: 1.1 }}
+             className={`pointer-events-auto text-white font-sans font-thin text-center text-4xl mt-5  ${
+            activeTab === 'web' ? 'text-white' : 'text-gray-400'
+          }`}
+        >
+          Websites
+        </motion.button>
+        <motion.button
+        variants={smallGlowingLabels}
+        whileHover={{ scale: 1.1 }}
+          onClick={() => setActiveTab('game')}
+          className={`pointer-events-auto text-white font-sans font-thin text-center text-4xl mt-5  ${
+            activeTab === 'game' ? 'text-white' : 'text-gray-400'
+          }`}
+        >
+          Games
+        </motion.button>
+      </div>
             <motion.div className='w-full justify-center items-center  flex flex-grow h-auto py-20'>
-            {projects.map(({ id, image, info }, index) => (
-          <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
+
+      <div className="flex flex-wrap justify-center gap-4 p-4">
+        {activeTab === 'web' &&
+          webProjects.map(({ id, image, info }, index) => (
+               <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
+        {activeTab === 'game' &&
+          gameProjects.map(({ id, image, info }, index)=> (
+            <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
+      </div>
             </motion.div>
         </motion.div>
         </motion.div>
         <AnimatePresence>
-        {activeCardId && projects.find((project) => project.id === activeCardId).info} 
+        {activeCardId && allProjects.find(project => project.id === activeCardId)?.info}
         </AnimatePresence>
        
         <motion.div
