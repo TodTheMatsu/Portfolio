@@ -34,7 +34,7 @@ function App() {
     }
   ];
 
-  const boxDesign = 'bg-white bg-gradient-to-r rounded-md backdrop-blur-md bg-transparent'
+  const boxDesign = 'backdrop-blur-md'
   const aboutMe = "I am an aspiring web developer with a strong passion for learning and growth. My journey began with over four years of experience in game development, where I honed my programming skills and creative problem-solving abilities. Recently, I transitioned into web development, bringing with me a solid foundation in programming and a commitment to mastering this exciting field."
 
   const greetText = "Hello my name is Lee."
@@ -137,7 +137,7 @@ function App() {
           </motion.h1>
         </div>
         <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="px-4 pointer-events-none w-full flex flex-wrap items-center justify-center gap-2">
-          <motion.div variants={bentosVar}  className="xl:w-[31.25%] lg:w-full h-[400px] bg-white rounded-md backdrop-blur-md bg-transparent pb-2 flex-grow">
+          <motion.div variants={bentosVar}  className="xl:w-[31.25%] lg:w-full h-[400px] backdrop-blur-md pb-2 flex-grow">
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>About me</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-bold mx-auto text-center w-full text-4xl mt-5 blur-lg'>About me</motion.h1>
             <p className='text-white font-sans px-5 font-thin mx-auto text-center w-full text-2xl mt-5 flex-grow'>
