@@ -201,12 +201,14 @@ function App() {
       </div>
       <motion.div className='w-full justify-center items-center  flex flex-grow h-auto py-20'>
       <div className="flex flex-wrap justify-center gap-4 p-4">
+
         {activeTab === 'web' &&
           webProjects.map(({ id, image, info }, index) => (
                <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
         {activeTab === 'game' &&
           gameProjects.map(({ id, image, info }, index)=> (
             <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
+
       </div>
             </motion.div>
         </motion.div>
