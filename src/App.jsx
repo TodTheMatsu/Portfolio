@@ -182,7 +182,7 @@ function App() {
         variants={smallGlowingLabels}
           onClick={() => setActiveTab('web')}
           whileHover={{ scale: 1.1 }}
-             className={`pointer-events-auto text-white font-sans font-thin text-center text-4xl mt-5  ${
+             className={`pointer-events-auto font-sans font-thin text-center text-4xl mt-5  ${
             activeTab === 'web' ? 'text-white' : 'text-gray-400'
           }`}
         >
@@ -192,15 +192,14 @@ function App() {
         variants={smallGlowingLabels}
         whileHover={{ scale: 1.1 }}
           onClick={() => setActiveTab('game')}
-          className={`pointer-events-auto text-white font-sans font-thin text-center text-4xl mt-5  ${
+          className={`pointer-events-auto font-sans font-thin text-center text-4xl mt-5  ${
             activeTab === 'game' ? 'text-white' : 'text-gray-400'
           }`}
         >
           Games
         </motion.button>
       </div>
-            <motion.div className='w-full justify-center items-center  flex flex-grow h-auto py-20'>
-
+      <motion.div className='w-full justify-center items-center  flex flex-grow h-auto py-20'>
       <div className="flex flex-wrap justify-center gap-4 p-4">
         {activeTab === 'web' &&
           webProjects.map(({ id, image, info }, index) => (
