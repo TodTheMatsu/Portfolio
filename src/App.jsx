@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import assistant from './assets/assistant.png';
 import Assistant from './Assistant';
+import AnimatedCursor from 'react-animated-cursor';
+import { h1 } from 'motion/react-client';
 function App() {
   const links = [
     {
@@ -100,12 +102,23 @@ function App() {
   return (
     <>
       <div className={`bg-gray-950 h-screen w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
+      <AnimatedCursor  innerSize={15} outerAlpha={0.6} outerSize={25}
+       innerStyle={{ backgroundColor: '#fff', mixBlendMode: 'difference' }} outerScale={2} 
+       
+       outerStyle={{ border: '1px solid #fff', mixBlendMode: 'difference', backgroundColor: 'rgba(255, 255, 255,1)' }}  />
       <div className={`pb-20 flex-grow w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
         <div className="w-full h-[105vh] mx-auto flex flex-col items-center justify-center">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 2, duration: 1 } }}
+          className='w-[50vw] h-[5vh] bg-white absolute rounded-full blur-[25vh]' />
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 2, duration: 1 } }}
+            className="w-[10%] h-[5%] bg-white top-0 left-0 absolute blur-[15vh]"
+          />
+
           <motion.h1>
             {greetText.split("").map((char, index) => (
               <motion.span className="text-white font-sans font-bold mx-auto text-center w-full text-6xl blur-xl" 
-              initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: index * 0.05 + 1.5, duration: 1 } }} key={index}>{char}</motion.span>
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1, transition: { delay: index * 0.05 + 1.5, duration: 1 } }} key={index}>{char}</motion.span>
             ))}
           </motion.h1>
           <motion.h1 className='absolute'>
