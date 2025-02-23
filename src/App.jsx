@@ -183,9 +183,11 @@ function App() {
             </motion.div>
           </motion.div>
           <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign}`}>
-            <div className="flex justify-center mb-10 py-4 relative">
+          <div className="flex justify-center gap-6 mb-10 py-4 relative flex-wrap">
+
               {tabs.map(({ key, label }) => (
-                <div key={key}  className="w-[8%] relative">
+            <div key={key} className="relative min-w-[120px] md:min-w-[120px]">
+
                   <motion.button
                     id="stick-title"
                     variants={smallGlowingLabels}
