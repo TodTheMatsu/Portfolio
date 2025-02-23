@@ -180,7 +180,7 @@ function Main({ onClick }) {
             target="_blank"
             className="text-white backdrop-blur-md font-sans font-thin mx-auto text-center rounded-3xl px-2 outline pb-2 text-4xl"
           >
-            <motion.h2 
+            <motion.h2 data-cursor-exclusion data-cursor-size='80px'
               className="text-white mix-blend-darken font-sans font-thin mx-auto text-center rounded-3xl px-2 text-4xl"
             >
               Source code

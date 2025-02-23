@@ -3,6 +3,7 @@ import { AnimatePresence, delay, motion, useScroll } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { Cursor } from 'react-creative-cursor';
 import 'react-creative-cursor/dist/styles.css';
+
 // Local components
 import Assistant from './Assistant';
 import Card from './Card';
@@ -118,8 +119,6 @@ function App() {
 
   return (
     <>
-
-
       <div 
        className={`bg-gray-950 h-screen w-full absolute flex flex-col items-center overflow-x-hidden  ${activeCardId ? "overflow-hidden" : ""}`}>
         
@@ -186,10 +185,9 @@ function App() {
           <div className="flex justify-center gap-6 mb-10 py-4 relative flex-wrap">
 
               {tabs.map(({ key, label }) => (
-            <div key={key} className="relative min-w-[120px] md:min-w-[120px]">
-
-                  <motion.button
-                    id="stick-title"
+            <div data-cursor-size="80px" data-cursor-exclusion key={key} className="relative min-w-[120px] md:min-w-[120px]">
+                  <motion.button 
+                  
                     variants={smallGlowingLabels}
                     onClick={() => setActiveTab(key)}
                     whileHover={{ scale: 1.1 }}
@@ -199,7 +197,7 @@ function App() {
                   >
                     {label}
                   </motion.button>
-                  <motion.div
+                  <motion.div 
                     variants={smallGlowingLabels}
                     className={`pointer-events-none absolute font-sans font-thin text-center text-4xl mt-5 ${
                       activeTab === key ? 'text-white blur-md' : 'text-transparent'
@@ -211,15 +209,15 @@ function App() {
               ))}
             </div>
         <motion.div className='w-full justify-center items-center  flex flex-grow h-auto py-20'>
-      <div  className="flex flex-wrap justify-center gap-4 p-4">
-        {activeTab === 'web' &&
-          webProjects.map(({ id, image, info }, index) => (
-               <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
-        {activeTab === 'game' &&
-          gameProjects.map(({ id, image, info }, index)=> (
-            <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
+          <div  className="flex flex-wrap justify-center gap-4 p-4">
+            {activeTab === 'web' &&
+              webProjects.map(({ id, image, info }, index) => (
+                  <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
+            {activeTab === 'game' &&
+              gameProjects.map(({ id, image, info }, index)=> (
+                <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
 
-      </div>
+          </div>
             </motion.div>
         </motion.div>
         </motion.div>
@@ -263,7 +261,7 @@ function App() {
         </motion.div>
       </div>
       </div>
-      <Cursor isGelly={true} cursorInnerColor='#000000' cursorBackgrounColor='#ffffff'   />
+      <Cursor isGelly={true}  cursorInnerColor='#000000' cursorBackgrounColor='#ffffff'  sizeAnimationEase='easeInOut'  />
     </>
   );
 }
