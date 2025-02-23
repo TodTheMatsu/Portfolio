@@ -6,7 +6,7 @@ function Card({ image, info, onClick, index }) {
     const randomRotation = Math.random() < 0.5 ? -10 : 10;
     
     return (
-        <motion.button  
+        <motion.button  data-cursor-text="View" data-cursor-size="80px"
             onClick={onClick} 
             initial={{ opacity: 0, rotate: randomRotation, x: '100%' }} 
             whileInView={{ rotate: randomRotation, x: 0, opacity: 1,
@@ -27,7 +27,7 @@ function Card({ image, info, onClick, index }) {
                     duration: 0.1
                 } 
             }} 
-            className='relative bg-white lg:w-[300px] lg:h-[400px] md:w-[250px] md:h-[350px] sm:w-[150px] sm:h-[200px] w-[100px] h-[150px] rounded-2xl pointer-events-auto cursor-pointer shadow-2xl overflow-hidden'>
+            className='relative card  bg-white lg:w-[300px] lg:h-[400px] md:w-[250px] md:h-[350px] sm:w-[150px] sm:h-[200px] w-[100px] h-[150px] rounded-2xl pointer-events-auto cursor-pointer shadow-2xl overflow-hidden'>
             
             <motion.img src={image} className='object-cover w-full h-full object-center rounded-2xl' />
             

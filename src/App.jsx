@@ -1,13 +1,14 @@
 // External dependencies
 import { AnimatePresence, delay, motion, useScroll } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import AnimatedCursor from 'react-animated-cursor';
-
+import { Cursor } from 'react-creative-cursor';
+import 'react-creative-cursor/dist/styles.css';
 // Local components
 import Assistant from './Assistant';
 import Card from './Card';
 import Howistheweather from './Howistheweather';
 import WhattodoInfo from './WhattodoInfo';
+
 
 // Assets
 import assistant from './assets/assistant.png';
@@ -107,16 +108,21 @@ function App() {
   const [activeCardId, setActiveCardId] = useState(null);
 
   const handleCardClick = (id) => {
-    console.log(id);
     setActiveCardId((prev) => (prev === id ? null : id));
   };
 
+  const tabs = [
+    { key: 'web', label: 'Websites' },
+    { key: 'game', label: 'Games' }
+  ];
+
   return (
     <>
-      <div className={`bg-gray-950 h-screen w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
-      <AnimatedCursor  innerSize={15} outerAlpha={0.6} outerSize={25}
-       innerStyle={{ backgroundColor: '#fff', mixBlendMode: 'difference' }} outerScale={2} 
-       outerStyle={{ border: '1px solid #fff', mixBlendMode: 'difference', backgroundColor: 'rgba(255, 255, 255,1)' }}  />
+
+
+      <div 
+       className={`bg-gray-950 h-screen w-full absolute flex flex-col items-center overflow-x-hidden  ${activeCardId ? "overflow-hidden" : ""}`}>
+        
       <div className={`pb-20 flex-grow w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
         <div className="w-full h-[105vh] mx-auto flex flex-col items-center justify-center">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 2, duration: 1 } }}
@@ -177,31 +183,33 @@ function App() {
             </motion.div>
           </motion.div>
           <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign}`}>
-          <div className="flex justify-center space-x-4 py-4">
-        <motion.button
-        variants={smallGlowingLabels}
-          onClick={() => setActiveTab('web')}
-          whileHover={{ scale: 1.1 }}
-             className={`pointer-events-auto font-sans font-thin text-center text-4xl mt-5  ${
-            activeTab === 'web' ? 'text-white' : 'text-gray-400'
-          }`}
-        >
-          Websites
-        </motion.button>
-        <motion.button
-        variants={smallGlowingLabels}
-        whileHover={{ scale: 1.1 }}
-          onClick={() => setActiveTab('game')}
-          className={`pointer-events-auto font-sans font-thin text-center text-4xl mt-5  ${
-            activeTab === 'game' ? 'text-white' : 'text-gray-400'
-          }`}
-        >
-          Games
-        </motion.button>
-      </div>
-      <motion.div className='w-full justify-center items-center  flex flex-grow h-auto py-20'>
-      <div className="flex flex-wrap justify-center gap-4 p-4">
-
+            <div className="flex justify-center mb-10 py-4 relative">
+              {tabs.map(({ key, label }) => (
+                <div key={key}  className="w-[8%] relative">
+                  <motion.button
+                    id="stick-title"
+                    variants={smallGlowingLabels}
+                    onClick={() => setActiveTab(key)}
+                    whileHover={{ scale: 1.1 }}
+                    className={`pointer-events-auto absolute font-sans font-thin text-center text-4xl mt-5 ${
+                      activeTab === key ? 'text-white' : 'text-gray-400'
+                    }`}
+                  >
+                    {label}
+                  </motion.button>
+                  <motion.div
+                    variants={smallGlowingLabels}
+                    className={`pointer-events-none absolute font-sans font-thin text-center text-4xl mt-5 ${
+                      activeTab === key ? 'text-white blur-md' : 'text-transparent'
+                    }`}
+                  >
+                    {label}
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+        <motion.div className='w-full justify-center items-center  flex flex-grow h-auto py-20'>
+      <div  className="flex flex-wrap justify-center gap-4 p-4">
         {activeTab === 'web' &&
           webProjects.map(({ id, image, info }, index) => (
                <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
@@ -216,7 +224,7 @@ function App() {
         <AnimatePresence>
         {activeCardId && allProjects.find(project => project.id === activeCardId)?.info}
         </AnimatePresence>
-       
+
         <motion.div
           initial={{ opacity: 0, width: "60px", y: 100 }}
           animate={{
@@ -253,6 +261,7 @@ function App() {
         </motion.div>
       </div>
       </div>
+      <Cursor isGelly={true} cursorInnerColor='#000000' cursorBackgrounColor='#ffffff'   />
     </>
   );
 }
