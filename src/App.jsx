@@ -9,7 +9,7 @@ import Assistant from './Assistant';
 import Card from './Card';
 import Howistheweather from './Howistheweather';
 import WhattodoInfo from './WhattodoInfo';
-
+import Empirehound from './Empirehound';
 
 // Assets
 import assistant from './assets/assistant.png';
@@ -102,7 +102,7 @@ function App() {
     {id:3, image: assistant, info: <Assistant onClick={() => handleCardClick(3)} />}
   ]
   const gameProjects = [
-    {id:4, image: empirehounds, info: <WhattodoInfo onClick={() => handleCardClick(4)} />},
+    {id:4, image: empirehounds, info: <Empirehound onClick={() => handleCardClick(4)} />},
   ]
   const allProjects = [...webProjects, ...gameProjects];
   const [activeTab, setActiveTab] = useState('web');
