@@ -183,11 +183,9 @@ function App() {
           </motion.div>
           <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign}`}>
           <div className="flex justify-center gap-6 mb-10 py-4 relative flex-wrap">
-
               {tabs.map(({ key, label }) => (
             <div data-cursor-size="80px" data-cursor-exclusion key={key} className="relative min-w-[120px] md:min-w-[120px]">
                   <motion.button 
-                  
                     variants={smallGlowingLabels}
                     onClick={() => setActiveTab(key)}
                     whileHover={{ scale: 1.1 }}
@@ -212,13 +210,12 @@ function App() {
           <div  className="flex flex-wrap justify-center gap-4 p-4">
             {activeTab === 'web' &&
               webProjects.map(({ id, image, info }, index) => (
-                  <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
+                <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
             {activeTab === 'game' &&
               gameProjects.map(({ id, image, info }, index)=> (
                 <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
-
           </div>
-            </motion.div>
+        </motion.div>
         </motion.div>
         </motion.div>
         <AnimatePresence>
@@ -241,8 +238,9 @@ function App() {
           className="h-[60px] fixed bg-white rounded-full backdrop-blur-md bg-opacity-20 top-[90%] flex items-center justify-center space-x-5"
         >
           {links.map((link, index) => (
-            <motion.a
+            <motion.a 
               key={index}
+              data-cursor-size="80px" data-cursor-exclusion
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{
@@ -253,7 +251,7 @@ function App() {
               href={link.href}
               className="text-white font-sans font-thin text-center text-2xl"
             >
-              <motion.svg whileHover={{ scale: 1.3 }} className="h-auto w-10 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <motion.svg  whileHover={{ scale: 1.3 }} className="h-auto w-10 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d={link.svg}/>
               </motion.svg>
             </motion.a>
