@@ -10,12 +10,14 @@ import Card from './Card';
 import Howistheweather from './Howistheweather';
 import WhattodoInfo from './WhattodoInfo';
 import Empirehound from './Empirehound';
+import ProjectRTS from './ProjectRTS';
 
 // Assets
 import assistant from './assets/assistant.png';
 import howistheweather from './assets/howistheweather.png';
 import whattodo from './assets/whattodo.png';
 import empirehounds from './assets/empirehounds.png';
+import projectrts from './assets/projectrts.png';
 
 function App() {
   const links = [
@@ -103,6 +105,7 @@ function App() {
   ]
   const gameProjects = [
     {id:4, image: empirehounds, info: <Empirehound onClick={() => handleCardClick(4)} />},
+    {id:5, image: projectrts, info: <ProjectRTS onClick={() => handleCardClick(5)} />},
   ]
   const allProjects = [...webProjects, ...gameProjects];
   const [activeTab, setActiveTab] = useState('web');
