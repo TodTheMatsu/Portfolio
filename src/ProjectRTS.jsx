@@ -116,7 +116,7 @@ function Main({ onClick }) {
           <motion.hr variants={textVariants} className="w-full mx-auto " />
           <motion.a
             whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
-            href="https://github.com/TodTheMatsu/what-to-do"
+            href="https://www.roblox.com/games/85241405978238/Project-RTS"
             variants={textVariants}
             target="_blank"
             className="text-white backdrop-blur-md font-sans font-thin mx-auto text-center rounded-3xl px-2 outline-double pb-2 text-4xl"
