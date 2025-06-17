@@ -360,6 +360,7 @@ function App() {
                       whileHover={{ scale: 1.1 }}
                       onClick={() => setActiveBlogPost(post)}
                       className="text-white font-thin hover:text-gray-300"
+                      data-cursor-size="80px" data-cursor-exclusion
                     >
                       Read More →
                     </motion.button>

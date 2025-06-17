@@ -5,7 +5,7 @@ import React from 'react';
 function Card({ image, info, onClick, index }) {
     const randomRotation = Math.random() < 0.5 ? -10 : 10;
     
-    return (
+return (
         <motion.button  data-cursor-text="VIEW" data-cursor-size="130px" 
             onClick={onClick} 
             initial={{ opacity: 0, rotate: randomRotation, x: '100%' }} 
