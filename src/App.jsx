@@ -4,6 +4,8 @@ import { useMemo, useEffect, useRef, useState, Suspense, lazy } from 'react';
 import { Cursor } from 'react-creative-cursor';
 import 'react-creative-cursor/dist/styles.css';
 import Card from './Card';
+import BlogPost from './BlogPost';
+import { blogPosts } from './data/blogPosts';
 
 // Local components
 const WhattodoInfo = lazy(() => import('./WhattodoInfo'));
@@ -161,6 +163,7 @@ function App() {
 
   const [activeTab, setActiveTab] = useState('web');
   const [activeCardId, setActiveCardId] = useState(null);
+  const [activeBlogPost, setActiveBlogPost] = useState(null);
 
   // Use a stable callback for card click
   const handleCardClick = (id) => {
@@ -298,46 +301,83 @@ function App() {
                 </motion.svg>
               </motion.div>
             </motion.div>
-            <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign}`}>
+          </motion.div>
+
+          <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign}`}>
             <div className="flex justify-center gap-6 mb-10 py-4 relative flex-wrap">
-                {tabs.map(({ key, label }) => (
-              <div data-cursor-size="80px" data-cursor-exclusion key={key} className="relative min-w-[120px] md:min-w-[120px]">
-                    <motion.button 
-                      variants={smallGlowingLabels}
-                      onClick={() => setActiveTab(key)}
-                      whileHover={{ scale: 1.1 }}
-                      className={`pointer-events-auto absolute font-sans font-thin text-center text-4xl mt-5 ${
-                        activeTab === key ? 'text-white' : 'text-gray-400'
-                      }`}
-                    >
-                      {label}
-                    </motion.button>
-                    <motion.div 
-                      variants={smallGlowingLabels}
-                      className={`pointer-events-none absolute font-sans font-thin text-center text-4xl mt-5 ${
-                        activeTab === key ? 'text-white blur-md' : 'text-transparent'
-                      }`}
-                    >
-                      {label}
-                    </motion.div>
-                  </div>
-                ))}
+              {tabs.map(({ key, label }) => (
+                <div data-cursor-size="80px" data-cursor-exclusion key={key} className="relative min-w-[120px] md:min-w-[120px]">
+                  <motion.button 
+                    variants={smallGlowingLabels}
+                    onClick={() => setActiveTab(key)}
+                    whileHover={{ scale: 1.1 }}
+                    className={`pointer-events-auto absolute font-sans font-thin text-center text-4xl mt-5 ${
+                      activeTab === key ? 'text-white' : 'text-gray-400'
+                    }`}
+                  >
+                    {label}
+                  </motion.button>
+                  <motion.div 
+                    variants={smallGlowingLabels}
+                    className={`pointer-events-none absolute font-sans font-thin text-center text-4xl mt-5 ${
+                      activeTab === key ? 'text-white blur-md' : 'text-transparent'
+                    }`}
+                  >
+                    {label}
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+            <motion.div className='w-full justify-center items-center flex flex-grow h-auto py-20'>
+              <div className="flex flex-wrap justify-center gap-4 p-4">
+                {activeTab === 'web' &&
+                  webProjects.map(({ id, image, info }, index) => (
+                    <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
+                {activeTab === 'game' &&
+                  gameProjects.map(({ id, image, info }, index)=> (
+                    <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
               </div>
-          <motion.div className='w-full justify-center items-center  flex flex-grow h-auto py-20'>
-            <div  className="flex flex-wrap justify-center gap-4 p-4">
-              {activeTab === 'web' &&
-                webProjects.map(({ id, image, info }, index) => (
-                  <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
-              {activeTab === 'game' &&
-                gameProjects.map(({ id, image, info }, index)=> (
-                  <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
+            </motion.div>
+          </motion.div>
+
+          {/* Blog Section */}
+          <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign} mt-10`}>
+            <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>Blog</motion.h1>
+            <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 blur-lg'>Blog</motion.h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-8 mt-20">
+              {blogPosts.map((post) => (
+                <motion.div 
+                  key={post.id}
+                  variants={bentosVar}
+                  className="bg-white/10 backdrop-blur-md rounded-lg p-6 hover:bg-white/20 transition-all duration-300"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <h2 className="text-white text-2xl font-thin mb-4">{post.title}</h2>
+                  <p className="text-gray-300 font-thin mb-4">{post.preview}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400 text-sm">{post.date}</span>
+                    <motion.button 
+                      whileHover={{ scale: 1.1 }}
+                      onClick={() => setActiveBlogPost(post)}
+                      className="text-white font-thin hover:text-gray-300"
+                    >
+                      Read More →
+                    </motion.button>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
-          </motion.div>
-          </motion.div>
+
           <AnimatePresence>
             <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center z-50 text-white text-3xl">Loading...</div>}>
               {activeCardId && allProjects.find(project => project.id === activeCardId)?.info}
+              {activeBlogPost && (
+                <BlogPost 
+                  post={activeBlogPost} 
+                  onClose={() => setActiveBlogPost(null)} 
+                />
+              )}
             </Suspense>
           </AnimatePresence>
 
