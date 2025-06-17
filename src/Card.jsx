@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import React from 'react';
 
 function Card({ image, info, onClick, index }) {
     const randomRotation = Math.random() < 0.5 ? -10 : 10;
@@ -30,4 +31,4 @@ function Card({ image, info, onClick, index }) {
     );
 }
 
-export default Card;
+export default React.memo(Card);
