@@ -344,30 +344,90 @@ function App() {
           <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign} mt-10`}>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>Blog</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 blur-lg'>Blog</motion.h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-8 mt-20">
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-8 mt-20"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.2,
+                    delayChildren: 0.3
+                  }
+                }
+              }}
+            >
               {blogPosts.map((post) => (
                 <motion.div 
                   key={post.id}
-                  variants={bentosVar}
+                  variants={{
+                    hidden: { 
+                      opacity: 0,
+                      y: 50,
+                      scale: 0.8,
+                      rotateX: -15
+                    },
+                    visible: { 
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                      rotateX: 0,
+                      transition: {
+                        type: "spring",
+                        stiffness: 100,
+                        damping: 15
+                      }
+                    }
+                  }}
                   className="bg-white/10 backdrop-blur-md rounded-lg p-6 hover:bg-white/20 transition-all duration-300"
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ 
+                    scale: 1.02,
+                    rotateY: 5,
+                    boxShadow: "0 0 20px rgba(255,255,255,0.1)"
+                  }}
                 >
-                  <h2 className="text-white text-2xl font-thin mb-4">{post.title}</h2>
-                  <p className="text-gray-300 font-thin mb-4">{post.preview}</p>
-                  <div className="flex justify-between items-center">
+                  <motion.h2 
+                    className="text-white text-2xl font-thin mb-4"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    {post.title}
+                  </motion.h2>
+                  <motion.p 
+                    className="text-gray-300 font-thin mb-4"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    {post.preview}
+                  </motion.p>
+                  <motion.div 
+                    className="flex justify-between items-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                  >
                     <span className="text-gray-400 text-sm">{post.date}</span>
                     <motion.button 
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ 
+                        scale: 1.1,
+                        x: 5,
+                        transition: { type: "spring", stiffness: 400, damping: 10 }
+                      }}
                       onClick={() => setActiveBlogPost(post)}
                       className="text-white font-thin hover:text-gray-300"
-                      data-cursor-size="80px" data-cursor-exclusion
+                      data-cursor-size="80px" 
+                      data-cursor-exclusion
                     >
                       Read More →
                     </motion.button>
-                  </div>
+                  </motion.div>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
 
           <AnimatePresence>
