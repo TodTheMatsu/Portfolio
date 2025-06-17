@@ -378,7 +378,7 @@ function App() {
           </motion.div>
         </div>
       </div>
-      <Cursor isGelly={true} cursorInnerColor='#ffffff' cursorBackgrounColor='#000000' sizeAnimationEase='easeInOut' />
+      <Cursor isGelly={true} cursorInnerColor='#000000' cursorBackgrounColor='#ffffff' sizeAnimationEase='easeInOut' />
     </>
   );
 }
