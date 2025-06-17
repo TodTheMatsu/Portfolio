@@ -27,7 +27,7 @@ const BlogPost = ({ post, onClose }) => {
         <div className="text-gray-300 font-thin mb-6">
           <span className="text-gray-400">{post.date}</span>
         </div>
-        <div className="text-white font-thin text-lg leading-relaxed">
+        <div className="text-white font-thin text-lg leading-relaxed whitespace-pre-wrap">
           {post.content}
         </div>
       </motion.div>
