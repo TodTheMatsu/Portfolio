@@ -14,6 +14,7 @@ const FeatureItem = ({ feature, index, textVariants }) => (
       variants={textVariants}
       autoPlay
       loop
+      preload="none"
       className="w-full h-auto rounded-2xl shadow-2xl"
     >
       <source src={feature.video} type="video/mp4" />
