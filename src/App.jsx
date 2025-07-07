@@ -271,49 +271,78 @@ function App() {
             </motion.h1>
           </div>
           <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="px-4 pointer-events-none w-full flex flex-wrap items-center justify-center gap-2">
-            <motion.div variants={bentosVar}  className="xl:w-[31.25%] lg:w-full h-[400px] backdrop-blur-md pb-2 flex-grow">
+            <motion.div 
+              variants={bentosVar}  
+              initial={{ opacity: 0, y: 80 }} 
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } }} 
+              viewport={{ once: true }}
+              className="xl:w-[31.25%] lg:w-full h-[400px] backdrop-blur-md pb-2 flex-grow"
+            >
               <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>About me</motion.h1>
               <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 blur-lg'>About me</motion.h1>
-              <p className='text-white font-sans px-2 sm:px-4 font-thin mx-auto text-center w-full text-lg xs:text-base sm:text-xl md:text-2xl mt-5 flex-grow break-words overflow-auto max-h-[320px]'>
+              <motion.p
+                className='text-white font-sans px-2 sm:px-4 font-thin mx-auto text-center w-full text-lg xs:text-base sm:text-xl md:text-2xl mt-5 flex-grow break-words overflow-auto max-h-[320px]'
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.3, ease: 'easeOut' } }}
+                viewport={{ once: true }}
+              >
                 {aboutMe.split("").map((word, index) => (  
                   <motion.span
-                  key = {index}
-                  initial={{ opacity: 0, y:200 }}
-                  whileInView={{ opacity: 1, y: 0, transition: { delay: index * 0.005+1.5, ease: "easeOut", duration: 1 } }}
-                  viewport={{ once: true }}
-                  className='text-white font-sans font-thin mx-auto text-center'>{word}</motion.span>
+                    key={index}
+                    initial={{ opacity: 0, y: 200 }}
+                    whileInView={{ opacity: 1, y: 0, transition: { delay: index * 0.005 + 1.5, ease: "easeOut", duration: 1 } }}
+                    viewport={{ once: true }}
+                    className='text-white font-sans font-thin mx-auto text-center'>{word}</motion.span>
                 ))}
-               </p>
+              </motion.p>
             </motion.div>
-            <motion.div variants={bentosVar} className={`xl:max-w-[68%]  sm:w-full lg:max-w-[100%] h-[400px] flex-grow ${boxDesign}`}>
+            <motion.div 
+              variants={bentosVar} 
+              initial={{ opacity: 0, y: 80 }} 
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.2, ease: 'easeOut' } }} 
+              viewport={{ once: true }}
+              className={`xl:max-w-[68%]  sm:w-full lg:max-w-[100%] h-[400px] flex-grow ${boxDesign}`}
+            >
               <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My tech stack</motion.h1>
               <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 blur-lg'>My tech stack</motion.h1>
               <motion.div variants={imgParentVariants} viewport={{ once: true }} initial="hidden" whileInView="visible" className='w-full flex flex-wrap justify-center items-center h-[300px] gap-4'>
                 {/* Tech stack icons: React, MongoDB, Tailwind, Supabase, TypeScript, Lua, Node */}
-                <motion.div variants={ImgVariants} className='flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 xl:h-32 xl:w-32'>
-                  <FaReact className='w-full h-full text-white' title="React" />
-                </motion.div>
-                <motion.div variants={ImgVariants} className='flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 xl:h-32 xl:w-32'>
-                  <SiMongodb className='w-full h-full text-white' title="MongoDB" />
-                </motion.div>
-                <motion.div variants={ImgVariants} className='flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 xl:h-32 xl:w-32'>
-                  <SiTailwindcss className='w-full h-full text-white' title="Tailwind CSS" />
-                </motion.div>
-                <motion.div variants={ImgVariants} className='flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 xl:h-32 xl:w-32'>
-                  <SiSupabase className='w-full h-full text-white' title="Supabase" />
-                </motion.div>
-                <motion.div variants={ImgVariants} className='flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 xl:h-32 xl:w-32'>
-                  <SiTypescript className='w-full h-full text-white' title="TypeScript" />
-                </motion.div>
-                <motion.div variants={ImgVariants} className='flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 xl:h-32 xl:w-32'>
-                  <SiLua className='w-full h-full text-white' title="Lua" />
-                </motion.div>
-                <motion.div variants={ImgVariants} className='flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 xl:h-32 xl:w-32'>
-                  <FaNodeJs className='w-full h-full text-white' title="Node.js" />
-                </motion.div>
-                <motion.div variants={ImgVariants} className='flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 xl:h-32 xl:w-32'>
-                  <TbBrandCSharp className='w-full h-full text-white' title="C#" />
-                </motion.div>
+                {[FaReact, SiMongodb, SiTailwindcss, SiSupabase, SiTypescript, SiLua, FaNodeJs, TbBrandCSharp].map((Icon, idx) => (
+                  <motion.div
+                    key={idx}
+                    variants={ImgVariants}
+                    className='flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 xl:h-32 xl:w-32 rounded-md'
+                    animate={{
+                      y: [0, -10, 0],
+                    }}
+                    transition={{
+                      duration: 2 + idx * 0.2,
+                      repeat: Infinity,
+                      repeatType: 'reverse',
+                      ease: 'easeInOut',
+                      delay: idx * 0.1,
+                    }}
+                  >
+                    <motion.div
+                      className="w-full h-full flex items-center justify-center"
+                      animate={{
+                        filter: [
+                          'drop-shadow(0 0 0px #fff)',
+                          'drop-shadow(0 0 8px #fff)',
+                          'drop-shadow(0 0 0px #fff)'
+                        ],
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        repeatType: 'reverse',
+                        ease: 'easeInOut',
+                      }}
+                    >
+                      <Icon className='w-5/6 h-5/6 text-white' />
+                    </motion.div>
+                  </motion.div>
+                ))}
               </motion.div>
             </motion.div>
           </motion.div>
