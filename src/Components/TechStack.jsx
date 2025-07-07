@@ -2,7 +2,8 @@ import React, { forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedText from './AnimatedText';
 import { FaReact, FaNodeJs } from 'react-icons/fa';
-import { SiMongodb, SiTailwindcss, SiTypescript, SiLua, SiSupabase, SiVite, TbBrandCSharp } from 'react-icons/si';
+import { SiMongodb, SiTailwindcss, SiTypescript, SiLua, SiSupabase, SiVite } from 'react-icons/si';
+import { TbBrandCSharp } from 'react-icons/tb';
 import { Tooltip } from 'react-tooltip';
 
 const techIcons = {
