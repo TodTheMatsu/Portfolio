@@ -25,7 +25,7 @@ function Card({ image, info, onClick, index }) {
                 } 
             }} 
             className='relative card  bg-white lg:w-[300px] lg:h-[400px] md:w-[250px] md:h-[350px] sm:w-[150px] sm:h-[200px] w-[100px] h-[150px] rounded-2xl pointer-events-auto cursor-pointer shadow-2xl overflow-hidden'>
-            <motion.img src={image} className='object-cover w-full h-full object-center rounded-2xl' />
+            <motion.img src={image} loading="lazy" className='object-cover w-full h-full object-center rounded-2xl' />
         </motion.button>
     );
 }
