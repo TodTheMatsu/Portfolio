@@ -23,6 +23,7 @@ import projectrts from './assets/projectrts.png';
 // React icons for tech stack
 import { FaReact, FaNodeJs } from 'react-icons/fa';
 import { SiMongodb, SiTailwindcss, SiTypescript, SiLua, SiSupabase } from 'react-icons/si';
+import { TbBrandCSharp } from 'react-icons/tb';
 
 // Animation variants and static data
 const ImgVariants = {
@@ -173,6 +174,11 @@ function App() {
     setActiveCardId((prev) => (prev === id ? null : id));
   };
 
+  // Sort blog posts by date (newest first)
+  const sortedBlogPosts = [...blogPosts].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+
   return (
     <>
       <div className={`bg-black h-screen w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
@@ -305,6 +311,9 @@ function App() {
                 <motion.div variants={ImgVariants} className='flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 xl:h-32 xl:w-32'>
                   <FaNodeJs className='w-full h-full text-white' title="Node.js" />
                 </motion.div>
+                <motion.div variants={ImgVariants} className='flex items-center justify-center h-16 w-16 sm:h-20 sm:w-20 lg:h-28 lg:w-28 xl:h-32 xl:w-32'>
+                  <TbBrandCSharp className='w-full h-full text-white' title="C#" />
+                </motion.div>
               </motion.div>
             </motion.div>
           </motion.div>
@@ -365,7 +374,7 @@ function App() {
                 }
               }}
             >
-              {blogPosts.map((post) => (
+              {sortedBlogPosts.map((post) => (
                 <motion.div 
                   key={post.id}
                   variants={{
@@ -496,8 +505,8 @@ function App() {
           </motion.div>
         </div>
       </div>
-      {/* Show custom cursor only on non-mobile devices */}
-      {typeof window !== 'undefined' && window.matchMedia && !window.matchMedia('(pointer: coarse)').matches && (
+      {/* Show custom cursor only on non-mobile devices and hide when a card or blog post is open */}
+      {typeof window !== 'undefined' && window.matchMedia && !window.matchMedia('(pointer: coarse)').matches && !activeCardId && !activeBlogPost && (
         <Cursor isGelly={true} cursorInnerColor='#000000' cursorBackgrounColor='#ffffff' sizeAnimationEase='easeInOut' />
       )}
     </>

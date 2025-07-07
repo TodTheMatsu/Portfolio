@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 
 const BlogPost = ({ post, onClose }) => {
   return (
@@ -16,23 +17,23 @@ const BlogPost = ({ post, onClose }) => {
       >
         <div className="flex justify-between items-start mb-6">
           <h1 className="text-white text-4xl font-thin">{post.title}</h1>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
+          <button
             onClick={onClose}
-            className="text-white text-2xl font-thin hover:text-gray-300"
+            className="text-white text-7xl font-bold hover:text-red-400 w-12 h-12 flex items-center justify-center"
+            aria-label="Close post"
           >
             ×
-          </motion.button>
+          </button>
         </div>
         <div className="text-gray-300 font-thin mb-6">
           <span className="text-gray-400">{post.date}</span>
         </div>
-        <div className="text-white font-thin text-lg leading-relaxed whitespace-pre-wrap">
-          {post.content}
+        <div className="text-white font-thin text-lg leading-relaxed prose prose-invert prose-headings:text-white prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl max-w-none">
+          <ReactMarkdown>{post.content}</ReactMarkdown>
         </div>
       </motion.div>
     </motion.div>
   );
 };
 
-export default BlogPost; 
+export default BlogPost;

@@ -15,5 +15,8 @@ export default {
       '2xl': '1536px',
     }
   },
-  plugins: [ require("@designbycode/tailwindcss-text-shadow"),],
+  plugins: [
+    require("@designbycode/tailwindcss-text-shadow"),
+    require("@tailwindcss/typography"),
+  ],
 }
