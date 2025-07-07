@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedText from './AnimatedText';
 import { FaReact, FaNodeJs } from 'react-icons/fa';
-import { SiMongodb, SiTailwindcss, SiTypescript, SiLua, SiSupabase, SiVite, SiCsharp } from 'react-icons/si';
+import { SiMongodb, SiTailwindcss, SiTypescript, SiLua, SiSupabase, SiVite, TbBrandCSharp } from 'react-icons/si';
 import { Tooltip } from 'react-tooltip';
 
 const techIcons = {
@@ -14,7 +14,7 @@ const techIcons = {
   'Lua': SiLua,
   'Supabase': SiSupabase,
   'Vite': SiVite,
-  'C#': SiCsharp,
+  'C#': TbBrandCSharp,
 };
 
 const TechStack = forwardRef(({ tech, textVariants }, ref) => (
