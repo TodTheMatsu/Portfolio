@@ -14,7 +14,7 @@ import ProjectRTS from './ProjectRTS';
 
 // Assets
 import assistant from './assets/assistant.png';
-import howistheweather from './assets/howistheweather.png';
+import howistheweather from './assets/Howistheweather.png';
 import whattodo from './assets/whattodo.png';
 import empirehounds from './assets/empirehounds.png';
 import projectrts from './assets/projectrts.png';
