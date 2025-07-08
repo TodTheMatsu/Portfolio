@@ -416,7 +416,7 @@ function App() {
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>Blog</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 blur-lg'>Blog</motion.h1>
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-8 mt-20"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-10 mt-20"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -424,8 +424,8 @@ function App() {
                 hidden: {},
                 visible: {
                   transition: {
-                    staggerChildren: 0.2,
-                    delayChildren: 0.3
+                    staggerChildren: 0.15,
+                    delayChildren: 0.2
                   }
                 }
               }}
@@ -452,49 +452,64 @@ function App() {
                       }
                     }
                   }}
-                  className="p-[2px] bg-gradient-to-bl  hover:from-white hover:to-white hover:via-black rounded-lg transition-all duration-400"
+                  className="p-[2px] bg-gradient-to-br from-white/20 via-transparent to-white/5 hover:from-white/30 hover:via-white/10 hover:to-white/20 rounded-xl transition-all duration-500 group cursor-pointer"
                   whileHover={{ 
-                    scale: 1.02,
-                    boxShadow: "0 0 20px rgba(255,255,255,0.2)"
+                    scale: 1.03,
+                    rotateY: 2,
+                    boxShadow: "0 10px 40px rgba(255,255,255,0.1), 0 0 20px rgba(255,255,255,0.05)"
                   }}
+                  onClick={() => setActiveBlogPost(post)}
                 >
-                  <div className="bg-black backdrop-blur-md rounded-lg p-6 h-full">
+                  <div className="bg-black/90 backdrop-blur-xl rounded-xl p-8 h-full border border-white/5 group-hover:border-white/20 transition-all duration-500">
                     <motion.h2 
-                      className="text-white text-2xl font-thin mb-4"
+                      className="text-white text-2xl font-light mb-6 leading-tight group-hover:text-white/90 transition-colors duration-300"
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.2 }}
                     >
                       {post.title}
                     </motion.h2>
+                    
                     <motion.p 
-                      className="text-gray-300 font-thin mb-4"
+                      className="text-gray-300 font-light mb-6 leading-relaxed line-clamp-3"
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       transition={{ delay: 0.3 }}
                     >
                       {post.preview}
                     </motion.p>
+                    
                     <motion.div 
-                      className="flex justify-between items-center"
+                      className="flex justify-between items-center mt-auto"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 }}
                     >
-                      <span className="text-gray-400 text-sm">{post.date}</span>
-                      <motion.button 
+                      <div className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-white/40 rounded-full"></div>
+                        <span className="text-gray-400 text-sm font-light tracking-wide">{post.date}</span>
+                      </div>
+                      <motion.div 
+                        className="flex items-center space-x-2 text-white/80 group-hover:text-white transition-colors duration-300"
                         whileHover={{ 
-                          scale: 1.1,
                           x: 5,
                           transition: { type: "spring", stiffness: 400, damping: 10 }
                         }}
-                        onClick={() => setActiveBlogPost(post)}
-                        className="text-white font-thin hover:text-gray-300"
                         data-cursor-size="80px" 
                         data-cursor-exclusion
                       >
-                        Read More →
-                      </motion.button>
+                        <span className="text-sm font-light">Read</span>
+                        <motion.svg 
+                          className="w-4 h-4" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          viewBox="0 0 24 24"
+                          whileHover={{ x: 2 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </motion.svg>
+                      </motion.div>
                     </motion.div>
                   </div>
                 </motion.div>
