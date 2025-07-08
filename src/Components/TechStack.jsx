@@ -23,11 +23,11 @@ const TechStack = forwardRef(({ tech, textVariants }, ref) => (
     <motion.h1
       ref={ref}
       variants={textVariants}
-      className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-4  pb-2 text-4xl"
+      className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-4 my-5  pb-2 text-4xl"
     >
       Technology Stack
     </motion.h1>
-    <motion.div className="flex items-center justify-center flex-row gap-5">
+    <motion.div className="flex items-center justify-center flex-row my-5 gap-5">
       {tech.Frontend.length > 0 && (
         <motion.div
           variants={textVariants}

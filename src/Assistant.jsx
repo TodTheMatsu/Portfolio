@@ -1,6 +1,6 @@
 // WhattodoInfo.jsx
 import { motion } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import vid1 from './assets/videos/assistant/vid1.mp4';
 import vid2 from './assets/videos/assistant/vid2.mp4';
 import vid3 from './assets/videos/assistant/vid3.mp4';
@@ -15,6 +15,9 @@ function Main({ onClick }) {
   const handleClick = (e) => {
     if (e.target === e.currentTarget) onClick();
   };
+
+  // State for zoomed feature
+  const [zoomedFeature, setZoomedFeature] = useState(null);
 
   // Refs for scrolling to sections
   const introRef = useRef(null);
@@ -91,106 +94,264 @@ function Main({ onClick }) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="xl:max-w-[50%] max-w-full h-max py-5 flex-grow bg-black bg-opacity-20 rounded-2xl flex flex-col justify-start items-center backdrop-blur-md px-10 space-y-5"
+          className="xl:max-w-[50%] max-w-full h-max py-12 flex-grow bg-black/30 backdrop-blur-xl rounded-2xl flex flex-col justify-start items-center border border-white/10 px-8 md:px-12 space-y-0"
         >
           {/* Logo and Heading */}
-          <div className="mx-auto flex flex-row justify-start items-center relative">
-            <svg 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="stroke-white h-auto w-[10vw] mb-10 absolute"
-              viewBox="0 0 20 20"
+          <motion.div 
+            className="flex flex-col items-center mb-16"
+            variants={containerVariants}
+          >
+            <motion.div 
+              className="flex items-center justify-center mb-8"
+              variants={textVariants}
             >
-              <motion.path 
-                initial={{ pathLength: 0, fill: "none" }} 
-                animate={{ pathLength: 1, transition: { duration: 2, delay: 1 } }} 
-                viewport={{ once: true }}
-                d="M7.39804 12.8085c.17624.1243.38672.1909.60239.1905.2159.0002.42643-.0673.602-.193.1775-.1305.31221-.3108.387-.518l.447-1.373c.11443-.3443.30748-.6572.56387-.9139.2563-.25674.569-.45021.9131-.5651l1.391-.45101c.152-.05435.2892-.14315.4011-.25944s.1953-.2569.2437-.41082c.0485-.15393.0606-.31697.0355-.47637-.0251-.15939-.0868-.3108-.1803-.44236-.1341-.18593-.325-.32317-.544-.391l-1.375-.447c-.3445-.11423-.6576-.3072-.91453-.56359-.25691-.25638-.45052-.56913-.56544-.91341l-.452-1.388c-.0723-.20231-.20582-.37707-.382-.5-.13266-.09373-.28536-.15521-.44595-.17956-.16059-.02434-.32465-.01088-.47912.03931-.15448.0502-.29511.13575-.41072.24985-.1156.11409-.20299.25359-.25521.4074l-.457 1.4c-.11459.33482-.30376.63923-.55321.89025-.24946.25101-.55269.44207-.88679.55875l-1.391.448c-.15178.05439-.28891.14317-.40066.25938-.11176.11622-.19511.25672-.24353.4105-.04842.15379-.0606.31669-.03559.47597.02502.15928.08655.31061.17978.44215.12784.17945.30862.31442.517.386l1.374.44499c.44011.14649.82656.42083 1.11.78801.16242.2106.28787.4473.371.7l.452 1.391c.07203.2033.20536.3792.38161.5035Zm6.13726 4.0425c.136.0962.2984.1479.465.148.1651.0001.3261-.0509.461-.146.1395-.0985.2445-.2384.3-.4l.248-.762c.0532-.1584.1422-.3025.26-.421.1174-.1185.2614-.2073.42-.259l.772-.252c.1577-.0545.2944-.1569.391-.293.0734-.103.1213-.2219.1398-.347.0185-.1251.0071-.2528-.0333-.3727-.0404-.1198-.1087-.2283-.1991-.3167-.0905-.0884-.2006-.154-.3214-.1916l-.764-.249c-.1581-.0525-.3019-.1412-.4199-.2588-.118-.1177-.2071-.2612-.2601-.4192l-.252-.773c-.0537-.1578-.1563-.2944-.293-.39-.102-.0729-.2198-.1209-.3437-.1399-.124-.0191-.2507-.0087-.3699.0302-.1193.0389-.2277.1053-.3165.1939-.0888.0885-.1556.1967-.1949.3158l-.247.762c-.0523.1577-.1398.3013-.256.42-.1147.1165-.2546.2051-.409.259l-.773.252c-.159.0539-.2971.1565-.3946.2933-.0975.1367-.1495.3007-.1486.4686.0009.1679.0546.3313.1535.4671.099.1357.2381.2368.3977.289l.763.247c.1589.0534.3033.1427.422.261.1182.1183.2067.2629.258.422l.253.774c.0548.1565.1568.2921.292.388Z"
-              />
-            </svg>
-            <svg 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="stroke-white h-auto w-[10vw] mb-10 blur-md"
-              viewBox="0 0 20 20"
+              <svg 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="stroke-white w-16 h-16 mr-4"
+                viewBox="0 0 20 20"
+              >
+                <motion.path 
+                  initial={{ pathLength: 0, opacity: 0 }} 
+                  animate={{ pathLength: 1, opacity: 1, transition: { duration: 1.5, delay: 0.5 } }} 
+                  strokeWidth="1.5"
+                  d="M7.39804 12.8085c.17624.1243.38672.1909.60239.1905.2159.0002.42643-.0673.602-.193.1775-.1305.31221-.3108.387-.518l.447-1.373c.11443-.3443.30748-.6572.56387-.9139.2563-.25674.569-.45021.9131-.5651l1.391-.45101c.152-.05435.2892-.14315.4011-.25944s.1953-.2569.2437-.41082c.0485-.15393.0606-.31697.0355-.47637-.0251-.15939-.0868-.3108-.1803-.44236-.1341-.18593-.325-.32317-.544-.391l-1.375-.447c-.3445-.11423-.6576-.3072-.91453-.56359-.25691-.25638-.45052-.56913-.56544-.91341l-.452-1.388c-.0723-.20231-.20582-.37707-.382-.5-.13266-.09373-.28536-.15521-.44595-.17956-.16059-.02434-.32465-.01088-.47912.03931-.15448.0502-.29511.13575-.41072.24985-.1156.11409-.20299.25359-.25521.4074l-.457 1.4c-.11459.33482-.30376.63923-.55321.89025-.24946.25101-.55269.44207-.88679.55875l-1.391.448c-.15178.05439-.28891.14317-.40066.25938-.11176.11622-.19511.25672-.24353.4105-.04842.15379-.0606.31669-.03559.47597.02502.15928.08655.31061.17978.44215.12784.17945.30862.31442.517.386l1.374.44499c.44011.14649.82656.42083 1.11.78801.16242.2106.28787.4473.371.7l.452 1.391c.07203.2033.20536.3792.38161.5035Zm6.13726 4.0425c.136.0962.2984.1479.465.148.1651.0001.3261-.0509.461-.146.1395-.0985.2445-.2384.3-.4l.248-.762c.0532-.1584.1422-.3025.26-.421.1174-.1185.2614-.2073.42-.259l.772-.252c.1577-.0545.2944-.1569.391-.293.0734-.103.1213-.2219.1398-.347.0185-.1251.0071-.2528-.0333-.3727-.0404-.1198-.1087-.2283-.1991-.3167-.0905-.0884-.2006-.154-.3214-.1916l-.764-.249c-.1581-.0525-.3019-.1412-.4199-.2588-.118-.1177-.2071-.2612-.2601-.4192l-.252-.773c-.0537-.1578-.1563-.2944-.293-.39-.102-.0729-.2198-.1209-.3437-.1399-.124-.0191-.2507-.0087-.3699.0302-.1193.0389-.2277.1053-.3165.1939-.0888.0885-.1556.1967-.1949.3158l-.247.762c-.0523.1577-.1398.3013-.256.42-.1147.1165-.2546.2051-.409.259l-.773.252c-.159.0539-.2971.1565-.3946.2933-.0975.1367-.1495.3007-.1486.4686.0009.1679.0546.3313.1535.4671.099.1357.2381.2368.3977.289l.763.247c.1589.0534.3033.1427.422.261.1182.1183.2067.2629.258.422l.253.774c.0548.1565.1568.2921.292.388Z"
+                />
+              </svg>
+              <motion.h1 
+                variants={textVariants} 
+                className="text-white text-6xl md:text-7xl font-light tracking-tight"
+              >
+                Assistant
+              </motion.h1>
+            </motion.div>
+            <motion.p 
+              variants={textVariants}
+              className="text-gray-300 text-lg text-center max-w-2xl leading-relaxed"
             >
-              <motion.path 
-                initial={{ pathLength: 0, fill: "none" }} 
-                animate={{ pathLength: 1, transition: { duration: 2, delay: 1.5 } }} 
-                viewport={{ once: true }}
-                d="M7.39804 12.8085c.17624.1243.38672.1909.60239.1905.2159.0002.42643-.0673.602-.193.1775-.1305.31221-.3108.387-.518l.447-1.373c.11443-.3443.30748-.6572.56387-.9139.2563-.25674.569-.45021.9131-.5651l1.391-.45101c.152-.05435.2892-.14315.4011-.25944s.1953-.2569.2437-.41082c.0485-.15393.0606-.31697.0355-.47637-.0251-.15939-.0868-.3108-.1803-.44236-.1341-.18593-.325-.32317-.544-.391l-1.375-.447c-.3445-.11423-.6576-.3072-.91453-.56359-.25691-.25638-.45052-.56913-.56544-.91341l-.452-1.388c-.0723-.20231-.20582-.37707-.382-.5-.13266-.09373-.28536-.15521-.44595-.17956-.16059-.02434-.32465-.01088-.47912.03931-.15448.0502-.29511.13575-.41072.24985-.1156.11409-.20299.25359-.25521.4074l-.457 1.4c-.11459.33482-.30376.63923-.55321.89025-.24946.25101-.55269.44207-.88679.55875l-1.391.448c-.15178.05439-.28891.14317-.40066.25938-.11176.11622-.19511.25672-.24353.4105-.04842.15379-.0606.31669-.03559.47597.02502.15928.08655.31061.17978.44215.12784.17945.30862.31442.517.386l1.374.44499c.44011.14649.82656.42083 1.11.78801.16242.2106.28787.4473.371.7l.452 1.391c.07203.2033.20536.3792.38161.5035Zm6.13726 4.0425c.136.0962.2984.1479.465.148.1651.0001.3261-.0509.461-.146.1395-.0985.2445-.2384.3-.4l.248-.762c.0532-.1584.1422-.3025.26-.421.1174-.1185.2614-.2073.42-.259l.772-.252c.1577-.0545.2944-.1569.391-.293.0734-.103.1213-.2219.1398-.347.0185-.1251.0071-.2528-.0333-.3727-.0404-.1198-.1087-.2283-.1991-.3167-.0905-.0884-.2006-.154-.3214-.1916l-.764-.249c-.1581-.0525-.3019-.1412-.4199-.2588-.118-.1177-.2071-.2612-.2601-.4192l-.252-.773c-.0537-.1578-.1563-.2944-.293-.39-.102-.0729-.2198-.1209-.3437-.1399-.124-.0191-.2507-.0087-.3699.0302-.1193.0389-.2277.1053-.3165.1939-.0888.0885-.1556.1967-.1949.3158l-.247.762c-.0523.1577-.1398.3013-.256.42-.1147.1165-.2546.2051-.409.259l-.773.252c-.159.0539-.2971.1565-.3946.2933-.0975.1367-.1495.3007-.1486.4686.0009.1679.0546.3313.1535.4671.099.1357.2381.2368.3977.289l.763.247c.1589.0534.3033.1427.422.261.1182.1183.2067.2629.258.422l.253.774c.0548.1565.1568.2921.292.388Z"
-              />
-            </svg>
-            <motion.h1 
-              variants={textVariants} 
-              className="text-white 2xl:text-9xl text-7xl font-sans font-thin text-center rounded-3xl pb-5"
-            >
-              Assistant
-            </motion.h1>
-          </div>
+              A modern AI chat application powered by Google's Gemini 1.5 Flash model
+            </motion.p>
+          </motion.div>
 
-          <motion.hr variants={textVariants} className="w-full mx-auto" />
+          <motion.div 
+            className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-16"
+            variants={textVariants}
+          />
 
           {/* Introduction Section */}
-          <motion.h1 
-            variants={textVariants} 
-            ref={introRef} 
-            className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 pb-2 text-4xl"
+          <motion.div 
+            className="w-full max-w-4xl mx-auto text-center mb-5"
+            variants={containerVariants}
           >
-            Introduction
-          </motion.h1>
-          <motion.p 
-            variants={textVariants} 
-            className="text-white font-sans font-thin mx-auto text-center w-full"
-          >
-            <AnimatedText text={description} />
-          </motion.p>
+            <motion.h2 
+              variants={textVariants} 
+              ref={introRef} 
+              className="text-white text-3xl font-light mb-5"
+            >
+              Introduction
+            </motion.h2>
+            <motion.div 
+              variants={textVariants} 
+              className="text-gray-300 text-lg my-5 leading-relaxed max-w-3xl mx-auto"
+            >
+              <AnimatedText text={description} />
+            </motion.div>
+          </motion.div>
 
-          <motion.hr variants={textVariants} className="w-full mx-auto" />
+          <motion.div 
+            className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-12"
+            variants={textVariants}
+          />
 
           {/* Features Section */}
-          <motion.h1 
-            variants={textVariants} 
-            ref={featuresRef} 
-            className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 pb-2 text-4xl"
+          <motion.div 
+            className="w-full max-w-6xl mx-auto mb-16"
+            variants={containerVariants}
           >
-            Features
-          </motion.h1>
-          {features.map((feature, index) => (
-            <FeatureItem 
-              key={index} 
-              index={index} 
-              feature={feature} 
-              textVariants={textVariants} 
-            />
-          ))}
+            <motion.h2 
+              variants={textVariants} 
+              ref={featuresRef} 
+              className="text-white text-3xl font-light text-center mb-12"
+            >
+              Features
+            </motion.h2>
+            <motion.div 
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-5"
+              variants={containerVariants}
+            >
+              {features.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  variants={textVariants}
+                  className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer group"
+                  whileHover={{ scale: 1.02 }}
+                  onClick={() => setZoomedFeature(feature)}
+                >
+                  <FeatureItem 
+                    index={index} 
+                    feature={feature} 
+                    textVariants={textVariants} 
+                  />
+                  <motion.div 
+                    className="mt-4 flex items-center justify-center text-white/60 group-hover:text-white/80 transition-colors text-sm"
+                  >
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                    Click to zoom
+                  </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
 
-          <motion.hr variants={textVariants} className="w-full mx-auto flex items-center justify-center" />
+          <motion.div 
+            className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-16"
+            variants={textVariants}
+          />
 
           {/* Technology Stack Section */}
-          <TechStack ref={techStackRef} tech={tech} textVariants={textVariants} />
+          <motion.div 
+            className="w-full max-w-4xl mx-auto mb-16"
+            variants={containerVariants}
+          >
+            <TechStack ref={techStackRef} tech={tech} textVariants={textVariants} />
+          </motion.div>
 
-          <motion.hr variants={textVariants} className="w-full mx-auto" />
+          <motion.div 
+            className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-12"
+            variants={textVariants}
+          />
 
           {/* Source Code Link */}
-          <motion.a 
-            whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
-            href="https://github.com/TodTheMatsu/Assistant"
-            variants={textVariants}
-            target="_blank"
-            className="text-white backdrop-blur-md font-sans font-thin mx-auto text-center rounded-3xl px-2 outline pb-2 text-4xl"
+          <motion.div 
+            className="w-full max-w-md mx-auto"
+            variants={containerVariants}
           >
-            <motion.h2 data-cursor-exclusion data-cursor-size='80px'
-              className="text-white mix-blend-darken font-sans font-thin mx-auto text-center rounded-3xl px-2 text-4xl"
+            <motion.a 
+              href="https://github.com/TodTheMatsu/Assistant"
+              target="_blank"
+              className="block w-full"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              variants={textVariants}
             >
-              Source code
-            </motion.h2>
-          </motion.a>
+              <motion.div 
+                className="bg-gradient-to-r from-white/10 to-white/5 hover:from-white/20 hover:to-white/10 mt-5 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:border-white/30 transition-all duration-300 text-center group"
+                data-cursor-exclusion 
+                data-cursor-size='80px'
+              >
+                <div className="flex items-center justify-center space-x-3">
+                  <svg className="w-6 h-6 text-white group-hover:text-gray-200 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  <span className="text-white text-xl font-light group-hover:text-gray-200 transition-colors">
+                    View Source Code
+                  </span>
+                  <motion.svg 
+                    className="w-5 h-5 text-white group-hover:text-gray-200 transition-colors" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    whileHover={{ x: 2 }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </motion.svg>
+                </div>
+              </motion.div>
+            </motion.a>
+          </motion.div>
         </motion.div>
 
         {/* Navigation Menu */}
         <NavigationMenu sectionRefs={sectionRefs} scrollToSection={scrollToSection} />
       </motion.div>
+
+      {/* Feature Zoom Modal */}
+      {zoomedFeature && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex items-center justify-center p-4"
+          onClick={() => setZoomedFeature(null)}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="bg-white/10 backdrop-blur-2xl rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-white/20"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex justify-between items-start mb-6">
+              <motion.h2 
+                className="text-white text-3xl font-light"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+              >
+                {zoomedFeature.name}
+              </motion.h2>
+              <motion.button
+                onClick={() => setZoomedFeature(null)}
+                className="text-white/60 hover:text-white w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/5 transition-all duration-200"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </motion.button>
+            </div>
+
+            {/* Video Section */}
+            <motion.div 
+              className="mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <video 
+                className="w-full rounded-xl border border-white/10" 
+                controls 
+                autoPlay 
+                muted
+                loop
+              >
+                <source src={zoomedFeature.video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </motion.div>
+
+            {/* Description Section */}
+            <motion.div 
+              className="text-gray-300 text-lg leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <p>{zoomedFeature.description}</p>
+            </motion.div>
+
+            {/* Close Button */}
+            <motion.div 
+              className="mt-8 flex justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <motion.button
+                onClick={() => setZoomedFeature(null)}
+                className="bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-xl px-6 py-3 text-white font-light border border-white/20 hover:border-white/30 transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Close
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      )}
     </motion.div>
   );
 }
