@@ -94,17 +94,17 @@ const ParticleBackground = () => {
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 2 + 1,
+      size: Math.random() * 3 + 3,
       duration: Math.random() * 20 + 10,
     }));
   }, []);
 
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none">
+    <div className="inset-0 overflow-hidden pointer-events-none">
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-white opacity-10"
+          className="absolute rounded-full bg-white"
           style={{
             width: particle.size,
             height: particle.size,
@@ -112,8 +112,8 @@ const ParticleBackground = () => {
             top: `${particle.y}%`,
           }}
           animate={{
-            y: [0, -100],
-            opacity: [0, 0.2, 0],
+            y: [0, -1000],
+            opacity: [0, 0.3, 0],
           }}
           transition={{
             duration: particle.duration,
@@ -425,50 +425,51 @@ function App() {
                       }
                     }
                   }}
-                  className="bg-white/10 backdrop-blur-md rounded-lg p-6 hover:bg-white/20 transition-all duration-300"
+                  className="p-[2px] bg-gradient-to-bl  hover:from-white hover:to-white hover:via-black rounded-lg transition-all duration-400"
                   whileHover={{ 
                     scale: 1.02,
-                    rotateY: 5,
-                    boxShadow: "0 0 20px rgba(255,255,255,0.1)"
+                    boxShadow: "0 0 20px rgba(255,255,255,0.2)"
                   }}
                 >
-                  <motion.h2 
-                    className="text-white text-2xl font-thin mb-4"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    {post.title}
-                  </motion.h2>
-                  <motion.p 
-                    className="text-gray-300 font-thin mb-4"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    {post.preview}
-                  </motion.p>
-                  <motion.div 
-                    className="flex justify-between items-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    <span className="text-gray-400 text-sm">{post.date}</span>
-                    <motion.button 
-                      whileHover={{ 
-                        scale: 1.1,
-                        x: 5,
-                        transition: { type: "spring", stiffness: 400, damping: 10 }
-                      }}
-                      onClick={() => setActiveBlogPost(post)}
-                      className="text-white font-thin hover:text-gray-300"
-                      data-cursor-size="80px" 
-                      data-cursor-exclusion
+                  <div className="bg-black backdrop-blur-md rounded-lg p-6 h-full">
+                    <motion.h2 
+                      className="text-white text-2xl font-thin mb-4"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2 }}
                     >
-                      Read More →
-                    </motion.button>
-                  </motion.div>
+                      {post.title}
+                    </motion.h2>
+                    <motion.p 
+                      className="text-gray-300 font-thin mb-4"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      {post.preview}
+                    </motion.p>
+                    <motion.div 
+                      className="flex justify-between items-center"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      <span className="text-gray-400 text-sm">{post.date}</span>
+                      <motion.button 
+                        whileHover={{ 
+                          scale: 1.1,
+                          x: 5,
+                          transition: { type: "spring", stiffness: 400, damping: 10 }
+                        }}
+                        onClick={() => setActiveBlogPost(post)}
+                        className="text-white font-thin hover:text-gray-300"
+                        data-cursor-size="80px" 
+                        data-cursor-exclusion
+                      >
+                        Read More →
+                      </motion.button>
+                    </motion.div>
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
