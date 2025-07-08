@@ -526,7 +526,7 @@ function App() {
 
           {/* Social links bar, hidden when a card is open */}
           <motion.div
-            initial={{ opacity: 0, width: "60px", y: 100 }}
+            initial={{ opacity: 0, width: "60px", y: 200 }}
             animate={{
               opacity: activeCardId ? 0 : 1,
               y: 0,
