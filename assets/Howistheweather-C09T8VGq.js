@@ -1,0 +1,1 @@
+import{j as o}from"./index-CquXpnRx.js";import{P as r,p as a}from"./projectData-DJfGTcRY.js";import"./NavigationMenu-CmuUdWKe.js";function i({onClick:t}){return o.jsx(r,{onClick:t,projectData:a.howistheweather})}export{i as default};
