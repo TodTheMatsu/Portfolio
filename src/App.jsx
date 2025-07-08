@@ -1,5 +1,5 @@
 // External dependencies
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, delay, motion } from 'framer-motion';
 import { useMemo, useEffect, useRef, useState, Suspense, lazy } from 'react';
 import { Cursor } from 'react-creative-cursor';
 import 'react-creative-cursor/dist/styles.css';
@@ -20,8 +20,8 @@ import howistheweather from './assets/Howistheweather.png';
 import whattodo from './assets/whattodo.png';
 import empirehounds from './assets/empirehounds.png';
 import projectrts from './assets/projectrts.png';
-// React icons for tech stack
-import { FaReact, FaNodeJs } from 'react-icons/fa';
+// React icons for tech stack and social links
+import { FaReact, FaNodeJs, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { SiMongodb, SiTailwindcss, SiTypescript, SiLua, SiSupabase } from 'react-icons/si';
 import { TbBrandCSharp } from 'react-icons/tb';
 
@@ -132,17 +132,17 @@ function App() {
     {
       href: 'https://github.com/TodTheMatsu',
       label: 'Github',
-      svg: 'M4.0744 2.9938c.05823-1.03009.30429-1.47803 1.00992-1.83774.75925-.387161 1.95674-.206988 3.36582.50655.60692.30748.66872.31374 1.73236.17737 1.4138-.18133 3.2339-.18069 4.5388.00166.9868.1379 1.0516.13101 1.66-.17711 2.0001-1.012851 3.5792-.94658 4.151.17417.2854.55942.3384 2.01101.1171 3.20825-.1227.66374-.1097.74661.1859 1.18217 2.0797 3.06473.5812 8.03248-2.9825 9.88638-.2727.1419-.5025.2297-.6898.3012-.5751.2196-.7497.2863-.5383 1.2971.1018.4862.2244 1.695.2726 2.6864.0871 1.792.0858 1.8045-.2285 2.1701-.4278.4973-1.0444.5057-1.4622.0199-.2725-.3168-.2991-.4664-.2991-1.6887 0-1.8063-.198-3.0069-.6658-4.0357-.5563-1.2243-.1439-1.6808 1.1283-1.9544 1.7683-.3804 3.1494-1.4717 3.9192-3.0968.7319-1.5448.8422-3.67959-.481-4.97792-.3763-.44718-.4025-.85222-.1338-2.07359.1004-.45649.1846-1.04541.1871-1.30884.0038-.41602-.0341-.47884-.2896-.47884-.1617 0-.7795.23521-1.3727.52264l-.9468.4589c-.0861.04171-.1824.05775-.2774.04685-2.4075-.27634-4.6951-.28061-7.11438.00108-.09536.0111-.19209-.00494-.27847-.04686l-.9463-.4592c-.59326-.28795-1.21103-.52341-1.37268-.52341-.37376 0-.37938.27594-.0387 1.91537.20811 1.00125.34815 1.22435-.25346 2.02494-.90176 1.20004-1.12701 2.6902-.64344 4.25588.60947 1.973 2.10193 3.3059 4.20016 3.7506 1.26487.2681 1.59547.6179 1.11247 2.0683-.3802 1.1414-.6206 1.4356-1.17313 1.4356-.74342 0-1.20911-.644-.95283-1.3179.11288-.297.0793-.3287-.61713-.5827-2.12594-.7751-3.75197-2.5124-4.49539-4.8032-.57461-1.77046-.32178-4.07491.60003-5.46777.31386-.47425.31872-.51447.17225-1.42236-.08287-.51395-.12769-1.34114-.0996-1.83837Zm-.74237 12.9516c-.30635-.4595-.92722-.5837-1.38675-.2773-.45952.3063-.5837.9272-.27735 1.3867.22617.3393.49674.618.72651.8477.04236.0424.08352.0833.12371.1232.19247.1912.36241.36.53309.5604.37751.4431.75412 1.0399.96816 2.1101.09534.4767.43799.7335.62785.8457.2059.1216.43087.1933.616.24.37871.0955.83844.1451 1.27474.174.47896.0318.99793.0421 1.462.0449.00034.5519.44792.9993.99999.9993.55229 0 1-.4477 1-1v-1c0-.5523-.44771-1-1-1-.09427 0-.19626.0003-.30429.0007-.58686.0018-1.35181.0041-2.02551-.0405-.32487-.0215-.59193-.052-.78777-.0893-.30158-1.1839-.78879-1.9716-1.30868-2.5819-.22982-.2697-.4678-.5057-.66137-.6977-.03624-.0359-.07092-.0703-.10371-.1031-.22335-.2233-.36945-.3821-.47662-.5429Z',
+      icon: FaGithub,
     },
     {
       href: 'https://www.linkedin.com/in/ph%C3%BAc-l%C3%AA-4591ab323/',
       label: 'Linkedin',
-      svg: 'M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z',
+      icon: FaLinkedin,
     },
     {
       href: 'https://x.com/LeeLeembp',
       label: 'Twitter',
-      svg: 'M21.15979,1H2.84021C1.823853,1,1,1.823853,1,2.84021v18.31958C1,22.176147,1.823853,23,2.84021,23h18.31958   C22.176147,23,23,22.176147,23,21.15979V2.84021C23,1.823853,22.176147,1,21.15979,1z M15.235352,20l-4.362549-6.213013   L5.411438,20H4l6.246887-7.104675L4,4h4.764648l4.130127,5.881958L18.06958,4h1.411377l-5.95697,6.775635L20,20H15.235352z',
+      icon: FaTwitter,
     },
   ], []);
 
@@ -211,7 +211,7 @@ function App() {
               className='w-[70vw] h-[70vh] bg-gradient-to-r from-white/10 via-white/20 to-white/10 absolute rounded-full blur-[30vh]'
             />
 
-            <motion.h1 className="relative z-10 text-4xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-center px-2 break-words leading-tight">
+            <motion.h1 className="z-10 text-4xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-center px-2 break-words leading-tight">
               {greetText.split("").map((char, index) => (
                 <motion.span 
                   className="text-white font-sans font-thin mx-auto text-center w-full"
@@ -240,37 +240,64 @@ function App() {
                 </motion.span>
               ))}
             </motion.h1>
-            <motion.h1 className='absolute z-10 text-4xl xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-center px-2 break-words leading-tight'>
-              {greetText.split("").map((char, index) => (
-                <motion.span  
-                  className="text-white font-sans font-thin mx-auto text-center w-full"
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ 
-                    opacity: 1, 
-                    y: 0,
-                    textShadow: [
-                      '0 0 10px rgba(255,255,255,0.3)',
-                      '0 0 20px rgba(255,255,255,0.5)',
-                      '0 0 10px rgba(255,255,255,0.3)',
-                    ],
-                  }}
-                  transition={{ 
-                    delay: index * 0.05 + 1.5, 
-                    duration: 1,
-                    textShadow: {
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }
-                  }} 
-                  key={index}
-                >
-                  {char}
-                </motion.span>
-              ))}
-            </motion.h1>
+
+            {/* Scroll Down Arrow */}
+            <motion.button
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ 
+                opacity: activeCardId || activeBlogPost ? 0 : 1,
+                y: 0,
+              }}
+              transition={{ 
+                delay: 3,
+                duration: 1,
+                opacity: { duration: 0.5, delay: 3 }
+              }}
+              onClick={() => {
+                const aboutSection = document.querySelector('[data-section="about"]');
+                if (aboutSection) {
+                  aboutSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className={`z-20 flex flex-col p-10 items-center cursor-pointer group ${activeCardId || activeBlogPost ? 'pointer-events-none' : ''}`}
+              data-cursor-size="80px" 
+              data-cursor-exclusion
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <motion.span 
+                className="text-white font-thin text-sm mb-2 opacity-70 group-hover:opacity-100 transition-opacity"
+                animate={{
+                  opacity: [0.7, 1, 0.7],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                Scroll Down
+              </motion.span>
+              <motion.svg 
+                className="w-8 h-8 text-white opacity-70 group-hover:opacity-100 transition-opacity"
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+                animate={{
+                  y: [0, 8, 0],
+                  opacity: [0.7, 1, 0.7],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </motion.svg>
+            </motion.button>
           </div>
-          <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="px-4 pointer-events-none w-full flex flex-wrap items-center justify-center gap-2">
+          <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="px-4 pointer-events-none w-full flex flex-wrap items-center justify-center gap-2" data-section="about">
             <motion.div 
               variants={bentosVar}  
               initial={{ opacity: 0, y: 80 }} 
@@ -513,25 +540,28 @@ function App() {
             }}
             className={`h-[60px] fixed bg-white rounded-full backdrop-blur-md bg-opacity-20 top-[90%] flex items-center justify-center space-x-5 ${activeCardId ? 'pointer-events-none' : ''}`}
           >
-            {links.map((link, index) => (
-              <motion.a 
-                key={index}
-                data-cursor-size="80px" data-cursor-exclusion
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{
-                  delay: 5 + index * 0.2,
-                  duration: 0.5,
-                }}
-                target="_blank"
-                href={link.href}
-                className="text-white font-sans font-thin text-center text-2xl"
-              >
-                <motion.svg  whileHover={{ scale: 1.3 }} className="h-auto w-10 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d={link.svg}/>
-                </motion.svg>
-              </motion.a>
-            ))}
+            {links.map((link, index) => {
+              const IconComponent = link.icon;
+              return (
+                <motion.a 
+                  key={index}
+                  data-cursor-size="80px" data-cursor-exclusion
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{
+                    delay: 5 + index * 0.2,
+                    duration: 0.5,
+                  }}
+                  target="_blank"
+                  href={link.href}
+                  className="text-white font-sans font-thin text-center text-2xl"
+                >
+                  <motion.div whileHover={{ scale: 1.3 }}>
+                    <IconComponent className="h-10 w-10 text-white" />
+                  </motion.div>
+                </motion.a>
+              );
+            })}
           </motion.div>
         </div>
       </div>
