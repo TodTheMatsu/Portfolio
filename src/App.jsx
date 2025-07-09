@@ -20,8 +20,9 @@ import projectrts from './assets/projectrts.png';
 // React icons for tech stack and social links
 import { FaReact, FaNodeJs, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { SiMongodb, SiTailwindcss, SiTypescript, SiLua, SiSupabase } from 'react-icons/si';
-import { TbBrandCSharp } from 'react-icons/tb';
-
+import { TbBrandCSharp,TbDeviceGamepad  } from 'react-icons/tb';
+import { HiOutlineMap, HiOutlineBriefcase, HiOutlinePencilAlt } from 'react-icons/hi';
+import { BiWorld} from 'react-icons/bi';
 // Animation variants and static data
 const ImgVariants = {
   hidden: { opacity: 0 },
@@ -143,13 +144,7 @@ function App() {
     },
   ], []);
 
-  // Memoized tabs and projects
-  const tabs = useMemo(() => [
-    { key: 'journey', label: 'My Journey' },
-    { key: 'projects', label: 'Projects' },
-    { key: 'blog', label: 'Blog' },
-  ], []);
-
+  // Memoized projects first
   const webProjects = useMemo(() => [
     { id: 'whattodo', image: whattodo, projectKey: 'whattodo' },
     { id: 'howistheweather', image: howistheweather, projectKey: 'howistheweather' },
@@ -162,6 +157,28 @@ function App() {
   ], []);
 
   const allProjects = useMemo(() => [...webProjects, ...gameProjects], [webProjects, gameProjects]);
+
+  // Enhanced tabs with icons and counts
+  const tabs = useMemo(() => [
+    { 
+      key: 'journey', 
+      label: 'My Journey',
+      icon: <HiOutlineMap className="w-5 h-5" />,
+      count: 5
+    },
+    { 
+      key: 'projects', 
+      label: 'Projects',
+      icon: <HiOutlineBriefcase className="w-5 h-5" />,
+      count: allProjects.length
+    },
+    { 
+      key: 'blog', 
+      label: 'Blog',
+      icon: <HiOutlinePencilAlt className="w-5 h-5" />,
+      count: blogPosts.length
+    },
+  ], [allProjects.length]);
 
   const [activeTab, setActiveTab] = useState('journey');
   const [activeProjectTab, setActiveProjectTab] = useState('web');
@@ -534,21 +551,233 @@ function App() {
           </motion.div>
 
           <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign}`}>
-            <div className="flex justify-center gap-6 mb-10 py-4 relative flex-wrap">
-              {tabs.map(({ key, label }) => (
-                <div data-cursor-size="80px" data-cursor-exclusion key={key} className="relative min-w-[120px] md:min-w-[120px]">
-                  <motion.button 
-                    onClick={() => setActiveTab(key)}
-                    whileHover={{ scale: 1.1 }}
-                    className={`pointer-events-auto font-sans font-thin text-center text-4xl mt-5 transition-colors duration-300 ${
-                      activeTab === key ? 'text-white' : 'text-gray-400'
-                    }`}
-                  >
-                    {label}
-                  </motion.button>
+            {/* Enhanced Tab Navigation */}
+            <motion.div 
+              className="flex justify-center mb-16 py-8 relative"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl p-2 border border-white/10 shadow-2xl w-full max-w-fit">
+                {/* Desktop Layout */}
+                <div className="hidden md:flex gap-2 relative">
+                  {/* Animated Background */}
+                  <motion.div
+                    className="absolute top-2 h-[calc(100%-16px)] bg-gradient-to-r from-white/20 via-white/25 to-white/20 rounded-xl border border-white/30 shadow-lg"
+                    layoutId="activeTabBackground"
+                    initial={false}
+                    animate={{
+                      x: tabs.findIndex(tab => tab.key === activeTab) * (160 + 8),
+                      width: 160
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 30,
+                      duration: 0.6
+                    }}
+                  />
+                  
+                  {tabs.map(({ key, label, icon, count }, index) => (
+                    <motion.button
+                      key={key}
+                      data-cursor-size="120px" 
+                      data-cursor-exclusion
+                      onClick={() => setActiveTab(key)}
+                      className={`relative z-10 pointer-events-auto px-6 py-4 rounded-xl transition-all duration-300 group min-w-[160px] flex flex-col items-center gap-2 ${
+                        activeTab === key 
+                          ? 'text-white' 
+                          : 'text-gray-400 hover:text-gray-200'
+                      }`}
+                      whileHover={{ 
+                        scale: 1.02,
+                        transition: { type: "spring", stiffness: 400, damping: 25 }
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.5 }}
+                    >
+                      {/* Icon and Count Row */}
+                      <motion.div 
+                        className={`flex items-center gap-2 transition-all duration-300 ${
+                          activeTab === key ? 'text-white' : 'text-gray-500 group-hover:text-gray-300'
+                        }`}
+                        animate={{
+                          scale: activeTab === key ? 1.1 : 1,
+                          filter: activeTab === key 
+                            ? 'drop-shadow(0 0 8px rgba(255,255,255,0.3))' 
+                            : 'drop-shadow(0 0 0px rgba(255,255,255,0))'
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <motion.div
+                          animate={{
+                            rotate: activeTab === key ? [0, 5, -5, 0] : 0
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: activeTab === key ? Infinity : 0,
+                            ease: "easeInOut"
+                          }}
+                        >
+                          {icon}
+                        </motion.div>
+                        
+                        <motion.span 
+                          className={`text-xs px-2 py-1 rounded-full border transition-all duration-300 ${
+                            activeTab === key
+                              ? 'bg-white/20 border-white/30 text-white'
+                              : 'bg-white/5 border-white/10 text-gray-400 group-hover:bg-white/10 group-hover:border-white/20'
+                          }`}
+                          animate={{
+                            scale: activeTab === key ? 1.05 : 1,
+                            boxShadow: activeTab === key 
+                              ? '0 0 15px rgba(255,255,255,0.2)' 
+                              : '0 0 0px rgba(255,255,255,0)'
+                          }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {count}
+                        </motion.span>
+                      </motion.div>
+                      
+                      {/* Label */}
+                      <motion.span 
+                        className={`font-sans font-light text-lg transition-all duration-300 ${
+                          activeTab === key 
+                            ? 'text-white font-normal' 
+                            : 'text-gray-400 group-hover:text-gray-200'
+                        }`}
+                        animate={{
+                          textShadow: activeTab === key 
+                            ? '0 0 10px rgba(255,255,255,0.3)' 
+                            : '0 0 0px rgba(255,255,255,0)'
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {label}
+                      </motion.span>
+                      
+                      {/* Tap Effect */}
+                      <motion.div
+                        className="absolute inset-0 rounded-xl bg-white/10 opacity-0"
+                        whileTap={{
+                          opacity: [0, 0.3, 0],
+                          scale: [1, 1.05, 1]
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </motion.button>
+                  ))}
                 </div>
-              ))}
-            </div>
+
+                {/* Mobile Layout */}
+                <div className="flex md:hidden flex-col gap-1 relative w-full">
+                  {/* Mobile Animated Background */}
+                  <motion.div
+                    className="absolute left-1 right-1 h-[calc(33.33%-4px)] bg-gradient-to-r from-white/20 via-white/25 to-white/20 rounded-lg border border-white/30 shadow-lg"
+                    layoutId="activeTabBackgroundMobile"
+                    initial={false}
+                    animate={{
+                      y: tabs.findIndex(tab => tab.key === activeTab) * (56 + 4),
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 30,
+                      duration: 0.6
+                    }}
+                  />
+                  
+                  {tabs.map(({ key, label, icon, count }, index) => (
+                    <motion.button
+                      key={key}
+                      onClick={() => setActiveTab(key)}
+                      className={`relative z-10 pointer-events-auto px-4 py-3 rounded-lg transition-all duration-300 group w-full flex items-center gap-3 h-14 ${
+                        activeTab === key 
+                          ? 'text-white' 
+                          : 'text-gray-400'
+                      }`}
+                      whileTap={{ scale: 0.98 }}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.5 }}
+                    >
+                      {/* Mobile Icon */}
+                      <motion.div
+                        animate={{
+                          rotate: activeTab === key ? [0, 5, -5, 0] : 0,
+                          scale: activeTab === key ? 1.1 : 1
+                        }}
+                        transition={{
+                          rotate: {
+                            duration: 2,
+                            repeat: activeTab === key ? Infinity : 0,
+                            ease: "easeInOut"
+                          },
+                          scale: { duration: 0.3 }
+                        }}
+                        className={`transition-all duration-300 ${
+                          activeTab === key ? 'text-white' : 'text-gray-500'
+                        }`}
+                      >
+                        {icon}
+                      </motion.div>
+                      
+                      {/* Mobile Label */}
+                      <span className={`font-sans font-light text-base flex-1 text-left transition-all duration-300 ${
+                        activeTab === key 
+                          ? 'text-white font-normal' 
+                          : 'text-gray-400'
+                      }`}>
+                        {label}
+                      </span>
+                      
+                      {/* Mobile Count */}
+                      <motion.span 
+                        className={`text-xs px-2 py-1 rounded-full border transition-all duration-300 ${
+                          activeTab === key
+                            ? 'bg-white/20 border-white/30 text-white'
+                            : 'bg-white/5 border-white/10 text-gray-400'
+                        }`}
+                        animate={{
+                          scale: activeTab === key ? 1.05 : 1
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {count}
+                      </motion.span>
+                      
+                      {/* Mobile Tap Effect */}
+                      <motion.div
+                        className="absolute inset-0 rounded-lg bg-white/10 opacity-0"
+                        whileTap={{
+                          opacity: [0, 0.3, 0],
+                          scale: [1, 1.02, 1]
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </motion.button>
+                  ))}
+                </div>
+                
+                {/* Background Glow Effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5 rounded-2xl blur-xl -z-10"
+                  animate={{
+                    opacity: [0.3, 0.6, 0.3],
+                    scale: [0.95, 1.02, 0.95]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              </div>
+            </motion.div>
 
             {/* Timeline Content */}
             {activeTab === 'journey' && (
@@ -738,26 +967,209 @@ function App() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="flex justify-center gap-6 mb-10 py-4 relative flex-wrap">
-                  {[
-                    { key: 'web', label: 'Websites' },
-                    { key: 'game', label: 'Games' }
-                  ].map(({ key, label }) => (
-                    <div data-cursor-size="80px" data-cursor-exclusion key={key} className="relative min-w-[120px] md:min-w-[120px]">
-                      <motion.button 
-                        onClick={() => setActiveProjectTab(key)}
-                        whileHover={{ scale: 1.1 }}
-                        className={`pointer-events-auto font-sans font-thin text-center text-2xl ${
-                          activeProjectTab === key ? 'text-white' : 'text-gray-400'
-                        }`}
-                      >
-                        {label}
-                      </motion.button>
+                {/* Enhanced Project Sub-tabs */}
+                <motion.div 
+                  className="flex justify-center mb-8 md:mb-12 px-4 py-4 md:py-6"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  <div className="relative bg-white/5 backdrop-blur-xl rounded-xl p-1.5 border border-white/10 w-full max-w-sm md:max-w-fit">
+                    {/* Desktop Layout */}
+                    <div className="hidden md:flex gap-1 relative">
+                      {/* Desktop Animated Background for Sub-tabs */}
+                      <motion.div
+                        className="absolute top-1.5 h-[calc(100%-12px)] bg-gradient-to-r from-white/15 via-white/20 to-white/15 rounded-lg border border-white/20"
+                        layoutId="activeProjectTabBackground"
+                        initial={false}
+                        animate={{
+                          x: activeProjectTab === 'web' ? 0 : 140,
+                          width: 140
+                        }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 350,
+                          damping: 30
+                        }}
+                      />
+                      
+                      {[
+                        { 
+                          key: 'web', 
+                          label: 'Websites',
+                          icon: <BiWorld className="w-4 h-4" />,
+                          count: webProjects.length
+                        },
+                        { 
+                          key: 'game', 
+                          label: 'Games',
+                          icon: <TbDeviceGamepad className="w-4 h-4" />,
+                          count: gameProjects.length
+                        }
+                      ].map(({ key, label, icon, count }, index) => (
+                        <motion.button
+                          key={key}
+                          data-cursor-size="100px" 
+                          data-cursor-exclusion
+                          onClick={() => setActiveProjectTab(key)}
+                          className={`relative z-10 pointer-events-auto px-4 py-3 rounded-lg transition-all duration-300 group min-w-[140px] flex items-center justify-center gap-2 ${
+                            activeProjectTab === key 
+                              ? 'text-white' 
+                              : 'text-gray-400 hover:text-gray-200'
+                          }`}
+                          whileHover={{ 
+                            scale: 1.02,
+                            transition: { type: "spring", stiffness: 400, damping: 25 }
+                          }}
+                          whileTap={{ scale: 0.98 }}
+                          initial={{ opacity: 0, x: index === 0 ? -20 : 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 + 0.3, duration: 0.4 }}
+                        >
+                          <motion.div
+                            animate={{
+                              rotate: activeProjectTab === key ? [0, 10, -10, 0] : 0,
+                              scale: activeProjectTab === key ? 1.1 : 1
+                            }}
+                            transition={{
+                              rotate: {
+                                duration: 2,
+                                repeat: activeProjectTab === key ? Infinity : 0,
+                                ease: "easeInOut"
+                              },
+                              scale: { duration: 0.3 }
+                            }}
+                          >
+                            {icon}
+                          </motion.div>
+                          
+                          <span className={`font-sans font-light text-base transition-all duration-300 ${
+                            activeProjectTab === key 
+                              ? 'text-white font-normal' 
+                              : 'text-gray-400 group-hover:text-gray-200'
+                          }`}>
+                            {label}
+                          </span>
+                          
+                          <motion.span 
+                            className={`text-xs px-1.5 py-0.5 rounded-full border transition-all duration-300 ${
+                              activeProjectTab === key
+                                ? 'bg-white/20 border-white/30 text-white'
+                                : 'bg-white/5 border-white/10 text-gray-400 group-hover:bg-white/10'
+                            }`}
+                            animate={{
+                              scale: activeProjectTab === key ? 1.05 : 1
+                            }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            {count}
+                          </motion.span>
+                        </motion.button>
+                      ))}
                     </div>
-                  ))}
-                </div>
-                <motion.div className='w-full justify-center items-center flex flex-grow h-auto py-20'>
-                  <div className="flex flex-wrap justify-center gap-4 p-4">
+
+                    {/* Mobile Layout */}
+                    <div className="flex md:hidden gap-1 relative">
+                      {/* Mobile Animated Background for Sub-tabs */}
+                      <motion.div
+                        className="absolute top-1.5 h-[calc(100%-12px)] bg-gradient-to-r from-white/15 via-white/20 to-white/15 rounded-lg border border-white/20"
+                        layoutId="activeProjectTabBackgroundMobile"
+                        initial={false}
+                        animate={{
+                          x: activeProjectTab === 'web' ? 0 : 'calc(50% + 2px)',
+                          width: 'calc(50% - 2px)'
+                        }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 350,
+                          damping: 30
+                        }}
+                      />
+                      
+                      {[
+                        { 
+                          key: 'web', 
+                          label: 'Websites',
+                          shortLabel: 'Web',
+                          icon: <BiWorld className="w-4 h-4" />,
+                          count: webProjects.length
+                        },
+                        { 
+                          key: 'game', 
+                          label: 'Games',
+                          shortLabel: 'Games',
+                          icon: <TbDeviceGamepad className="w-4 h-4" />,
+                          count: gameProjects.length
+                        }
+                      ].map(({ key, label, shortLabel, icon, count }, index) => (
+                        <motion.button
+                          key={key}
+                          onClick={() => setActiveProjectTab(key)}
+                          className={`relative z-10 pointer-events-auto px-3 py-2.5 rounded-lg transition-all duration-300 group flex-1 flex items-center justify-center gap-2 min-h-[44px] ${
+                            activeProjectTab === key 
+                              ? 'text-white' 
+                              : 'text-gray-400'
+                          }`}
+                          whileTap={{ scale: 0.96 }}
+                          initial={{ opacity: 0, x: index === 0 ? -15 : 15 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 + 0.3, duration: 0.4 }}
+                        >
+                          <motion.div
+                            animate={{
+                              rotate: activeProjectTab === key ? [0, 10, -10, 0] : 0,
+                              scale: activeProjectTab === key ? 1.1 : 1
+                            }}
+                            transition={{
+                              rotate: {
+                                duration: 2,
+                                repeat: activeProjectTab === key ? Infinity : 0,
+                                ease: "easeInOut"
+                              },
+                              scale: { duration: 0.3 }
+                            }}
+                            className={`transition-all duration-300 ${
+                              activeProjectTab === key ? 'text-white' : 'text-gray-500'
+                            }`}
+                          >
+                            {icon}
+                          </motion.div>
+                          
+                          <span className={`font-sans font-light text-sm transition-all duration-300 ${
+                            activeProjectTab === key 
+                              ? 'text-white font-normal' 
+                              : 'text-gray-400'
+                          }`}>
+                            {shortLabel}
+                          </span>
+                          
+                          <motion.span 
+                            className={`text-xs px-1.5 py-0.5 rounded-full border transition-all duration-300 ${
+                              activeProjectTab === key
+                                ? 'bg-white/20 border-white/30 text-white'
+                                : 'bg-white/5 border-white/10 text-gray-400'
+                            }`}
+                            animate={{
+                              scale: activeProjectTab === key ? 1.05 : 1
+                            }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            {count}
+                          </motion.span>
+                        </motion.button>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+                
+                <motion.div 
+                  className='w-full justify-center items-center flex flex-grow h-auto py-10 md:py-20'
+                  key={activeProjectTab}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <div className="flex flex-wrap justify-center gap-3 md:gap-4 p-2 md:p-4 w-full max-w-7xl">
                     {activeProjectTab === 'web' &&
                       webProjects.map(({ id, image, projectKey }, index) => (
                         <Card key={id} image={image} onClick={() => handleCardClick(projectKey)} index={index}/>))}
