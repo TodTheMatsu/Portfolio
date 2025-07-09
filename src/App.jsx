@@ -433,6 +433,7 @@ function App() {
               {sortedBlogPosts.map((post) => (
                 <motion.div 
                   key={post.id}
+                  data-cursor-text="READ"
                   variants={{
                     hidden: { 
                       opacity: 0,
@@ -448,7 +449,7 @@ function App() {
                       transition: {
                         type: "spring",
                         stiffness: 100,
-                        damping: 15
+                        damping: 1
                       }
                     }
                   }}
