@@ -148,8 +148,9 @@ function App() {
 
   // Memoized tabs and projects
   const tabs = useMemo(() => [
-    { key: 'web', label: 'Websites' },
-    { key: 'game', label: 'Games' },
+    { key: 'journey', label: 'My Journey' },
+    { key: 'projects', label: 'Projects' },
+    { key: 'blog', label: 'Blog' },
   ], []);
 
   const webProjects = useMemo(() => [
@@ -165,7 +166,8 @@ function App() {
 
   const allProjects = useMemo(() => [...webProjects, ...gameProjects], [webProjects, gameProjects]);
 
-  const [activeTab, setActiveTab] = useState('web');
+  const [activeTab, setActiveTab] = useState('journey');
+  const [activeProjectTab, setActiveProjectTab] = useState('web');
   const [activeCardId, setActiveCardId] = useState(null);
   const [activeBlogPost, setActiveBlogPost] = useState(null);
 
@@ -289,36 +291,11 @@ function App() {
           </div>
           <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="px-4 pointer-events-none w-full flex flex-wrap items-center justify-center gap-2" data-section="about">
             <motion.div 
-              variants={bentosVar}  
-              initial={{ opacity: 0, y: 80 }} 
-              whileInView={{ opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } }} 
-              viewport={{ once: true }}
-              className="xl:w-[31.25%] lg:w-full h-[400px] backdrop-blur-md pb-2 flex-grow"
-            >
-              <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>About me</motion.h1>
-              <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 blur-lg'>About me</motion.h1>
-              <motion.p
-                className='text-white font-sans px-2 sm:px-4 font-thin mx-auto text-center w-full text-lg xs:text-base sm:text-xl md:text-2xl mt-5 flex-grow break-words overflow-auto max-h-[320px]'
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.3, ease: 'easeOut' } }}
-                viewport={{ once: true }}
-              >
-                {aboutMe.split("").map((word, index) => (  
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0, y: 200 }}
-                    whileInView={{ opacity: 1, y: 0, transition: { delay: index * 0.005 + 1.5, ease: "easeOut", duration: 1 } }}
-                    viewport={{ once: true }}
-                    className='text-white font-sans font-thin mx-auto text-center'>{word}</motion.span>
-                ))}
-              </motion.p>
-            </motion.div>
-            <motion.div 
               variants={bentosVar} 
               initial={{ opacity: 0, y: 80 }} 
               whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.2, ease: 'easeOut' } }} 
               viewport={{ once: true }}
-              className={`xl:max-w-[68%]  sm:w-full lg:max-w-[100%] h-[400px] flex-grow ${boxDesign}`}
+              className={`w-full h-[400px] flex-grow ${boxDesign}`}
             >
               <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My tech stack</motion.h1>
               <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 blur-lg'>My tech stack</motion.h1>
@@ -364,31 +341,538 @@ function App() {
             </motion.div>
           </motion.div>
 
+          {/* Timeline Section */}
+          <motion.div 
+            variants={bentosVar} 
+            initial={{ opacity: 0, y: 80 }} 
+            whileInView={{ opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } }} 
+            viewport={{ once: true }}
+            className={`h-auto flex-grow w-full ${boxDesign} mt-10`}
+            style={{display: 'none'}}
+          >
+            <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My Journey</motion.h1>
+            <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 blur-lg'>My Journey</motion.h1>
+            
+            <motion.div 
+              className="flex flex-col items-center px-4 py-20 mt-10"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.3,
+                    delayChildren: 0.2
+                  }
+                }
+              }}
+            >
+              {/* Timeline items */}
+              {[
+                {
+                  year: "2020",
+                  title: "First Steps in Game Dev",
+                  description: "Discovered my passion for coding by building games on Roblox. Learned Lua scripting, basic game mechanics, and the thrill of seeing players enjoy my creations.",
+                  tech: ["Lua", "Roblox Studio", "Game Design"]
+                },
+                {
+                  year: "2021-2024",
+                  title: "BMO Box Studio & Freelance Adventures",
+                  description: "Co-founded BMO Box with a friend—my first real taste of teamwork and project management. Balanced studio work with freelancing for other Roblox creators, sharpening my skills in both collaboration and client work.",
+                  tech: ["Lua", "Teamwork", "Freelancing", "Client Projects"]
+                },
+                {
+                  year: "2024",
+                  title: "Web Dev Awakening",
+                  description: "Made the leap from games to web apps. Built my first projects with React, Vite, and Node.js—excited by the speed, flexibility, and reach of modern web tech.",
+                  tech: ["React", "JavaScript", "Node.js", "Vite"]
+                },
+                {
+                  year: "2025",
+                  title: "Startup Rollercoaster: CDO at a Roblox Company",
+                  description: "Jumped from lead developer to Chief Development Officer in a month at a Roblox-focused startup. Led a team, juggled web design, and learned a ton about leadership—even when the startup hit tough times.",
+                  tech: ["Leadership", "Project Management", "Web Design", "Game Dev"]
+                },
+                {
+                  year: "2025",
+                  title: "Front-end Developer @ Nexon Dev Vina",
+                  description: "Joined Nexon Dev Vina, maintaining legacy Lua game code and building new features. Also dove deep into TypeScript and Vite for web projects, blending my game and web experience.",
+                  tech: ["TypeScript", "Vite", "React", "Lua"]
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  variants={{
+                    hidden: { 
+                      opacity: 0,
+                      x: index % 2 === 0 ? -100 : 100,
+                      scale: 0.8
+                    },
+                    visible: { 
+                      opacity: 1,
+                      x: 0,
+                      scale: 1,
+                      transition: {
+                        type: "spring",
+                        stiffness: 100,
+                        damping: 15,
+                        duration: 0.8
+                      }
+                    }
+                  }}
+                  className={`flex items-center w-full max-w-6xl mb-16 ${
+                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  } flex-col md:relative relative`}
+                >
+                  {/* Timeline line and dot */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 md:flex flex-col items-center hidden">
+                    <motion.div 
+                      className="w-6 h-6 bg-white rounded-full border-4 border-black shadow-lg"
+                      animate={{
+                        boxShadow: [
+                          '0 0 0px rgba(255,255,255,0.3)',
+                          '0 0 20px rgba(255,255,255,0.6)',
+                          '0 0 0px rgba(255,255,255,0.3)'
+                        ],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.5
+                      }}
+                    />
+                      <motion.div 
+                        className="w-1 h-32 bg-gradient-to-b from-white to-white/30 mt-2"
+                        initial={{ scaleY: 0, originY: 0 }}
+                        whileInView={{ scaleY: 1 }}
+                        transition={{ duration: 1, delay: 0.5 }}
+                        viewport={{ once: true }}
+                      />
+                  </div>
+
+                  {/* Mobile timeline dot */}
+                  <div className="md:hidden flex items-center justify-center mb-4">
+                    <motion.div 
+                      className="w-4 h-4 bg-white rounded-full border-2 border-black shadow-lg"
+                      animate={{
+                        boxShadow: [
+                          '0 0 0px rgba(255,255,255,0.3)',
+                          '0 0 15px rgba(255,255,255,0.6)',
+                          '0 0 0px rgba(255,255,255,0.3)'
+                        ],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.5
+                      }}
+                    />
+                  </div>
+
+                  {/* Content card */}
+                  <motion.div 
+                    className={`md:w-5/12 w-full p-6 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-xl rounded-xl border border-white/20 ${
+                      index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'
+                    }`}
+                    whileHover={{ 
+                      scale: 1.02,
+                      boxShadow: "0 10px 40px rgba(255,255,255,0.1)"
+                    }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <motion.div 
+                      className="text-white/80 text-lg font-light mb-2"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      {item.year}
+                    </motion.div>
+                    
+                    <motion.h3 
+                      className="text-white text-2xl font-light mb-4"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      {item.title}
+                    </motion.h3>
+                    
+                    <motion.p 
+                      className="text-gray-300 font-light mb-4 leading-relaxed"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      {item.description}
+                    </motion.p>
+                    
+                    <motion.div 
+                      className="flex flex-wrap gap-2"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 }}
+                    >
+                      {item.tech.map((tech, techIndex) => (
+                        <span 
+                          key={techIndex}
+                          className="px-3 py-1 bg-white/10 text-white/90 rounded-full text-sm font-light border border-white/20"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+
           <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign}`}>
             <div className="flex justify-center gap-6 mb-10 py-4 relative flex-wrap">
               {tabs.map(({ key, label }) => (
                 <div data-cursor-size="80px" data-cursor-exclusion key={key} className="relative min-w-[120px] md:min-w-[120px]">
                   <motion.button 
-                    variants={smallGlowingLabels}
                     onClick={() => setActiveTab(key)}
                     whileHover={{ scale: 1.1 }}
-                    className={`pointer-events-auto absolute font-sans font-thin text-center text-4xl mt-5 ${
+                    className={`pointer-events-auto font-sans font-thin text-center text-4xl mt-5 transition-colors duration-300 ${
                       activeTab === key ? 'text-white' : 'text-gray-400'
                     }`}
                   >
                     {label}
                   </motion.button>
-                  <motion.div 
-                    variants={smallGlowingLabels}
-                    className={`pointer-events-none absolute font-sans font-thin text-center text-4xl mt-5 ${
-                      activeTab === key ? 'text-white blur-md' : 'text-transparent'
-                    }`}
-                  >
-                    {label}
-                  </motion.div>
                 </div>
               ))}
             </div>
+
+            {/* Timeline Content */}
+            {activeTab === 'journey' && (
+              <motion.div 
+                className="flex flex-col items-center px-4 py-20"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: {},
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.3,
+                      delayChildren: 0.2
+                    }
+                  }
+                }}
+              >
+                {/* Timeline items */}
+                {[
+                  {
+                    year: "2020",
+                    title: "First Steps in Game Dev",
+                    description: "Discovered my passion for coding by building games on Roblox. Learned Lua scripting, basic game mechanics, and the thrill of seeing players enjoy my creations.",
+                    tech: ["Lua", "Roblox Studio", "Game Design"]
+                  },
+                  {
+                    year: "2021-2024",
+                    title: "BMO Box Studio & Freelance Adventures",
+                    description: "Co-founded BMO Box with a friend—my first real taste of teamwork and project management. Balanced studio work with freelancing for other Roblox creators, sharpening my skills in both collaboration and client work.",
+                    tech: ["Lua", "Teamwork", "Freelancing", "Client Projects"]
+                  },
+                  {
+                    year: "2024",
+                    title: "Web Dev Awakening",
+                    description: "Made the leap from games to web apps. Built my first projects with React, Vite, and Node.js—excited by the speed, flexibility, and reach of modern web tech.",
+                    tech: ["React", "JavaScript", "Node.js", "Vite"]
+                  },
+                  {
+                    year: "2025",
+                    title: "Startup Rollercoaster: CDO at a Roblox Company",
+                    description: "Jumped from lead developer to Chief Development Officer in a month at a Roblox-focused startup. Led a team, juggled web design, and learned a ton about leadership—even when the startup hit tough times.",
+                    tech: ["Leadership", "Project Management", "Web Design", "Game Dev"]
+                  },
+                  {
+                    year: "2025",
+                    title: "Front-end Developer @ Nexon Dev Vina",
+                    description: "Joined Nexon Dev Vina, maintaining legacy Lua game code and building new features. Also dove deep into TypeScript and Vite for web projects, blending my game and web experience.",
+                    tech: ["TypeScript", "Vite", "React", "Lua"]
+                  }
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    variants={{
+                      hidden: { 
+                        opacity: 0,
+                        x: index % 2 === 0 ? -100 : 100,
+                        scale: 0.8
+                      },
+                      visible: { 
+                        opacity: 1,
+                        x: 0,
+                        scale: 1,
+                        transition: {
+                          type: "spring",
+                          stiffness: 100,
+                          damping: 15,
+                          duration: 0.8
+                        }
+                      }
+                    }}
+                    className={`flex items-center w-full max-w-6xl mb-16 ${
+                      index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                    } flex-col md:relative relative`}
+                  >
+                    {/* Timeline line and dot */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 md:flex flex-col items-center hidden">
+                      <motion.div 
+                        className="w-6 h-6 bg-white rounded-full border-4 border-black shadow-lg"
+                        animate={{
+                          boxShadow: [
+                            '0 0 0px rgba(255,255,255,0.3)',
+                            '0 0 20px rgba(255,255,255,0.6)',
+                            '0 0 0px rgba(255,255,255,0.3)'
+                          ],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.5
+                        }}
+                      />
+                      {index < 4 && (
+                        <motion.div 
+                          className="w-1 h-32 bg-gradient-to-b from-white to-white/30 mt-2"
+                          initial={{ scaleY: 0, originY: 0 }}
+                          whileInView={{ scaleY: 1 }}
+                          transition={{ duration: 1, delay: 0.5 }}
+                          viewport={{ once: true }}
+                        />
+                      )}
+                    </div>
+
+                    {/* Mobile timeline dot */}
+                    <div className="md:hidden flex items-center justify-center mb-4">
+                      <motion.div 
+                        className="w-4 h-4 bg-white rounded-full border-2 border-black shadow-lg"
+                        animate={{
+                          boxShadow: [
+                            '0 0 0px rgba(255,255,255,0.3)',
+                            '0 0 15px rgba(255,255,255,0.6)',
+                            '0 0 0px rgba(255,255,255,0.3)'
+                          ],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.5
+                        }}
+                      />
+                    </div>
+
+                    {/* Content card */}
+                    <motion.div 
+                      className={`md:w-5/12 w-full p-6 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-xl rounded-xl border border-white/20 ${
+                        index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'
+                      }`}
+                      whileHover={{ 
+                        scale: 1.02,
+                        boxShadow: "0 10px 40px rgba(255,255,255,0.1)"
+                      }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    >
+                      <motion.div 
+                        className="text-white/80 text-lg font-light mb-2"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                      >
+                        {item.year}
+                      </motion.div>
+                      
+                      <motion.h3 
+                        className="text-white text-2xl font-light mb-4"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                      >
+                        {item.title}
+                      </motion.h3>
+                      
+                      <motion.p 
+                        className="text-gray-300 font-light mb-4 leading-relaxed"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.5 }}
+                      >
+                        {item.description}
+                      </motion.p>
+                      
+                      <motion.div 
+                        className="flex flex-wrap gap-2"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.6 }}
+                      >
+                        {item.tech.map((tech, techIndex) => (
+                          <span 
+                            key={techIndex}
+                            className="px-3 py-1 bg-white/10 text-white/90 rounded-full text-sm font-light border border-white/20"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+
+            {/* Projects Content */}
+            {activeTab === 'projects' && (
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="flex justify-center gap-6 mb-10 py-4 relative flex-wrap">
+                  {[
+                    { key: 'web', label: 'Websites' },
+                    { key: 'game', label: 'Games' }
+                  ].map(({ key, label }) => (
+                    <div data-cursor-size="80px" data-cursor-exclusion key={key} className="relative min-w-[120px] md:min-w-[120px]">
+                      <motion.button 
+                        onClick={() => setActiveProjectTab(key)}
+                        whileHover={{ scale: 1.1 }}
+                        className={`pointer-events-auto font-sans font-thin text-center text-2xl ${
+                          activeProjectTab === key ? 'text-white' : 'text-gray-400'
+                        }`}
+                      >
+                        {label}
+                      </motion.button>
+                    </div>
+                  ))}
+                </div>
+                <motion.div className='w-full justify-center items-center flex flex-grow h-auto py-20'>
+                  <div className="flex flex-wrap justify-center gap-4 p-4">
+                    {activeProjectTab === 'web' &&
+                      webProjects.map(({ id, image, info }, index) => (
+                        <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
+                    {activeProjectTab === 'game' &&
+                      gameProjects.map(({ id, image, info }, index)=> (
+                        <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+
+            {/* Blog Content */}
+            {activeTab === 'blog' && (
+              <motion.div 
+                className="p-10 mt-10"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <motion.div 
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={{
+                    hidden: {},
+                    visible: {
+                      transition: {
+                        staggerChildren: 0.15,
+                        delayChildren: 0.2
+                      }
+                    }
+                  }}
+                >
+                  {sortedBlogPosts.map((post) => (
+                    <motion.div 
+                      key={post.id}
+                      data-cursor-text="READ"
+                      variants={{
+                        hidden: { 
+                          opacity: 0,
+                          y: 50,
+                          scale: 0.8,
+                          rotateX: -15
+                        },
+                        visible: { 
+                          opacity: 1,
+                          y: 0,
+                          scale: 1,
+                          rotateX: 0,
+                        }
+                      }}
+                      className="p-[2px] bg-gradient-to-br from-white/20 via-transparent to-white/5 hover:from-white/30 hover:via-white/10 hover:to-white/20 rounded-xl transition-all duration-500 group cursor-pointer"
+                      whileHover={{ 
+                        scale: 1.03,
+                        rotateY: 2,
+                        boxShadow: "0 10px 40px rgba(255,255,255,0.1), 0 0 20px rgba(255,255,255,0.05)"
+                      }}
+                      onClick={() => setActiveBlogPost(post)}
+                    >
+                      <div className="bg-black/90 backdrop-blur-xl rounded-xl p-8 h-full border border-white/5 group-hover:border-white/20 transition-all duration-500">
+                        <motion.h2 
+                          className="text-white text-2xl font-light mb-6 leading-tight group-hover:text-white/90 transition-colors duration-300"
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          {post.title}
+                        </motion.h2>
+                        
+                        <motion.p 
+                          className="text-gray-300 font-light mb-6 leading-relaxed line-clamp-3"
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          transition={{ delay: 0.3 }}
+                        >
+                          {post.preview}
+                        </motion.p>
+                        
+                        <motion.div 
+                          className="flex justify-between items-center mt-auto"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.4 }}
+                        >
+                          <div className="flex items-center space-x-2">
+                            <div className="w-2 h-2 bg-white/40 rounded-full"></div>
+                            <span className="text-gray-400 text-sm font-light tracking-wide">{post.date}</span>
+                          </div>
+                          <motion.div 
+                            className="flex items-center space-x-2 text-white/80 group-hover:text-white transition-colors duration-300"
+                            whileHover={{ 
+                              x: 5,
+                              transition: { type: "spring", stiffness: 400, damping: 10 }
+                            }}
+                            data-cursor-size="80px" 
+                            data-cursor-exclusion
+                          >
+                            <span className="text-sm font-light">Read</span>
+                            <motion.svg 
+                              className="w-4 h-4" 
+                              fill="none" 
+                              stroke="currentColor" 
+                              viewBox="0 0 24 24"
+                              whileHover={{ x: 2 }}
+                              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </motion.svg>
+                          </motion.div>
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            )}
             <motion.div className='w-full justify-center items-center flex flex-grow h-auto py-20'>
               <div className="flex flex-wrap justify-center gap-4 p-4">
                 {activeTab === 'web' &&
@@ -402,7 +886,7 @@ function App() {
           </motion.div>
 
           {/* Blog Section */}
-          <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign} mt-10`}>
+          <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign} mt-10`} style={{display: 'none'}}>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>Blog</motion.h1>
             <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 blur-lg'>Blog</motion.h1>
             <motion.div 
@@ -436,11 +920,6 @@ function App() {
                       y: 0,
                       scale: 1,
                       rotateX: 0,
-                      transition: {
-                        type: "spring",
-                        stiffness: 100,
-                        damping: 1
-                      }
                     }
                   }}
                   className="p-[2px] bg-gradient-to-br from-white/20 via-transparent to-white/5 hover:from-white/30 hover:via-white/10 hover:to-white/20 rounded-xl transition-all duration-500 group cursor-pointer"
