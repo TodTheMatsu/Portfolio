@@ -84,7 +84,7 @@ const imgParentVariants = {
 
 const boxDesign = 'backdrop-blur-md';
 const aboutMe =
-  'I am an aspiring web developer with a strong passion for learning and growth. My journey began with over four years of experience in game development, where I honed my programming skills and creative problem-solving abilities. Recently, I transitioned into web development, bringing with me a solid foundation in programming and a commitment to mastering this exciting field.';
+  "I’m a passionate web developer with a strong drive for continuous learning and growth. My journey began in game development, where I spent over four years sharpening my programming and creative problem-solving skills. Now, I’m channeling that experience into web development—combining a solid technical foundation with a commitment to building innovative, user-focused solutions.";
 const greetText = 'Hello my name is Lee.';
 
 // Particle animation component
