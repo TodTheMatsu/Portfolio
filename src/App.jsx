@@ -242,7 +242,7 @@ function App() {
             </motion.h1>
 
             {/* Scroll Down Arrow */}
-            <motion.button
+            <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ 
                 opacity: activeCardId || activeBlogPost ? 0 : 1,
@@ -253,17 +253,7 @@ function App() {
                 duration: 1,
                 opacity: { duration: 0.5, delay: 3 }
               }}
-              onClick={() => {
-                const aboutSection = document.querySelector('[data-section="about"]');
-                if (aboutSection) {
-                  aboutSection.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-              className={`z-20 flex flex-col p-10 items-center cursor-pointer group ${activeCardId || activeBlogPost ? 'pointer-events-none' : ''}`}
-              data-cursor-size="80px" 
-              data-cursor-exclusion
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              className={`z-20 flex flex-col p-10 items-center group ${activeCardId || activeBlogPost ? 'pointer-events-none' : ''}`}
             >
               <motion.span 
                 className="text-white font-thin text-sm mb-2 opacity-70 group-hover:opacity-100 transition-opacity"
@@ -295,7 +285,7 @@ function App() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </motion.svg>
-            </motion.button>
+            </motion.div>
           </div>
           <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="px-4 pointer-events-none w-full flex flex-wrap items-center justify-center gap-2" data-section="about">
             <motion.div 
