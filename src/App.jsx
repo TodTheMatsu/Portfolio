@@ -772,13 +772,50 @@ function App() {
             {/* Blog Content */}
             {activeTab === 'blog' && (
               <motion.div 
-                className="p-10 mt-10"
+                className="px-6 md:px-10 mt-10"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
+                {/* Blog header with stats */}
                 <motion.div 
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                  className="text-center mb-12"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.6 }}
+                >
+                  <motion.div 
+                    className="inline-flex items-center space-x-4 bg-white/5 backdrop-blur-xl rounded-full px-6 py-3 border border-white/10"
+                    whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-white/80 text-sm font-light">
+                        {sortedBlogPosts.length} Articles
+                      </span>
+                    </div>
+                    <div className="w-px h-4 bg-white/20"></div>
+                    <div className="flex items-center space-x-2">
+                      <motion.svg 
+                        className="w-4 h-4 text-white/60" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                        animate={{ rotate: [0, 5, -5, 0] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </motion.svg>
+                      <span className="text-white/80 text-sm font-light">
+                        Latest: {sortedBlogPosts[0]?.date}
+                      </span>
+                    </div>
+                  </motion.div>
+                </motion.div>
+
+                <motion.div 
+                  className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8"
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
@@ -786,93 +823,194 @@ function App() {
                     hidden: {},
                     visible: {
                       transition: {
-                        staggerChildren: 0.15,
-                        delayChildren: 0.2
+                        staggerChildren: 0.12,
+                        delayChildren: 0.3
                       }
                     }
                   }}
                 >
-                  {sortedBlogPosts.map((post) => (
-                    <motion.div 
-                      key={post.id}
-                      data-cursor-text="READ"
-                      variants={{
-                        hidden: { 
-                          opacity: 0,
-                          y: 50,
-                          scale: 0.8,
-                          rotateX: -15
-                        },
-                        visible: { 
-                          opacity: 1,
-                          y: 0,
-                          scale: 1,
-                          rotateX: 0,
-                        }
-                      }}
-                      className="p-[2px] bg-gradient-to-br from-white/20 via-transparent to-white/5 hover:from-white/30 hover:via-white/10 hover:to-white/20 rounded-xl transition-all duration-500 group cursor-pointer"
-                      whileHover={{ 
-                        scale: 1.03,
-                        rotateY: 2,
-                        boxShadow: "0 10px 40px rgba(255,255,255,0.1), 0 0 20px rgba(255,255,255,0.05)"
-                      }}
-                      onClick={() => setActiveBlogPost(post)}
-                    >
-                      <div className="bg-black/90 backdrop-blur-xl rounded-xl p-8 h-full border border-white/5 group-hover:border-white/20 transition-all duration-500">
-                        <motion.h2 
-                          className="text-white text-2xl font-light mb-6 leading-tight group-hover:text-white/90 transition-colors duration-300"
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.2 }}
-                        >
-                          {post.title}
-                        </motion.h2>
+                  {sortedBlogPosts.map((post, index) => {
+                    // Calculate reading time (roughly 200 words per minute)
+                    const readingTime = Math.ceil(post.content.split(' ').length / 200);
+                    const isLatest = index === 0;
+                    
+                    return (
+                      <motion.article 
+                        key={post.id}
+                        data-cursor-text="READ"
+                        variants={{
+                          hidden: { 
+                            opacity: 0,
+                            y: 60,
+                            scale: 0.85,
+                            rotateX: -20
+                          },
+                          visible: { 
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            rotateX: 0,
+                            transition: {
+                              type: "spring",
+                              stiffness: 100,
+                              damping: 15,
+                              duration: 0.8
+                            }
+                          }
+                        }}
+                        className={`group cursor-pointer relative overflow-hidden ${
+                          isLatest ? 'md:col-span-2 xl:col-span-1' : ''
+                        }`}
+                        whileHover={{ 
+                          y: -8,
+                          transition: { type: "spring", stiffness: 400, damping: 25 }
+                        }}
+                        onClick={() => setActiveBlogPost(post)}
+                      >
+                        {/* Animated border gradient */}
+                        <motion.div
+                          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                          style={{
+                            background: 'linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05), rgba(255,255,255,0.2))',
+                            backgroundSize: '300% 300%',
+                          }}
+                          animate={{
+                            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
+                        />
                         
-                        <motion.p 
-                          className="text-gray-300 font-light mb-6 leading-relaxed line-clamp-3"
-                          initial={{ opacity: 0 }}
-                          whileInView={{ opacity: 1 }}
-                          transition={{ delay: 0.3 }}
-                        >
-                          {post.preview}
-                        </motion.p>
-                        
+                        {/* Main card */}
                         <motion.div 
-                          className="flex justify-between items-center mt-auto"
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.4 }}
+                          className="relative bg-gradient-to-br from-black/95 via-black/90 to-black/95 backdrop-blur-xl rounded-2xl p-6 lg:p-8 h-full border border-white/5 group-hover:border-white/20 transition-all duration-500 overflow-hidden"
+                          whileHover={{
+                            boxShadow: "0 20px 60px rgba(255,255,255,0.15), 0 0 30px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.1)"
+                          }}
                         >
-                          <div className="flex items-center space-x-2">
-                            <div className="w-2 h-2 bg-white/40 rounded-full"></div>
-                            <span className="text-gray-400 text-sm font-light tracking-wide">{post.date}</span>
-                          </div>
-                          <motion.div 
-                            className="flex items-center space-x-2 text-white/80 group-hover:text-white transition-colors duration-300"
-                            whileHover={{ 
-                              x: 5,
-                              transition: { type: "spring", stiffness: 400, damping: 10 }
-                            }}
-                            data-cursor-size="80px" 
-                            data-cursor-exclusion
-                          >
-                            <span className="text-sm font-light">Read</span>
-                            <motion.svg 
-                              className="w-4 h-4" 
-                              fill="none" 
-                              stroke="currentColor" 
-                              viewBox="0 0 24 24"
-                              whileHover={{ x: 2 }}
-                              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                          {/* Background decoration */}
+                          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-2xl transform translate-x-16 -translate-y-16 group-hover:scale-150 transition-transform duration-700"></div>
+                          
+                          {/* Latest badge */}
+                          {isLatest && (
+                            <motion.div 
+                              className="absolute top-4 right-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-sm text-green-300 px-3 py-1 rounded-full text-xs font-medium border border-green-500/30"
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: 0.5, type: "spring", stiffness: 300 }}
                             >
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </motion.svg>
-                          </motion.div>
+                              <motion.span
+                                animate={{ opacity: [1, 0.6, 1] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                              >
+                                Latest
+                              </motion.span>
+                            </motion.div>
+                          )}
+                          
+                          {/* Content */}
+                          <div className="relative z-10 flex flex-col h-full">
+                            {/* Title */}
+                            <motion.h2 
+                              className="text-white text-xl lg:text-2xl font-light mb-4 leading-tight group-hover:text-white/95 transition-colors duration-300"
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.2 }}
+                            >
+                              {post.title}
+                            </motion.h2>
+                            
+                            {/* Preview */}
+                            <motion.p 
+                              className="text-gray-300 font-light mb-6 leading-relaxed text-sm lg:text-base flex-grow"
+                              style={{
+                                display: '-webkit-box',
+                                WebkitLineClamp: 3,
+                                WebkitBoxOrient: 'vertical',
+                                overflow: 'hidden'
+                              }}
+                              initial={{ opacity: 0 }}
+                              whileInView={{ opacity: 1 }}
+                              transition={{ delay: 0.3 }}
+                            >
+                              {post.preview}
+                            </motion.p>
+                            
+                            {/* Footer */}
+                            <motion.div 
+                              className="flex justify-between items-center mt-auto pt-4 border-t border-white/5 group-hover:border-white/10 transition-colors duration-300"
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.4 }}
+                            >
+                              {/* Date and reading time */}
+                              <div className="flex items-center space-x-4">
+                                <div className="flex items-center space-x-2">
+                                  <motion.div 
+                                    className="w-2 h-2 bg-gradient-to-r from-white/60 to-white/40 rounded-full"
+                                    animate={{ 
+                                      scale: [1, 1.2, 1],
+                                      opacity: [0.6, 1, 0.6]
+                                    }}
+                                    transition={{ 
+                                      duration: 3, 
+                                      repeat: Infinity, 
+                                      ease: "easeInOut",
+                                      delay: index * 0.5 
+                                    }}
+                                  />
+                                  <span className="text-gray-400 text-xs lg:text-sm font-light tracking-wide">
+                                    {post.date}
+                                  </span>
+                                </div>
+                                <div className="text-gray-500 text-xs">•</div>
+                                <div className="flex items-center space-x-1">
+                                  <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                  </svg>
+                                  <span className="text-gray-500 text-xs font-light">
+                                    {readingTime} min read
+                                  </span>
+                                </div>
+                              </div>
+                              
+                              {/* Read more button */}
+                              <motion.div 
+                                className="flex items-center space-x-2 text-white/80 group-hover:text-white transition-colors duration-300"
+                                whileHover={{ 
+                                  x: 8,
+                                  transition: { type: "spring", stiffness: 400, damping: 10 }
+                                }}
+                                data-cursor-size="80px" 
+                                data-cursor-exclusion
+                              >
+                                <span className="text-xs lg:text-sm font-light">Read</span>
+                                <motion.svg 
+                                  className="w-4 h-4" 
+                                  fill="none" 
+                                  stroke="currentColor" 
+                                  viewBox="0 0 24 24"
+                                  whileHover={{ 
+                                    x: 3,
+                                    transition: { type: "spring", stiffness: 400, damping: 10 }
+                                  }}
+                                >
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </motion.svg>
+                              </motion.div>
+                            </motion.div>
+                          </div>
                         </motion.div>
-                      </div>
-                    </motion.div>
-                  ))}
+                      </motion.article>
+                    );
+                  })}
                 </motion.div>
+                
+                {/* Bottom spacing for better scroll experience */}
+                <div className="h-20"></div>
               </motion.div>
             )}
             <motion.div className='w-full justify-center items-center flex flex-grow h-auto py-20'>
