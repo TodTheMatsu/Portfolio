@@ -974,10 +974,9 @@ function App() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  <div className="relative bg-white/5 backdrop-blur-xl rounded-xl p-1.5 border border-white/10 w-full max-w-sm md:max-w-fit">
-                    {/* Desktop Layout */}
-                    <div className="hidden md:flex gap-1 relative">
-                      {/* Desktop Animated Background for Sub-tabs */}
+                  <div className="relative bg-white/5 backdrop-blur-xl rounded-xl p-1.5 border border-white/10 w-full max-w-fit">
+                    <div className="flex gap-1 relative">
+                      {/* Animated Background for Sub-tabs */}
                       <motion.div
                         className="absolute top-1.5 h-[calc(100%-12px)] bg-gradient-to-r from-white/15 via-white/20 to-white/15 rounded-lg border border-white/20"
                         layoutId="activeProjectTabBackground"
@@ -1056,98 +1055,6 @@ function App() {
                               activeProjectTab === key
                                 ? 'bg-white/20 border-white/30 text-white'
                                 : 'bg-white/5 border-white/10 text-gray-400 group-hover:bg-white/10'
-                            }`}
-                            animate={{
-                              scale: activeProjectTab === key ? 1.05 : 1
-                            }}
-                            transition={{ duration: 0.3 }}
-                          >
-                            {count}
-                          </motion.span>
-                        </motion.button>
-                      ))}
-                    </div>
-
-                    {/* Mobile Layout */}
-                    <div className="flex md:hidden gap-1 relative">
-                      {/* Mobile Animated Background for Sub-tabs */}
-                      <motion.div
-                        className="absolute top-1.5 h-[calc(100%-12px)] bg-gradient-to-r from-white/15 via-white/20 to-white/15 rounded-lg border border-white/20"
-                        layoutId="activeProjectTabBackgroundMobile"
-                        initial={false}
-                        animate={{
-                          x: activeProjectTab === 'web' ? 0 : 'calc(50% + 2px)',
-                          width: 'calc(50% - 2px)'
-                        }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 350,
-                          damping: 30
-                        }}
-                      />
-                      
-                      {[
-                        { 
-                          key: 'web', 
-                          label: 'Websites',
-                          shortLabel: 'Web',
-                          icon: <BiWorld className="w-4 h-4" />,
-                          count: webProjects.length
-                        },
-                        { 
-                          key: 'game', 
-                          label: 'Games',
-                          shortLabel: 'Games',
-                          icon: <TbDeviceGamepad className="w-4 h-4" />,
-                          count: gameProjects.length
-                        }
-                      ].map(({ key, label, shortLabel, icon, count }, index) => (
-                        <motion.button
-                          key={key}
-                          onClick={() => setActiveProjectTab(key)}
-                          className={`relative z-10 pointer-events-auto px-3 py-2.5 rounded-lg transition-all duration-300 group flex-1 flex items-center justify-center gap-2 min-h-[44px] ${
-                            activeProjectTab === key 
-                              ? 'text-white' 
-                              : 'text-gray-400'
-                          }`}
-                          whileTap={{ scale: 0.96 }}
-                          initial={{ opacity: 0, x: index === 0 ? -15 : 15 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 + 0.3, duration: 0.4 }}
-                        >
-                          <motion.div
-                            animate={{
-                              rotate: activeProjectTab === key ? [0, 10, -10, 0] : 0,
-                              scale: activeProjectTab === key ? 1.1 : 1
-                            }}
-                            transition={{
-                              rotate: {
-                                duration: 2,
-                                repeat: activeProjectTab === key ? Infinity : 0,
-                                ease: "easeInOut"
-                              },
-                              scale: { duration: 0.3 }
-                            }}
-                            className={`transition-all duration-300 ${
-                              activeProjectTab === key ? 'text-white' : 'text-gray-500'
-                            }`}
-                          >
-                            {icon}
-                          </motion.div>
-                          
-                          <span className={`font-sans font-light text-sm transition-all duration-300 ${
-                            activeProjectTab === key 
-                              ? 'text-white font-normal' 
-                              : 'text-gray-400'
-                          }`}>
-                            {shortLabel}
-                          </span>
-                          
-                          <motion.span 
-                            className={`text-xs px-1.5 py-0.5 rounded-full border transition-all duration-300 ${
-                              activeProjectTab === key
-                                ? 'bg-white/20 border-white/30 text-white'
-                                : 'bg-white/5 border-white/10 text-gray-400'
                             }`}
                             animate={{
                               scale: activeProjectTab === key ? 1.05 : 1
