@@ -1,11 +1,23 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 
 function Card({ image, info, onClick, index }) {
     const [isHovered, setIsHovered] = useState(false);
+    const [shouldAnimate, setShouldAnimate] = useState(false);
     const randomRotation = (Math.random() - 0.5) * 20; // More varied rotation (-10 to 10)
     const randomDelay = Math.random() * 2; // Random floating delay
+    
+    // Detect if we're on mobile for responsive animations
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    
+    // Fallback animation trigger for mobile
+    useEffect(() => {
+        if (isMobile) {
+            const timer = setTimeout(() => setShouldAnimate(true), (index * 150) + 500);
+            return () => clearTimeout(timer);
+        }
+    }, [index, isMobile]);
     
     // Spring configurations for different animations
     const springConfig = {
@@ -30,7 +42,7 @@ function Card({ image, info, onClick, index }) {
         hidden: { 
             opacity: 0, 
             rotate: randomRotation * 2, 
-            x: 200,
+            x: isMobile ? 20 : 50, // Even smaller initial offset for mobile
             scale: 0.8
         },
         visible: { 
@@ -100,18 +112,24 @@ return (
             variants={cardVariants}
             initial="hidden"
             whileInView="visible"
-            animate={!isHovered ? floatingAnimation : "visible"}
+            animate={
+                isMobile && shouldAnimate 
+                    ? "visible" 
+                    : !isHovered 
+                        ? floatingAnimation 
+                        : "visible"
+            }
             whileHover="hover"
             whileTap="tap"
             exit={{ 
-                x: -200, 
+                x: isMobile ? -20 : -50, // Smaller exit offset for mobile
                 opacity: 0, 
                 rotate: randomRotation - 20,
                 scale: 0.8,
                 transition: { duration: 0.4 }
             }}
-            viewport={{ once: true, margin: "-50px" }}
-            className='relative card bg-gradient-to-br from-white to-gray-50 lg:w-[300px] lg:h-[400px] md:w-[250px] md:h-[350px] sm:w-[150px] sm:h-[200px] w-[100px] h-[150px] rounded-2xl pointer-events-auto cursor-pointer shadow-xl hover:shadow-2xl overflow-hidden border border-gray-100'>
+            viewport={{ once: true, margin: isMobile ? "20px" : "0px" }} // Positive margin for mobile to trigger earlier
+            className='relative card bg-gradient-to-br from-white to-gray-50 lg:w-[300px] lg:h-[400px] md:w-[250px] md:h-[350px] sm:w-[180px] sm:h-[240px] w-[140px] h-[200px] rounded-2xl pointer-events-auto cursor-pointer shadow-xl hover:shadow-2xl overflow-hidden border border-gray-100'>
             
             {/* Image with parallax effect */}
             <motion.img 
