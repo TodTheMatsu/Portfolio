@@ -87,7 +87,7 @@ function ProjectModal({ onClick, projectData }) {
     >
       <motion.div 
         onClick={handleClick} 
-        className="w-full h-full flex justify-center overflow-hidden py-28 space-x-5 md:px-20 px-5 scroll-smooth"
+        className="w-full h-full flex justify-center  items-center overflow-hidden py-28 space-x-5 md:px-20 px-5 scroll-smooth"
       >
         <motion.div
           variants={containerVariants}
@@ -98,21 +98,13 @@ function ProjectModal({ onClick, projectData }) {
         >
           {/* Fixed Header */}
           <motion.div 
-            className="flex justify-between items-start p-8 pb-6 border-b border-white/10"
+            className="flex flex-col p-4 md:p-8 pb-4 md:pb-6 border-b border-white/10 relative"
             variants={containerVariants}
           >
-            <div className="flex-1 pr-4 flex flex-col items-center text-center">
-              {renderLogo()}
-              <motion.p 
-                variants={textVariants}
-                className="text-gray-300 text-lg text-center max-w-2xl leading-relaxed"
-              >
-                {projectData.subtitle}
-              </motion.p>
-            </div>
+            {/* Exit Button */}
             <motion.button
               onClick={onClick}
-              className="text-white/60 hover:text-white w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/5 transition-all duration-200"
+              className="absolute top-4 right-4 text-white/60 hover:text-white w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/5 transition-all duration-200 z-10"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               variants={textVariants}
@@ -121,10 +113,51 @@ function ProjectModal({ onClick, projectData }) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </motion.button>
+
+            {/* Logo and Title - Mobile Responsive */}
+            <div className="flex flex-col items-center text-center pr-12 md:pr-4">
+              {/* Mobile-optimized logo rendering */}
+              {projectData.logo?.type === 'svg' ? (
+                <motion.div 
+                  className="flex flex-col md:flex-row items-center justify-center mb-4 md:mb-8"
+                  variants={textVariants}
+                >
+                  <div 
+                    className="w-12 h-12 md:w-16 md:h-16 mb-4 md:mb-0 md:mr-4"
+                    dangerouslySetInnerHTML={{ __html: projectData.logo.content }}
+                  />
+                  <motion.h1 
+                    variants={textVariants} 
+                    className="text-white text-3xl md:text-6xl lg:text-7xl font-light tracking-tight text-center"
+                  >
+                    {projectData.title}
+                  </motion.h1>
+                </motion.div>
+              ) : (
+                <motion.div 
+                  className="flex items-center justify-center mb-4 md:mb-8"
+                  variants={textVariants}
+                >
+                  <motion.h1 
+                    variants={textVariants} 
+                    className="text-white text-3xl md:text-6xl lg:text-7xl font-light tracking-tight text-center"
+                  >
+                    {projectData.title}
+                  </motion.h1>
+                </motion.div>
+              )}
+
+              <motion.p 
+                variants={textVariants}
+                className="text-gray-300 text-sm md:text-lg text-center max-w-2xl leading-relaxed"
+              >
+                {projectData.subtitle}
+              </motion.p>
+            </div>
           </motion.div>
 
           {/* Scrollable Content */}
-          <div className="overflow-y-auto max-h-[calc(90vh-200px)] px-8 md:px-12 pb-8">
+          <div className="overflow-y-auto max-h-[calc(90vh-160px)] md:max-h-[calc(90vh-200px)] px-4 md:px-8 lg:px-12 pb-8">
             {/* Divider */}
             <motion.div 
               className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-16"
