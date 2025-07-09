@@ -18,6 +18,9 @@ import assistantVid2 from '../assets/videos/assistant/vid2.mp4';
 import assistantVid3 from '../assets/videos/assistant/vid3.mp4';
 import assistantVid4 from '../assets/videos/assistant/vid4.mp4';
 
+import empirehoundVid1 from '../assets/videos/empirehound/vid1.mp4';
+import projectrtsVid1 from '../assets/videos/projectrts/vid1.mp4';
+
 export const projectsData = {
   whattodo: {
     title: "What to do?",
@@ -171,6 +174,64 @@ export const projectsData = {
       bgStyle: "bg-black/30 backdrop-blur-xl border border-white/10",
       headerStyle: "",
       dividerStyle: "bg-gradient-to-r from-transparent via-white/20 to-transparent"
+    }
+  },
+
+  empirehound: {
+    title: "Empire's Hound",
+    subtitle: "An ability-based action RPG with fast-paced combat",
+    description: "Empire's Hound is an ability-based action RPG where you fight as a Hound, an elite mercenary serving the Empire of Verseria. Undertake perilous missions, battle relentless enemies, and amass wealth and power—all while following the mercenary creed: Profit before honor. Currently in development, Empire's Hound features fast-paced combat, deep ability-based mechanics.",
+    logo: {
+      type: "text",
+      content: "Empire's Hound"
+    },
+    features: [
+      {
+        name: 'Gameplay',
+        description: "In Empire's Hound, fast-paced, ability-driven combat pushes your skills to the limit. Use your hard-earned wealth to unlock powerful weapons and abilities, then fight through relentless waves of enemies to prove your worth.",
+        video: empirehoundVid1,
+      },
+    ],
+    tech: {
+      Frontend: [],
+      Backend: ['Powered by Luau', 'Roblox Studio'],
+    },
+    demoVideo: empirehoundVid1,
+    sourceCodeUrl: null,
+    theme: {
+      primaryColor: "white",
+      bgStyle: "bg-purple-900/20 backdrop-blur-xl border border-purple-500/20",
+      headerStyle: "",
+      dividerStyle: "bg-gradient-to-r from-transparent via-purple-500/20 to-transparent"
+    }
+  },
+
+  projectrts: {
+    title: "Project RTS",
+    subtitle: "A real-time strategy game with tactical battles",
+    description: "In RTS, players start with a small settlement and must gather resources like wood, stone, and food to expand their territory. Construct buildings to develop your economy, train armies, and unlock advanced technologies. Engage in tactical battles, command troops in real-time, and adapt to dynamic battle conditions. Whether forging alliances or waging war, every decision shapes the fate of your empire.",
+    logo: {
+      type: "text",
+      content: "Project RTS"
+    },
+    features: [
+      {
+        name: 'Gameplay',
+        description: "In Project RTS, players gather resources, build thriving cities, and lead powerful armies. Strategize your expansion, forge alliances, and wage war to dominate the battlefield.",
+        video: projectrtsVid1,
+      },
+    ],
+    tech: {
+      Frontend: [],
+      Backend: ['Powered by Luau', 'Roblox Studio'],
+    },
+    demoVideo: projectrtsVid1,
+    sourceCodeUrl: null,
+    theme: {
+      primaryColor: "white",
+      bgStyle: "bg-orange-900/20 backdrop-blur-xl border border-orange-500/20",
+      headerStyle: "",
+      dividerStyle: "bg-gradient-to-r from-transparent via-orange-500/20 to-transparent"
     }
   }
 };

@@ -6,13 +6,10 @@ import 'react-creative-cursor/dist/styles.css';
 import Card from './Card';
 import BlogPost from './BlogPost';
 import { blogPosts } from './data/blogPosts';
+import { projectsData } from './data/projectData';
+import ProjectModal from './Components/ProjectModal';
 
 // Local components
-const WhattodoInfo = lazy(() => import('./WhattodoInfo'));
-const Howistheweather = lazy(() => import('./Howistheweather'));
-const Assistant = lazy(() => import('./Assistant'));
-const Empirehound = lazy(() => import('./Empirehound'));
-const ProjectRTS = lazy(() => import('./ProjectRTS'));
 
 // Assets
 import assistant from './assets/assistant.png';
@@ -154,14 +151,14 @@ function App() {
   ], []);
 
   const webProjects = useMemo(() => [
-    { id: 1, image: whattodo, info: <WhattodoInfo onClick={() => handleCardClick(1)} /> },
-    { id: 2, image: howistheweather, info: <Howistheweather onClick={() => handleCardClick(2)} /> },
-    { id: 3, image: assistant, info: <Assistant onClick={() => handleCardClick(3)} /> },
+    { id: 'whattodo', image: whattodo, projectKey: 'whattodo' },
+    { id: 'howistheweather', image: howistheweather, projectKey: 'howistheweather' },
+    { id: 'assistant', image: assistant, projectKey: 'assistant' },
   ], []);
 
   const gameProjects = useMemo(() => [
-    { id: 4, image: empirehounds, info: <Empirehound onClick={() => handleCardClick(4)} /> },
-    { id: 5, image: projectrts, info: <ProjectRTS onClick={() => handleCardClick(5)} /> },
+    { id: 'empirehound', image: empirehounds, projectKey: 'empirehound' },
+    { id: 'projectrts', image: projectrts, projectKey: 'projectrts' },
   ], []);
 
   const allProjects = useMemo(() => [...webProjects, ...gameProjects], [webProjects, gameProjects]);
@@ -170,10 +167,15 @@ function App() {
   const [activeProjectTab, setActiveProjectTab] = useState('web');
   const [activeCardId, setActiveCardId] = useState(null);
   const [activeBlogPost, setActiveBlogPost] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   // Use a stable callback for card click
-  const handleCardClick = (id) => {
-    setActiveCardId((prev) => (prev === id ? null : id));
+  const handleCardClick = (projectKey) => {
+    const project = allProjects.find(p => p.projectKey === projectKey);
+    if (project && projectsData[projectKey]) {
+      setSelectedProject(projectKey);
+      setActiveCardId(projectKey);
+    }
   };
 
   // Sort blog posts by date (newest first)
@@ -183,7 +185,7 @@ function App() {
 
   return (
     <>
-      <div className={`bg-black h-screen w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
+      <div className={`bg-black h-screen w-full absolute flex flex-col items-center overflow-x-hidden ${selectedProject ? "overflow-hidden" : ""}`}>
         <ParticleBackground />
         <motion.div 
           className="fixed inset-0 bg-gradient-to-br from-white/5 via-white/10 to-white/5"
@@ -197,7 +199,7 @@ function App() {
           }}
         />
         
-        <div className={`pb-20 flex-grow w-full absolute flex flex-col items-center overflow-x-hidden ${activeCardId ? "overflow-hidden" : ""}`}>
+        <div className={`pb-20 flex-grow w-full absolute flex flex-col items-center overflow-x-hidden ${selectedProject ? "overflow-hidden" : ""}`}>
           <div className="w-full h-[105vh] mx-auto flex flex-col items-center justify-center relative">
             <motion.div 
               initial={{ opacity: 0, scale: 0.8 }}
@@ -247,7 +249,7 @@ function App() {
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ 
-                opacity: activeCardId || activeBlogPost ? 0 : 1,
+                opacity: selectedProject || activeBlogPost ? 0 : 1,
                 y: 0,
               }}
               transition={{ 
@@ -255,7 +257,7 @@ function App() {
                 duration: 1,
                 opacity: { duration: 0.5, delay: 3 }
               }}
-              className={`z-20 flex flex-col p-10 items-center group ${activeCardId || activeBlogPost ? 'pointer-events-none' : ''}`}
+              className={`z-20 flex flex-col p-10 items-center group ${selectedProject || activeBlogPost ? 'pointer-events-none' : ''}`}
             >
               <motion.span 
                 className="text-white font-thin text-sm mb-2 opacity-70 group-hover:opacity-100 transition-opacity"
@@ -757,11 +759,11 @@ function App() {
                 <motion.div className='w-full justify-center items-center flex flex-grow h-auto py-20'>
                   <div className="flex flex-wrap justify-center gap-4 p-4">
                     {activeProjectTab === 'web' &&
-                      webProjects.map(({ id, image, info }, index) => (
-                        <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
+                      webProjects.map(({ id, image, projectKey }, index) => (
+                        <Card key={id} image={image} onClick={() => handleCardClick(projectKey)} index={index}/>))}
                     {activeProjectTab === 'game' &&
-                      gameProjects.map(({ id, image, info }, index)=> (
-                        <Card key={id} image={image} info={info} onClick={() => handleCardClick(id)} index={index}/>))}
+                      gameProjects.map(({ id, image, projectKey }, index)=> (
+                        <Card key={id} image={image} onClick={() => handleCardClick(projectKey)} index={index}/>))}
                   </div>
                 </motion.div>
               </motion.div>
@@ -999,7 +1001,15 @@ function App() {
                 </div>
               </div>
             }>
-              {activeCardId && allProjects.find(project => project.id === activeCardId)?.info}
+              {selectedProject && (
+                <ProjectModal 
+                  onClick={() => {
+                    setSelectedProject(null);
+                    setActiveCardId(null);
+                  }} 
+                  projectData={projectsData[selectedProject]} 
+                />
+              )}
               {activeBlogPost && (
                 <BlogPost 
                   post={activeBlogPost} 
@@ -1013,7 +1023,7 @@ function App() {
           <motion.div
             initial={{ opacity: 0, width: "60px", y: 200 }}
             animate={{
-              opacity: activeCardId ? 0 : 1,
+              opacity: selectedProject ? 0 : 1,
               y: 0,
               width: ["60px", "60px", "200px"],
             }}
@@ -1023,7 +1033,7 @@ function App() {
               width: { delay: 3, duration: 2 },
               ease: "easeInOut",
             }}
-            className={`h-[60px] fixed bg-white rounded-full backdrop-blur-md bg-opacity-20 top-[90%] flex items-center justify-center space-x-5 ${activeCardId ? 'pointer-events-none' : ''}`}
+            className={`h-[60px] fixed bg-white rounded-full backdrop-blur-md bg-opacity-20 top-[90%] flex items-center justify-center space-x-5 ${selectedProject ? 'pointer-events-none' : ''}`}
           >
             {links.map((link, index) => {
               const IconComponent = link.icon;
@@ -1051,7 +1061,7 @@ function App() {
         </div>
       </div>
       {/* Show custom cursor only on non-mobile devices and hide when a card or blog post is open */}
-      {typeof window !== 'undefined' && window.matchMedia && !window.matchMedia('(pointer: coarse)').matches && !activeCardId && !activeBlogPost && (
+      {typeof window !== 'undefined' && window.matchMedia && !window.matchMedia('(pointer: coarse)').matches && !selectedProject && !activeBlogPost && (
         <Cursor isGelly={true} cursorInnerColor='#000000' cursorBackgrounColor='#ffffff' sizeAnimationEase='easeInOut' />
       )}
     </>
