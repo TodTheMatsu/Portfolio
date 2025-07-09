@@ -23,23 +23,23 @@ const TechStack = forwardRef(({ tech, textVariants }, ref) => (
     <motion.h1
       ref={ref}
       variants={textVariants}
-      className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-4 my-5  pb-2 text-4xl"
+      className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-4 my-5 pb-2 text-2xl md:text-4xl"
     >
       Technology Stack
     </motion.h1>
-    <motion.div className="flex items-center justify-center flex-row my-5 gap-5">
+    <motion.div className="flex items-start justify-center flex-col md:flex-row my-5 gap-5 w-full max-w-4xl mx-auto px-4">
       {tech.Frontend.length > 0 && (
         <motion.div
           variants={textVariants}
-          className="flex max-h-[150px] flex-col gap-2 outline-double outline-2 rounded-3xl outline-white px-2 py-2"
+          className="flex w-full md:w-auto flex-col gap-2 outline-double outline-2 rounded-3xl outline-white px-4 py-4"
         >
           <motion.h2
             variants={textVariants}
-            className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 pb-2 text-3xl"
+            className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 pb-2 text-2xl md:text-3xl"
           >
             Frontend
           </motion.h2>
-          <div className="flex flex-wrap gap-2 justify-center">
+          <div className="flex flex-wrap gap-2 justify-center min-h-fit">
             {tech.Frontend.map((item, index) => {
               let icons = [];
               if (item.includes('+')) {
@@ -49,9 +49,9 @@ const TechStack = forwardRef(({ tech, textVariants }, ref) => (
                 if (Icon) icons = [Icon];
               }
               return (
-                <div key={index} className="flex items-center gap-1 bg-white/10 border border-white/20 rounded-full px-3 py-1 shadow hover:bg-white/20 transition-all" data-tooltip-id={`frontend-tooltip-${index}`} data-tooltip-content={item}>
-                  {icons.map((Icon, i) => Icon && <Icon key={i} className="text-xl text-cyan-400" />)}
-                  <span className="text-white text-lg font-sans font-thin">{item}</span>
+                <div key={index} className="flex items-center gap-1 bg-white/10 border border-white/20 rounded-full px-2 md:px-3 py-1 shadow hover:bg-white/20 transition-all" data-tooltip-id={`frontend-tooltip-${index}`} data-tooltip-content={item}>
+                  {icons.map((Icon, i) => Icon && <Icon key={i} className="text-lg md:text-xl text-cyan-400" />)}
+                  <span className="text-white text-sm md:text-lg font-sans font-thin">{item}</span>
                   <Tooltip id={`frontend-tooltip-${index}`} />
                 </div>
               );
@@ -62,15 +62,15 @@ const TechStack = forwardRef(({ tech, textVariants }, ref) => (
       {tech.Backend.length > 0 && (
         <motion.div
           variants={textVariants}
-          className="flex flex-col gap-2 outline-double outline-2 rounded-3xl outline-white px-2 py-2"
+          className="flex w-full md:w-auto flex-col gap-2 outline-double outline-2 rounded-3xl outline-white px-4 py-4"
         >
           <motion.h2
             variants={textVariants}
-            className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 pb-2 text-3xl"
+            className="text-white font-sans font-thin mx-auto text-center rounded-3xl px-2 pb-2 text-2xl md:text-3xl"
           >
             Backend
           </motion.h2>
-          <div className="flex flex-wrap gap-2 justify-center">
+          <div className="flex flex-wrap gap-2 justify-center min-h-fit">
             {tech.Backend.map((item, index) => {
               let icons = [];
               if (item.includes('+')) {
@@ -80,9 +80,9 @@ const TechStack = forwardRef(({ tech, textVariants }, ref) => (
                 if (Icon) icons = [Icon];
               }
               return (
-                <div key={index} className="flex items-center gap-1 bg-white/10 border border-white/20 rounded-full px-3 py-1 shadow hover:bg-white/20 transition-all" data-tooltip-id={`backend-tooltip-${index}`} data-tooltip-content={item}>
-                  {icons.map((Icon, i) => Icon && <Icon key={i} className="text-xl text-green-400" />)}
-                  <span className="text-white text-lg font-sans font-thin">{item}</span>
+                <div key={index} className="flex items-center gap-1 bg-white/10 border border-white/20 rounded-full px-2 md:px-3 py-1 shadow hover:bg-white/20 transition-all" data-tooltip-id={`backend-tooltip-${index}`} data-tooltip-content={item}>
+                  {icons.map((Icon, i) => Icon && <Icon key={i} className="text-lg md:text-xl text-green-400" />)}
+                  <span className="text-white text-sm md:text-lg font-sans font-thin">{item}</span>
                   <Tooltip id={`backend-tooltip-${index}`} />
                 </div>
               );

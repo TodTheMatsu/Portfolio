@@ -31,7 +31,7 @@ const NavigationMenu = ({ sectionRefs, scrollToSection }) => {
 
   // Improved hamburger menu with better animations
   const Hamburger = (
-    <motion.button
+  <motion.button
       className="xl:hidden flex flex-col justify-center items-center w-12 h-12 z-50 bg-white/10 backdrop-blur-md rounded-xl border border-white/20"
       aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
       onClick={() => setMenuOpen((open) => !open)}
