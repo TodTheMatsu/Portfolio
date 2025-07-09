@@ -1,1 +1,0 @@
-import{j as a}from"./index-CquXpnRx.js";import{P as o,p as r}from"./projectData-DJfGTcRY.js";import"./NavigationMenu-CmuUdWKe.js";function i({onClick:t}){return a.jsx(o,{onClick:t,projectData:r.assistant})}export{i as default};
