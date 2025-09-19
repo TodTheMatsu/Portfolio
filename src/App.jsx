@@ -186,6 +186,8 @@ function App() {
   const [activeBlogPost, setActiveBlogPost] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
 
+  const techStackRef = useRef(null);
+
   // Use a stable callback for card click
   const handleCardClick = (projectKey) => {
     const project = allProjects.find(p => p.projectKey === projectKey);
@@ -263,7 +265,8 @@ function App() {
             </motion.h1>
 
             {/* Scroll Down Arrow */}
-            <motion.div
+            <motion.button
+
               initial={{ opacity: 0, y: 50 }}
               animate={{ 
                 opacity: selectedProject || activeBlogPost ? 0 : 1,
@@ -274,21 +277,17 @@ function App() {
                 duration: 1,
                 opacity: { duration: 0.5, delay: 3 }
               }}
-              className={`z-20 flex flex-col p-10 items-center group ${selectedProject || activeBlogPost ? 'pointer-events-none' : ''}`}
+              className={`z-20 flex flex-col p-10 items-center group ${selectedProject || activeBlogPost ? 'pointer-events-none' : 'cursor-pointer'}`}
+              onClick={() => techStackRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              data-cursor-size="100px" 
+              data-cursor-exclusion
+              data-cursor-magnetic
             >
-              <motion.span 
-                className="text-white font-thin text-sm mb-2 opacity-70 group-hover:opacity-100 transition-opacity"
-                animate={{
-                  opacity: [0.7, 1, 0.7],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+              <h1
+                className="text-white font-thin text-sm"
               >
                 Scroll Down
-              </motion.span>
+              </h1>
               <motion.svg 
                 className="w-8 h-8 text-white opacity-70 group-hover:opacity-100 transition-opacity"
                 fill="none" 
@@ -306,17 +305,18 @@ function App() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </motion.svg>
-            </motion.div>
+            </motion.button>
           </div>
-          <motion.div variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="px-4 pointer-events-none w-full flex flex-wrap items-center justify-center gap-2" data-section="about">
+          <motion.div ref={techStackRef} variants={bentoContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="px-4 pointer-events-none w-full flex flex-wrap items-center justify-center gap-2" data-section="about">
             <motion.div 
+
               variants={bentosVar} 
               initial={{ opacity: 0, y: 80 }} 
               whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.2, ease: 'easeOut' } }} 
               viewport={{ once: true }}
               className={`w-full h-[400px] flex-grow ${boxDesign}`}
             >
-              <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My tech stack</motion.h1>
+              <motion.h1  variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 absolute'>My tech stack</motion.h1>
               <motion.h1 variants={smallGlowingLabels} initial="hidden" whileInView="visible" viewport={{ once: true }} className='text-white font-sans font-thin mx-auto text-center w-full text-4xl mt-5 blur-lg'>My tech stack</motion.h1>
               <motion.div variants={imgParentVariants} viewport={{ once: true }} initial="hidden" whileInView="visible" className='w-full flex flex-wrap justify-center items-center h-[300px] gap-4'>
                 {/* Tech stack icons: React, MongoDB, Tailwind, Supabase, TypeScript, Lua, Node */}
@@ -421,6 +421,7 @@ function App() {
                 }
               ].map((item, index) => (
                 <motion.div
+
                   key={index}
                   variants={{
                     hidden: { 
@@ -447,7 +448,7 @@ function App() {
                   {/* Timeline line and dot */}
                   <div className="absolute left-1/2 transform -translate-x-1/2 md:flex flex-col items-center hidden">
                     <motion.div 
-                      className="w-6 h-6 bg-white rounded-full border-4 border-black shadow-lg"
+                      className="w-6 h-6 bg-white rounded-full shadow-lg"
                       animate={{
                         boxShadow: [
                           '0 0 0px rgba(255,255,255,0.3)',
@@ -551,20 +552,20 @@ function App() {
           </motion.div>
 
           <motion.div variants={bentosVar} className={`h-auto flex-grow w-full ${boxDesign}`}>
-            {/* Enhanced Tab Navigation */}
+            {/* Tab Navigation */}
             <motion.div 
-              className="flex justify-center mb-16 py-8 relative"
+              className="flex justify-center  py-8 relative"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl p-2 border border-white/10 shadow-2xl w-full max-w-fit">
+              <div className="relative from-white/10 via-white/5 to-transparent backdrop-blur-xl rounded-2xl p-2 border border-white/10 shadow-2xl w-full max-w-fit">
                 {/* Desktop Layout */}
                 <div className="hidden md:flex gap-2 relative">
                   {/* Animated Background */}
                   <motion.div
-                    className="absolute top-2 h-[calc(100%-16px)] bg-gradient-to-r from-white/20 via-white/25 to-white/20 rounded-xl border border-white/30 shadow-lg"
+                    className="absolute h-full bg-gradient-to-r from-white/20 via-white/25 to-white/20 rounded-xl border border-white/30 shadow-lg"
                     layoutId="activeTabBackground"
                     initial={false}
                     animate={{
@@ -855,7 +856,7 @@ function App() {
                     {/* Timeline line and dot */}
                     <div className="absolute left-1/2 transform -translate-x-1/2 md:flex flex-col items-center hidden">
                       <motion.div 
-                        className="w-6 h-6 bg-white rounded-full border-4 border-black shadow-lg"
+                        className="w-6 h-6 bg-white rounded-full  shadow-lg"
                         animate={{
                           boxShadow: [
                             '0 0 0px rgba(255,255,255,0.3)',
@@ -1021,8 +1022,6 @@ function App() {
                             transition: { type: "spring", stiffness: 400, damping: 25 }
                           }}
                           whileTap={{ scale: 0.98 }}
-                          initial={{ opacity: 0, x: index === 0 ? -20 : 20 }}
-                          animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 + 0.3, duration: 0.4 }}
                         >
                           <motion.div
@@ -1205,7 +1204,7 @@ function App() {
                         
                         {/* Main card */}
                         <motion.div 
-                          className="relative bg-gradient-to-br from-black/95 via-black/90 to-black/95 backdrop-blur-xl rounded-2xl p-6 lg:p-8 h-full border border-white/5 group-hover:border-white/20 transition-all duration-500 overflow-hidden"
+                          className="relative bg-gradient-to-br from-white/10 via-white/5 to-transparent5 backdrop-blur-xl rounded-2xl p-6 lg:p-8 h-full border border-white/5 group-hover:border-white/20 transition-all duration-500 overflow-hidden"
                           whileHover={{
                             boxShadow: "0 20px 60px rgba(255,255,255,0.15), 0 0 30px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.1)"
                           }}
@@ -1231,7 +1230,7 @@ function App() {
                           )}
                           
                           {/* Content */}
-                          <div className="relative z-10 flex flex-col h-full">
+                          <div className="relative z-10 flex flex-col  h-full">
                             {/* Title */}
                             <motion.h2 
                               className="text-white text-xl lg:text-2xl font-light mb-4 leading-tight group-hover:text-white/95 transition-colors duration-300"

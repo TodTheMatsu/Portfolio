@@ -13,7 +13,6 @@ const NavigationMenu = ({ sectionRefs, scrollToSection }) => {
       x: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
         staggerChildren: 0.1,
         delayChildren: 0.2
       }
@@ -23,9 +22,9 @@ const NavigationMenu = ({ sectionRefs, scrollToSection }) => {
   const itemVariants = {
     hidden: { opacity: 0, x: 20 },
     visible: { 
-      opacity: 1, 
+      opacity: 1,
       x: 0,
-      transition: { duration: 0.4, ease: "easeOut" }
+      transition: { duration: 0.4}
     }
   };
 
@@ -107,14 +106,11 @@ const NavigationMenu = ({ sectionRefs, scrollToSection }) => {
             </motion.button>
 
             {/* Menu title */}
-            <motion.h3 
+            <h3 
               className="text-white/60 text-sm font-light mb-4 border-b border-white/10 pb-2 w-full"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
             >
               Navigation
-            </motion.h3>
+            </h3>
 
             {Object.entries(sectionRefs).map(([section, ref], index) => (
               <motion.button
@@ -153,7 +149,6 @@ const NavigationMenu = ({ sectionRefs, scrollToSection }) => {
       {/* Navigation Title */}
       <motion.div 
         className="hidden xl:block text-white/60 text-sm font-light mb-2 text-center border-b border-white/10 pb-2 w-full"
-        variants={itemVariants}
       >
         Navigation
       </motion.div>
@@ -162,11 +157,12 @@ const NavigationMenu = ({ sectionRefs, scrollToSection }) => {
         <motion.button 
           key={section}
           onClick={() => scrollToSection(ref)}
-          className="relative group w-full py-3 px-4 rounded-xl font-light text-left transition-all duration-300 ease-out text-white/70 hover:text-white hover:bg-white/10"
+          className="relative group w-full py-3 px-4 rounded-xl font-light text-left hover:text-white text-white/70"
           variants={itemVariants}
           whileHover={{ 
             scale: 1.02,
-            transition: { duration: 0.2 }
+            transition: { duration: 0.2 },
+            style: {  }
           }}
           whileTap={{ scale: 0.98 }}
           data-cursor-exclusion 
