@@ -1488,7 +1488,7 @@ function App() {
               y: { duration: 0.8, delay: 2.5, type: "spring", stiffness: 100, damping: 15 },
               scale: { duration: 0.8, delay: 2.5, type: "spring", stiffness: 100, damping: 15 },
             }}
-            className={`fixed bottom-6 left-1/2 -translate-x-1/2 px-6 py-3 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-lg shadow-black/20 flex items-center gap-4 ${selectedProject || activeBlogPost ? 'pointer-events-none' : ''}`}
+            className={`fixed bottom-6 inset-x-0 mx-auto w-fit px-6 py-3 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-lg shadow-black/20 flex items-center gap-4 ${selectedProject || activeBlogPost ? 'pointer-events-none' : ''}`}
           >
             {/* Subtle glow effect behind the bar */}
             <motion.div 
