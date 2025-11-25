@@ -1475,44 +1475,129 @@ function App() {
             </Suspense>
           </AnimatePresence>
 
-          {/* Social links bar, hidden when a card is open */}
+          {/* Social links bar, hidden when a card or blog post is open */}
           <motion.div
-            initial={{ opacity: 0, width: "60px", y: 200 }}
+            initial={{ opacity: 0, y: 100, scale: 0.8 }}
             animate={{
-              opacity: selectedProject ? 0 : 1,
+              opacity: selectedProject || activeBlogPost ? 0 : 1,
               y: 0,
-              width: ["60px", "60px", "200px"],
+              scale: 1,
             }}
             transition={{
-              opacity: { duration: 0.5 },
-              y: { duration: 1, delay: 2.5 },
-              width: { delay: 3, duration: 2 },
-              ease: "easeInOut",
+              opacity: { duration: 0.4 },
+              y: { duration: 0.8, delay: 2.5, type: "spring", stiffness: 100, damping: 15 },
+              scale: { duration: 0.8, delay: 2.5, type: "spring", stiffness: 100, damping: 15 },
             }}
-            className={`h-[60px] fixed bg-white rounded-full backdrop-blur-md bg-opacity-20 top-[90%] flex items-center justify-center space-x-5 ${selectedProject ? 'pointer-events-none' : ''}`}
+            className={`fixed bottom-6 left-1/2 -translate-x-1/2 px-6 py-3 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-lg shadow-black/20 flex items-center gap-4 ${selectedProject || activeBlogPost ? 'pointer-events-none' : ''}`}
           >
+            {/* Subtle glow effect behind the bar */}
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5 rounded-2xl blur-xl -z-10"
+              animate={{
+                opacity: [0.5, 0.8, 0.5],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            
             {links.map((link, index) => {
               const IconComponent = link.icon;
               return (
                 <motion.a 
                   key={index}
-                  data-cursor-size="80px" data-cursor-exclusion
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  data-cursor-size="80px" 
+                  data-cursor-exclusion
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{
-                    delay: 5 + index * 0.2,
+                    delay: 3 + index * 0.15,
                     duration: 0.5,
+                    type: "spring",
+                    stiffness: 150,
+                    damping: 12
                   }}
                   target="_blank"
+                  rel="noopener noreferrer"
                   href={link.href}
-                  className="text-white font-sans font-thin text-center text-2xl"
+                  aria-label={link.label}
+                  className="relative group"
                 >
-                  <motion.div whileHover={{ scale: 1.3 }}>
-                    <IconComponent className="h-10 w-10 text-white" />
+                  {/* Tooltip */}
+                  <motion.span 
+                    className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-white/15 backdrop-blur-md text-white text-xs font-light rounded-lg border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none"
+                  >
+                    {link.label}
+                  </motion.span>
+                  
+                  {/* Icon container with hover effects */}
+                  <motion.div 
+                    className="relative p-2.5 rounded-xl bg-white/0 hover:bg-white/10 transition-colors duration-300"
+                    whileHover={{ 
+                      scale: 1.15,
+                      transition: { type: "spring", stiffness: 400, damping: 15 }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {/* Glow effect on hover */}
+                    <motion.div 
+                      className="absolute inset-0 rounded-xl bg-white/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                    
+                    <IconComponent className="relative h-6 w-6 text-white/80 group-hover:text-white transition-colors duration-300" />
                   </motion.div>
                 </motion.a>
               );
             })}
+            
+            {/* Divider */}
+            <motion.div 
+              className="w-px h-6 bg-white/20"
+              initial={{ opacity: 0, scaleY: 0 }}
+              animate={{ opacity: 1, scaleY: 1 }}
+              transition={{ delay: 3.5, duration: 0.5 }}
+            />
+            
+            {/* Email or Contact hint */}
+            <motion.a
+              href="mailto:gokudollmeanak@gmail.com"
+              data-cursor-size="80px" 
+              data-cursor-exclusion
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 3.6,
+                duration: 0.5,
+                type: "spring",
+                stiffness: 150,
+                damping: 12
+              }}
+              className="relative group"
+            >
+              <motion.span 
+                className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-white/15 backdrop-blur-md text-white text-xs font-light rounded-lg border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none"
+              >
+                Get in touch
+              </motion.span>
+              
+              <motion.div 
+                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/25 transition-all duration-300"
+                whileHover={{ 
+                  scale: 1.05,
+                  transition: { type: "spring", stiffness: 400, damping: 15 }
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <svg className="w-4 h-4 text-white/80 group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span className="text-white/80 group-hover:text-white text-sm font-light transition-colors duration-300">
+                  Contact
+                </span>
+              </motion.div>
+            </motion.a>
           </motion.div>
         </div>
       </div>

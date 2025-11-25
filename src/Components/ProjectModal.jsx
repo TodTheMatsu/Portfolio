@@ -17,9 +17,21 @@ function ProjectModal({ onClick, projectData }) {
   const introRef = useRef(null);
   const featuresRef = useRef(null);
   const techStackRef = useRef(null);
+  const scrollContainerRef = useRef(null);
   
   const scrollToSection = (ref) => {
-    ref.current?.scrollIntoView({ behavior: 'smooth' });
+    if (ref.current && scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const element = ref.current;
+      const containerTop = container.getBoundingClientRect().top;
+      const elementTop = element.getBoundingClientRect().top;
+      const offset = elementTop - containerTop + container.scrollTop - 20; // 20px padding from top
+      
+      container.scrollTo({
+        top: offset,
+        behavior: 'smooth'
+      });
+    }
   };
 
   // Mapping section names to refs
@@ -87,24 +99,24 @@ function ProjectModal({ onClick, projectData }) {
     >
       <motion.div 
         onClick={handleClick} 
-        className="w-full h-full flex justify-center  items-center overflow-hidden py-28 space-x-5 md:px-20 px-5 scroll-smooth"
+        className="w-full h-full flex justify-center items-center overflow-hidden py-4 md:py-16 lg:py-28 space-x-5 md:px-20 px-3 scroll-smooth"
       >
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="xl:max-w-[50%] max-w-full h-max flex-grow bg-black/30 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden"
+          className="xl:max-w-[50%] max-w-full h-full md:h-max flex-grow bg-black/30 backdrop-blur-xl rounded-2xl md:rounded-2xl border border-white/10 overflow-hidden"
         >
           {/* Fixed Header */}
           <motion.div 
-            className="flex flex-col p-4 md:p-8 pb-4 md:pb-6 border-b border-white/10 relative"
+            className="flex flex-col p-3 md:p-8 pb-3 md:pb-6 border-b border-white/10 relative"
             variants={containerVariants}
           >
-            {/* Exit Button */}
+            {/* Exit Button - positioned left on mobile to avoid burger menu overlap */}
             <motion.button
               onClick={onClick}
-              className="absolute top-4 right-4 text-white/60 hover:text-white w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/5 transition-all duration-200 z-10"
+              className="absolute top-3 left-3 md:top-4 md:left-auto md:right-4 text-white/60 hover:text-white w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 bg-white/5 md:bg-transparent transition-all duration-200 z-10"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               variants={textVariants}
@@ -157,7 +169,7 @@ function ProjectModal({ onClick, projectData }) {
           </motion.div>
 
           {/* Scrollable Content */}
-          <div className="overflow-y-auto max-h-[calc(90vh-160px)] md:max-h-[calc(90vh-200px)] px-4 md:px-8 lg:px-12 pb-8">
+          <div ref={scrollContainerRef} className="overflow-y-auto max-h-[calc(100vh-180px)] md:max-h-[calc(90vh-200px)] px-4 md:px-8 lg:px-12 pb-8">
             {/* Divider */}
             <motion.div 
               className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-16"
